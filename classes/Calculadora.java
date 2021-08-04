@@ -3,33 +3,22 @@ package classes;
 import java.lang.Math;
 
 public class Calculadora {
+    private double a, b, c;
 
     public Calculadora(double a, double b, double c){
-        calc_raiz(a, b, c);
+        setA(a);
+        setB(b);
+        setC(c);
     }
 
-    public Calculadora(double a, double b, byte escolha){
-        switch (escolha) {
-            case 0:
-                soma(a, b);
-                break;
-            case 1:
-                subtracao(a, b);
-                break;
-            case 2:
-                divisao(a, b);
-                break;
-            case 3:
-                multiplicacao(a, b);
-                break;
-        
-        }
+    public Calculadora(){
+        System.out.println("Você instanciou uma calculadora basica!!");
     }
 
-    public void calc_raiz(double a, double b, double c){
-        double delta = delta(a, b, c);
-        System.out.printf("A primeira raiz é: $d$n", raiz_one(a, b, delta));
-        System.out.printf("A segunda raiz é: $d$n", raiz_two(a, b, delta));
+    public void calc_raiz(){
+        double delta = delta(this.a, this.b, this.c);
+        System.out.printf("A primeira raiz é: $d$n", raiz_one(this.a, this.b, delta));
+        System.out.printf("A segunda raiz é: $d$n", raiz_two(this.a, this.b, delta));
     }
 
     public double soma(double a, double b){
@@ -60,6 +49,19 @@ public class Calculadora {
         } else {
             return (1/modulo_exponenciacao(a, b));
         }
+    }
+
+    public void setA(double a) {
+        System.out.printf("Digite o valor de : ");
+        this.a = a;
+    }
+
+    public void setB(double b) {
+        this.b = b;
+    }
+
+    public void setC(double c) {
+        this.c = c;
     }
 
     private double delta(double a, double b, double c){

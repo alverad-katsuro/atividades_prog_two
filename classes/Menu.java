@@ -10,18 +10,18 @@ public class Menu {
         byte o_que_fazer;
         boolean cont = true;
         while (cont) {
-            System.out.printf("Digite:\n0. Sair do Programa\n1. Calculadora\n2. Calculadora de Raizes\nEscolha: ");
+            System.out.printf("\033[1;34mDigite:\n0. Sair do Programa\n1. Calculadora\n2. Calculadora de Raizes\nEscolha: \033[1;97m");
             o_que_fazer = sc.nextByte();
             switch (o_que_fazer) {
                 case 0:
                     cont = false;
                     break;
                 case 1:
-                    System.out.printf("Digite:\n0. Soma\n1. Subtração\n2. Divisão\n3. Multipicação\n4. Exponenciação a^b\n5. Resto da Divisão\nEscolha: ");
+                    System.out.printf("\033[1;34mDigite:\n0. Soma\n1. Subtração\n2. Divisão\n3. Multipicação\n4. Exponenciação a^b\n5. Resto da Divisão\nEscolha: \033[1;97m");
                     byte escolha = sc.nextByte();
-                    System.out.printf("Digite o primeiro valor: ");
+                    System.out.printf("\033[1;34mDigite o primeiro valor: \033[1;97m");
                     double a = sc.nextDouble();
-                    System.out.printf("Digite o segundo valor: ");
+                    System.out.printf("\033[1;34mDigite o segundo valor: \033[1;97m");
                     double b = sc.nextDouble();
                     setCalc(new Calculadora());
                     switch (escolha) {
@@ -52,11 +52,11 @@ public class Menu {
                     }
                     break;
                 case 2:
-                    System.out.printf("Digite o primeiro valor: ");
+                    System.out.printf("\033[1;34mDigite o valor de a: \033[1;97m");
                     double a_r = sc.nextDouble();
-                    System.out.printf("Digite o segundo valor: ");
+                    System.out.printf("\033[1;34mDigite o valor de b: \033[1;97m");
                     double b_r = sc.nextDouble();
-                    System.out.printf("Digite o terceiro valor: ");
+                    System.out.printf("\033[1;34mDigite o valor de c: \033[1;97m");
                     double c_r = sc.nextDouble();
                     setCalc(new Calculadora(a_r, b_r, c_r));
                     getCalc().calc_raiz();
@@ -66,7 +66,7 @@ public class Menu {
     }
 
     private void saida(double func){
-        System.out.printf("O resultado é: %d%n", func);
+        System.out.printf("O resultado é: %.2f%n", func);
     }
 
     public void setCalc(Calculadora calc) {

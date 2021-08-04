@@ -12,9 +12,8 @@ public class Menu {
         // DECLARAÇÃO de VARIAVEIS
         Scanner sc = new Scanner(System.in);
         byte o_que_fazer;
-        boolean cont = true;
         // FIM
-        while (cont) {
+        while (true) {
             // Aqui temos o menu que será exibido ao usuario
             System.out.printf("\033[1;34mDigite:\n0. Sair do Programa\n1. Calculadora\n2. Calculadora de Raizes\nEscolha: \033[1;97m");
             // Entrada do Usuario
@@ -23,7 +22,8 @@ public class Menu {
             switch (o_que_fazer) {
                 // Para o laço caso 0
                 case 0:
-                    cont = false;
+                    System.exit(0);
+                    sc.close();
                     break;
                 // Vai para Calculadora
                 case 1:

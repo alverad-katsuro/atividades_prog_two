@@ -10,8 +10,22 @@ public class Calculadora {
         System.out.printf("A segunda raiz é: $d$n", raiz_two(a, b, delta));
     }
 
-    public Calculadora(double a, double b){
+    public Calculadora(double a, double b, byte escolha){
+        switch (escolha) {
+            case 0:
+                soma(a, b);
+                break;
+            case 1:
+                subtracao(a, b);
+                break;
+            case 2:
+                divisao(a, b);
+                break;
+            case 3:
+                multiplicacao(a, b);
+                break;
         
+        }
     }
 
     public double soma(double a, double b){

@@ -1,5 +1,3 @@
-import classes.Calculadora;
-
 import classes.Menu;
 
 public class Main {

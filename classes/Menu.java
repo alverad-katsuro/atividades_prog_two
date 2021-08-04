@@ -28,8 +28,8 @@ public class Menu {
                 // Vai para Calculadora
                 case 1:
                     // Aqui temos o um submenu que será exibido ao usuario com as operações basicas
-                    System.out.printf("\033[1;34mDigite:\n0. Soma\n1. Subtração\n2. Divisão\n3. Multipicação\n4. Exponenciação a^b\n5. Resto da Divisão\nEscolha: \033[1;97m");
-                    byte escolha = sc.nextByte();
+                    System.out.printf("\033[1;34mDigite:\n +. Soma\n -. Subtração\n /. Divisão\n *. Multipicação\n ^. Exponenciação a^b\n %%. Resto da Divisão\nEscolha: \033[1;97m");
+                    char escolha = sc.next().charAt(0);
                     System.out.printf("\033[1;34mDigite o primeiro valor: \033[1;97m");
                     double a = sc.nextDouble();
                     System.out.printf("\033[1;34mDigite o segundo valor: \033[1;97m");
@@ -37,37 +37,37 @@ public class Menu {
                     setCalc(new Calculadora());
                     // Laço condicional --> vai variar de acordo com a entrada do usuario.
                     switch (escolha) {
-                        case 0:
+                        case '+':
                             // Resultado da operação de soma está armazenada em result
                             double result_s = getCalc().soma(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_s);
                             break;
-                        case 1:
+                        case '-':
                             // Resultado da operação de subtração está armazenada em result
                             double result_sub = getCalc().subtracao(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_sub);
                             break;
-                        case 2:
+                        case '/':
                             // Resultado da operação de divisao está armazenada em result
                             double result_div = getCalc().divisao(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_div);
                             break;
-                        case 3:
+                        case '*':
                             // Resultado da operação de multiplicacao está armazenada em result
                             double result_mult = getCalc().multiplicacao(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_mult);
                             break;
-                        case 4:
+                        case '^':
                             // Resultado da operação de exponenciacao está armazenada em result
                             double result_exp = getCalc().exponenciacao(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_exp);
                             break;    
-                        case 5:
+                        case '%':
                             // Resultado da operação Resto da divisão está armazenada em result
                             double result_rest = getCalc().resto(a, b);
                             // Temos a saida do resultado para o usuario

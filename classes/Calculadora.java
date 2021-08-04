@@ -5,9 +5,7 @@ import java.lang.Math;
 public class Calculadora {
 
     public Calculadora(double a, double b, double c){
-        double delta = delta(a, b, c);
-        System.out.printf("A primeira raiz é: $d$n", raiz_one(a, b, delta));
-        System.out.printf("A segunda raiz é: $d$n", raiz_two(a, b, delta));
+        calc_raiz(a, b, c);
     }
 
     public Calculadora(double a, double b, byte escolha){
@@ -26,6 +24,12 @@ public class Calculadora {
                 break;
         
         }
+    }
+
+    public void calc_raiz(double a, double b, double c){
+        double delta = delta(a, b, c);
+        System.out.printf("A primeira raiz é: $d$n", raiz_one(a, b, delta));
+        System.out.printf("A segunda raiz é: $d$n", raiz_two(a, b, delta));
     }
 
     public double soma(double a, double b){

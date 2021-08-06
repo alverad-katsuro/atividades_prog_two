@@ -1,14 +1,12 @@
-// Declaração do pacote
-package classes;
-
 // Aqui é importado o Scanner --> metodo que permite receber dados do teclado.
 import java.util.Scanner;
 
+import classes.Calculadora;
+
 public class Menu {
     // Declaração da variavel que será responsavel pela CALCULADORA.
-    private Calculadora calc;
 
-    public void start(){
+    public static void main(String[] args) {
         // DECLARAÇÃO de VARIAVEIS
         Scanner sc = new Scanner(System.in);
         byte o_que_fazer;
@@ -34,42 +32,42 @@ public class Menu {
                     double a = sc.nextDouble();
                     System.out.printf("\033[1;34mDigite o segundo valor: \033[1;97m");
                     double b = sc.nextDouble();
-                    setCalc(new Calculadora());
+                    Calculadora calculadora = new Calculadora();
                     // Laço condicional --> vai variar de acordo com a entrada do usuario.
                     switch (escolha) {
                         case '+':
                             // Resultado da operação de soma está armazenada em result
-                            double result_s = getCalc().soma(a, b);
+                            double result_s = calculadora.soma(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_s);
                             break;
                         case '-':
                             // Resultado da operação de subtração está armazenada em result
-                            double result_sub = getCalc().subtracao(a, b);
+                            double result_sub = calculadora.subtracao(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_sub);
                             break;
                         case '/':
                             // Resultado da operação de divisao está armazenada em result
-                            double result_div = getCalc().divisao(a, b);
+                            double result_div = calculadora.divisao(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_div);
                             break;
                         case '*':
                             // Resultado da operação de multiplicacao está armazenada em result
-                            double result_mult = getCalc().multiplicacao(a, b);
+                            double result_mult = calculadora.multiplicacao(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_mult);
                             break;
                         case '^':
                             // Resultado da operação de exponenciacao está armazenada em result
-                            double result_exp = getCalc().exponenciacao(a, b);
+                            double result_exp = calculadora.exponenciacao(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_exp);
                             break;    
                         case '%':
                             // Resultado da operação Resto da divisão está armazenada em result
-                            double result_rest = getCalc().resto(a, b);
+                            double result_rest = calculadora.resto(a, b);
                             // Temos a saida do resultado para o usuario
                             saida(result_rest);
                             break;
@@ -86,25 +84,16 @@ public class Menu {
                     double c_r = sc.nextDouble();
                     // FIM
                     // Instancia da calculadora de raizes
-                    setCalc(new Calculadora(a_r, b_r, c_r));
+                    Calculadora calculadora_r = new Calculadora(a_r, b_r, c_r);
                     // Chamando o metodo que calcula raizes
-                    getCalc().calc_raiz(); 
+                    calculadora_r.calc_raiz(); 
                     break;
             }
         }
     }
+
     // METODO que exibe o resultado da calculadora basica para os usuarios
-    private void saida(double func){
+    private static void saida(double func){
         System.out.printf("O resultado é: %.2f%n", func);
-    }
-
-    // Metodo responsavel por definir o valor da variavel calc
-    public void setCalc(Calculadora calc) {
-        this.calc = calc;
-    }
-
-    // Metodo a fim de saber quem é a variavel calc
-    public Calculadora getCalc() {
-        return calc;
     }
 }

@@ -20,8 +20,8 @@ public class Menu {
             switch (o_que_fazer) {
                 // Para o laço caso 0
                 case 0:
-                    System.exit(0);
                     sc.close();
+                    System.exit(0);
                     break;
                 // Vai para Calculadora
                 case 1:

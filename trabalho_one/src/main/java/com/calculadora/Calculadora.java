@@ -24,6 +24,15 @@ public class Calculadora {
     // Temos que as formulas matematicas divididas em partes
     public void calc_raiz(){
         double delta = delta(getA(), getB(), getC());
+        if (delta > 0) {
+            System.out.println("Duas raizes reais e diferentes");
+        }
+        else if (delta == 0) {
+            System.out.println("Duas raizes reais e iguais");
+        }
+        else if (delta < 0) {
+            System.out.println("Sem raizes reais");
+        }
         System.out.printf("A primeira raiz é: %.2f%n", raiz_one(getA(), getB(), delta));
         System.out.printf("A segunda raiz é: %.2f%n", raiz_two(getA(), getB(), delta));
     }
@@ -103,6 +112,4 @@ public class Calculadora {
     private double raiz_two(double a, double b, double delta) {
         return divisao(subtracao(multiplicacao(-1, b), Math.sqrt(delta)), (2*a));
     }
-
-    // Motor anteriormente citado, responsavel pela exponenciação
 }

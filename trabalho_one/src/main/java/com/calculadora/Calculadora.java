@@ -11,7 +11,7 @@ public class Calculadora {
         setA(a);
         setB(b);
         setC(c);
-        System.out.printf("Você instanciou uma calculadora de raizes a = %.2f b = %.2f c = %.2f", getA(), getB(), getC());
+        System.out.printf("Você instanciou uma calculadora de raizes a = %.2f b = %.2f c = %.2f %n", getA(), getB(), getC());
     }
     
     // Construtor para o uso da calculadora elementar
@@ -24,7 +24,6 @@ public class Calculadora {
     // Temos que as formulas matematicas divididas em partes
     public void calc_raiz(){
         double delta = delta(getA(), getB(), getC());
-        System.out.println(delta);
         System.out.printf("A primeira raiz é: %.2f%n", raiz_one(getA(), getB(), delta));
         System.out.printf("A segunda raiz é: %.2f%n", raiz_two(getA(), getB(), delta));
     }

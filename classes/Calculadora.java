@@ -56,18 +56,8 @@ public class Calculadora {
 
     // Aqui temos o metodo responsavel pela potencia
     public double exponenciacao(double a, double b){
-        // Se o expoente(b) = 0 temos que todo numero elevado a 0 é igual a 1 
-        if (b == 0){
-            return (double)1;
-        // Aqui realizamos as multiplicações sucessivas
-        } else if(b > 0){
-            // modulo_exponenciacao é o motor --> o que realiza as operações coloquei um metodo private a fim de evitar repetição.
-            return modulo_exponenciacao(a, b);
-        // Semelhante ao metodo anterior aqui realizamos as multiplicações sucessivas quando B é menor que 0, isto é,
-        // quando o expoente é negativo
-        } else {
-            return (1/modulo_exponenciacao(a, b));
-        }
+        // Realiza a exponenciacao --> importado da biblioteca Math
+        return Math.pow(a, b);
     }
 
     // Definimos o valor de A aqui, para realizarmos as operações envolvendo raizes

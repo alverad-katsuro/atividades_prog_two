@@ -11,12 +11,13 @@ public class Calculadora {
         setA(a);
         setB(b);
         setC(c);
-        System.out.printf("Você instanciou uma calculadora de raizes a = %.2f b = %.2f c = %.2f %n", getA(), getB(), getC());
+        System.out.println("Você instanciou uma calculadora de raizes!");
+        System.out.printf("a = %.2f b = %.2f c = %.2f %n", getA(), getB(), getC());
     }
     
     // Construtor para o uso da calculadora elementar
     public Calculadora(){
-        System.out.println("Você instanciou uma calculadora basica!!");
+        System.out.println("Você instanciou uma calculadora basica!");
     }
 
     

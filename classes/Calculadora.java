@@ -106,11 +106,4 @@ public class Calculadora {
     }
 
     // Motor anteriormente citado, responsavel pela exponenciação
-    private double modulo_exponenciacao(double a, double b){
-        double result = a;
-        for(int k = 1; k < b ;k++){
-            result *= a;
-        }
-        return result;
-    }
 }

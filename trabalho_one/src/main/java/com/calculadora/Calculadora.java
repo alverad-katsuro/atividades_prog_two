@@ -1,5 +1,5 @@
 //Classe pertencente ao pacote "classes"
-package classes;
+package com.calculadora;
 //Importando a função raiz quadrada
 import java.lang.Math;
 

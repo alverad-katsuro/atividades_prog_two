@@ -1,7 +1,7 @@
+package com.calculadora;
+
 // Aqui é importado o Scanner --> metodo que permite receber dados do teclado.
 import java.util.Scanner;
-
-import classes.Calculadora;
 
 public class Menu {
     // Declaração da variavel que será responsavel pela CALCULADORA.
@@ -26,10 +26,10 @@ public class Menu {
                 // Vai para Calculadora
                 case 1:
                     // Aqui temos o um submenu que será exibido ao usuario com as operações basicas
-                    System.out.printf("\033[1;34mDigite o primeiro valor: \033[1;97m");
-                    double a = sc.nextDouble();
                     System.out.printf("\033[1;34mDigite:\n +. Soma\n -. Subtração\n /. Divisão\n *. Multipicação\n ^. Exponenciação a^b\n %%. Resto da Divisão\nEscolha: \033[1;97m");
                     char escolha = sc.next().charAt(0);
+                    System.out.printf("\033[1;34mDigite o primeiro valor: \033[1;97m");
+                    double a = sc.nextDouble();
                     System.out.printf("\033[1;34mDigite o segundo valor: \033[1;97m");
                     double b = sc.nextDouble();
                     Calculadora calculadora = new Calculadora();

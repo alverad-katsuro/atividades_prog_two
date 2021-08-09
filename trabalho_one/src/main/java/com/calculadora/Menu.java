@@ -84,7 +84,7 @@ public class Menu {
                     double c_r = sc.nextDouble();
                     // FIM
                     // Instancia da calculadora de raizes
-                    Calculadora calculadora_r = new Calculadora(a_r, b_r, c_r);
+                    Calculadora_raiz calculadora_r = new Calculadora_raiz(a_r, b_r, c_r);
                     // Chamando o metodo que calcula raizes
                     calculadora_r.calc_raiz(); 
                     break;

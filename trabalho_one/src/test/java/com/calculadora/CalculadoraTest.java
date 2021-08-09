@@ -51,28 +51,4 @@ public class CalculadoraTest {
 		final double expected = 8;
 		assertEquals(expected, instance.exponenciacao(2.0, 3.0));
 	}
-
-	@Test
-	public void testSetA() throws Exception {
-		Calculadora instance = new Calculadora();
-		final double expected = 10.0;
-		instance.setA(10.0);
-		assertEquals(expected, instance.getA());
-	}
-
-	@Test
-	public void testSetB() throws Exception {
-		Calculadora instance = new Calculadora();
-		final double expected = 10.0;
-		instance.setB(10.0);
-		assertEquals(expected, instance.getB());
-	}
-
-	@Test
-	public void testSetC() throws Exception {
-		Calculadora instance = new Calculadora();
-		final double expected = 10.0;
-		instance.setC(10.0);
-		assertEquals(expected, instance.getC());
-	}
 }

@@ -5,27 +5,27 @@ public class Atributos_Comuns extends Endereco {
     private String email;
     private int telefone;
 
-    public void setEmail(String email) {
+    protected void setEmail(String email) {
         this.email = email;
     }
 
-    public String getEmail() {
+    protected String getEmail() {
         return email;
     }
 
-    public void setNome(String nome) {
+    protected void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getNome() {
+    protected String getNome() {
         return nome;
     }
 
-    public void setTelefone(int telefone) {
+    protected void setTelefone(int telefone) {
         this.telefone = telefone;
     }
 
-    public int getTelefone() {
+    protected int getTelefone() {
         return telefone;
     }
 }

@@ -1,6 +1,7 @@
 package com.system;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public enum Setor {
     REQUISITOS,
@@ -10,35 +11,41 @@ public enum Setor {
     RECURSOS_HUMANOS;
 
     private ArrayList<Funcionario> funcionarios = new ArrayList<>();
-    private ArrayList<Contrato> contratos = new ArrayList<>();
+    private ArrayList<UUID> contratos = new ArrayList<>();
+    private Funcionario chefe;
+
+    public void setChefe(Funcionario chefe) {
+        this.chefe = chefe;
+    }
+
+    public Funcionario getChefe() {
+        return this.chefe;
+    }
 
     void addFuncionario(Funcionario funcionario) {
         this.funcionarios.add(funcionario);
     }
 
-    void addContrato(Contrato contrato) {
-        this.contratos.add(contrato);
+    void addFuncionario() throws Exception {
+        Funcionario funcionario = new Funcionario();
+        this.funcionarios.add(funcionario);
     }
 
-    void removeFuncionario(Funcionario funcionario){
+    boolean removeFuncionario(Funcionario funcionario){
         for (int i = 0; i < this.funcionarios.size(); i++) {
             if (funcionario == this.funcionarios.get(i)) {
                 this.funcionarios.remove(i);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
-    void removeContrato(Contrato contrato){
-        for (int i = 0; i < this.contratos.size(); i++) {
-            if (contrato == this.contratos.get(i)) {
-                this.contratos.remove(i);
-                break;
-            }
-        }
+    void addContrato(UUID contrato) {
+        this.contratos.add(contrato);
     }
-
-    public ArrayList<Contrato> getContratos() {
+    
+    public ArrayList<UUID> getContratos() {
         return contratos;
     }
 

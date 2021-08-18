@@ -1,24 +1,54 @@
 package com.system;
 
-public class Funcionario {
+import java.util.Scanner;
+
+import java.util.Date;
+
+public class Funcionario extends Pessoa {
     private Cargo cargo;
     private float salario = 1127.0f;
     private Setor setor;
-    private int Contrato;
+    private int contrato;
+    final Date data_de_ingresso = new Date(System.currentTimeMillis());
 
-    public Cargo getCargo() {
+    public Funcionario() throws Exception{
+        Scanner sc = new Scanner(System.in);
+        CadastraFuncionario(sc);
+    }
+
+    protected Cargo getCargo() {
         return cargo;
     }
+
+    protected void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
     
-    public int getContrato() {
-        return Contrato;
+    protected int getContrato() {
+        return contrato;
     }
 
-    public float getSalario() {
+    protected void setContrato(int contrato) {
+        this.contrato = contrato;
+    }
+
+    protected float getSalario() {
         return salario;
     }
 
-    public Setor getSetor() {
+    protected void setSalario(float salario) {
+        this.salario = salario;
+    }
+
+    protected Setor getSetor() {
         return setor;
+    }
+
+    protected void setSetor(Setor setor) {
+        this.setor = setor;
+    }
+
+    private void CadastraFuncionario(Scanner sc) throws Exception{
+        ajustaInformacoes(sc);
     }
 }

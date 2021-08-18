@@ -7,36 +7,47 @@ import java.util.Scanner;
 public class Pessoa extends Atributos_Comuns{
     private int cpf;
     private boolean sexo;
-    private short idade;
-    private byte dia;
-    private byte mes;
-    private short ano;
+    private int idade;
+    private int dia;
+    private int mes;
+    private int ano;
 
-    public Pessoa(String nome, byte dia, byte mes, short ano) {
+    public Pessoa(String nome, int cpf) throws Exception {
         setNome(nome);
-        setAno(ano);
-        setDia(dia);
-        setMes(mes);
+        setCpf(cpf);
     }
 
-    public void calculaIdade_auto() {
+    protected Pessoa() {
+        System.out.println("Não tenho nome ainda!");
+    }
+
+    protected  void ajustaNomeCPF(Scanner sc) throws Exception {
+        System.out.printf("Digite o nome da pessoa: ");
+        setNome(sc.nextLine());
+        System.out.printf("Digite o cpf da pessoa: ");
+        setCpf(sc.nextInt());
+    }
+
+    protected  void ajustaInformacoes(Scanner sc) throws Exception {
+        System.out.printf("Digite o sexo da pessoa\n0. Masculino\n1.Feminino\n Resposta: ");
+        setSexo(sc.nextBoolean());
+        System.out.printf("Digite o dia de nascimento: ");
+        setDia(sc.nextInt());
+        System.out.printf("Digite o mes de nascimento: ");
+        setMes(sc.nextInt());
+        System.out.printf("Digite o ano de nascimento: ");
+        setAno(sc.nextInt());
+    }
+
+    protected void calculaIdade() {
+        int dia, mes, ano;
         SimpleDateFormat format_year = new SimpleDateFormat("yyyy");
         SimpleDateFormat format_mouth = new SimpleDateFormat("MM");
         SimpleDateFormat format_day = new SimpleDateFormat("dd");
         Date date = new Date(System.currentTimeMillis());
-        System.out.printf("A idade atual é %d anos %d meses e %d dias %n", (format_year.format(date)), (format_mouth.format(date)), (format_day.format(date)));
-    }
-
-    public void calculaIdade() {
-        Byte dia, mes;
-        Short ano;
-        Scanner sc = new Scanner(System.in);
-        System.out.printf("Digite o dia: ");
-        dia = sc.nextByte();
-        System.out.printf("Digite o mes: ");
-        mes = sc.nextByte();
-        System.out.printf("Digite o ano: ");
-        ano = sc.nextShort();
+        ano = Integer.parseInt(format_year.format(date).toString());
+        mes = Integer.parseInt(format_mouth.format(date).toString());
+        dia = Integer.parseInt(format_day.format(date).toString());
         if (getMes() > mes) {
             setIdade((short)(ano - getAno()));
             System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
@@ -49,66 +60,65 @@ public class Pessoa extends Atributos_Comuns{
             setIdade((short) (ano - getAno() - 1));
             System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
         }
-        sc.close();
     }
 
-    public  void ajustaDataDeNascimento() {
-        Scanner sc = new Scanner(System.in);
-        System.out.printf("Digite o dia de nascimento: ");
-        setDia(sc.nextByte());
-        System.out.printf("Digite o mes de nascimento: ");
-        setMes(sc.nextByte());
-        System.out.printf("Digite o ano de nascimento: ");
-        setAno(sc.nextShort());
-        sc.close();
-        
-    }
-
-    public void setAno(short ano) {
-        this.ano = ano;
-    }
-
-    public short getAno() {
-        return ano;
-    }
-
-    public void setDia(byte dia) {
+    protected void setDia(int dia) throws Exception {
+        if (dia < 0 || dia > 31) {
+            throw new Exception("Dia invalido");
+        }
         this.dia = dia;
     }
 
-    public byte getDia() {
+    protected int getDia() {
         return dia;
     }
 
-    public void setIdade(short idade) {
-        this.idade = idade;
-    }
-
-    public short getIdade() {
-        return idade;
-    }
-
-    public void setMes(byte mes) {
+    protected void setMes(int mes) throws Exception{
+        if (mes < 0 || mes > 12) {
+            throw new Exception("Mes invalido");
+        }
         this.mes = mes;
     }
 
-    public byte getMes() {
+    protected int getMes() {
         return mes;
     }
 
-    public void setSexo(boolean sexo) {
+    protected void setAno(int ano) throws Exception{
+        if (ano < 0 || ano > 2021) {
+            throw new Exception("Ano invalido");
+        }
+        this.ano = ano;
+    }
+
+    protected int getAno() {
+        return ano;
+    }
+
+    protected void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    protected int getIdade() {
+        return idade;
+    }
+
+    protected void setSexo(boolean sexo) {
         this.sexo = sexo;
     }
 
-    public boolean getSexo(){
+    protected boolean getSexo(){
         return this.sexo;
     }
 
-    public void setCpf(int cpf) {
+    protected void setCpf(int cpf) throws Exception{
+        if ((String.valueOf(cpf).length()) != 11) {
+            throw new Exception("CPF INVALIDO");
+        }
         this.cpf = cpf;
     }
 
-    public int getCpf() {
+    protected int getCpf() {
         return cpf;
     }
 

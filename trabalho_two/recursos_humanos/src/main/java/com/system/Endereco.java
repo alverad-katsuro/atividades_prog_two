@@ -12,30 +12,30 @@ public class Endereco {
         setEndereco(temp, temp, temp, temp);
     }
 
-    public String[] getEndereco() {
+    protected String[] getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String rua, String bairro, String cidade, String estado) {
+    protected void setEndereco(String rua, String bairro, String cidade, String estado) {
         this.endereco[0] = rua;
         this.endereco[1] = bairro;
         this.endereco[2] = cidade;
         this.endereco[3] = estado;
     }
 
-    public void setEnderecoRua(String rua) {
+    protected void setEnderecoRua(String rua) {
         this.endereco[0] = rua;
     }
 
-    public void setEnderecoBairro(String bairro) {
+    protected void setEnderecoBairro(String bairro) {
         this.endereco[1] = bairro;
     }
 
-    public void setEnderecoCidade(String cidade) {
+    protected void setEnderecoCidade(String cidade) {
         this.endereco[2] = cidade;
     }
 
-    public void setEnderecoEstado(String estado) {
+    protected void setEnderecoEstado(String estado) {
         this.endereco[3] = estado;
     }
     

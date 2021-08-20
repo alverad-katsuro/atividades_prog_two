@@ -8,8 +8,10 @@ public class Contrato {
     private final Setor setor;
     private ArrayList<Funcionario> funcionarios = new ArrayList<>();
 
-    public Contrato(Setor setor){
+    public Contrato(Setor setor, Scanner sc) throws Exception{
         this.setor = setor;
+        setor.addContrato(getId());
+        addFuncionario(sc);
     }
     
     protected UUID getId() {
@@ -27,18 +29,14 @@ public class Contrato {
     protected void addFuncionario(Funcionario funcionario){
         funcionario.setSetor(getSetor());
         getSetor().addFuncionario(funcionario);
+        funcionario.setContrato(getId());
         getSetor().addContrato(getId());
         this.funcionarios.add(funcionario);
     }
 
-    protected boolean removeFuncionario(Funcionario funcionario){
-        for (int i = 0; i < getFuncionarios().size(); i++) {
-            if (funcionario.getCpf() == getFuncionarios().get(i).getCpf()) {
-                getFuncionarios().remove(i);
-                return true;
-            }
-        }
-        return false;
+    protected void addFuncionario(Scanner sc) throws Exception{
+        Funcionario funcionario = new Funcionario(sc);
+        this.funcionarios.add(funcionario);
     }
 
     protected ArrayList<Funcionario> getFuncionarios() {
@@ -55,7 +53,7 @@ public class Contrato {
         return array_temp;
     }
 
-    protected Funcionario buscaFuncionario(int cpf){
+    protected Funcionario buscaFuncionario(long cpf){
         for (Funcionario funcionario : getFuncionarios()) {
             if (funcionario.getCpf() == cpf) {
                 return funcionario;
@@ -73,7 +71,7 @@ public class Contrato {
         return null;
     }
 
-    protected boolean demitirFuncionario(int cpf){
+    protected boolean demitirFuncionario(long cpf){
         Funcionario funcionario_demitido = buscaFuncionario(cpf);
         if (funcionario_demitido == null) {
             return false;
@@ -92,11 +90,23 @@ public class Contrato {
         return true;
     }
 
+    private boolean removeFuncionario(Funcionario funcionario){
+        for (int i = 0; i < getFuncionarios().size(); i++) {
+            if (funcionario.getCpf() == getFuncionarios().get(i).getCpf()) {
+                Funcionario.modify_Numero_de_funcionarios(-1);
+                getFuncionarios().remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void is_boss_or_demit(Funcionario funcionario_demitido){
         if (funcionario_demitido.getCpf() == getSetor().getChefe().getCpf()) {
             Scanner sc = new Scanner(System.in);
             System.out.printf("Digite o CPF do novo Chefe do Setor: ");
             getSetor().setChefe(buscaFuncionario(sc.nextInt()));
+            sc.close();
         }
         getSetor().removeFuncionario(funcionario_demitido);
         removeFuncionario(funcionario_demitido);

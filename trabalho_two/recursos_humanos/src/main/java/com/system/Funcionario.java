@@ -3,17 +3,22 @@ package com.system;
 import java.util.Scanner;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Funcionario extends Pessoa {
     private Cargo cargo;
     private float salario = 1127.0f;
     private Setor setor;
-    private int contrato;
+    private UUID contrato;
     final Date data_de_ingresso = new Date(System.currentTimeMillis());
+    private static int numero_de_funcionarios = 0;
 
-    public Funcionario() throws Exception{
-        Scanner sc = new Scanner(System.in);
+    public Funcionario(Scanner sc) throws Exception{
         CadastraFuncionario(sc);
+        modify_Numero_de_funcionarios(1);
+        ajustaNomeCPF(sc);
+        ajustaInformacoes(sc);
+        definirEndereco(sc);
     }
 
     protected Cargo getCargo() {
@@ -24,11 +29,11 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
     }
     
-    protected int getContrato() {
+    protected UUID getContrato() {
         return contrato;
     }
 
-    protected void setContrato(int contrato) {
+    protected void setContrato(UUID contrato) {
         this.contrato = contrato;
     }
 
@@ -46,6 +51,14 @@ public class Funcionario extends Pessoa {
 
     protected void setSetor(Setor setor) {
         this.setor = setor;
+    }
+
+    protected static void modify_Numero_de_funcionarios(int number) {
+        Funcionario.numero_de_funcionarios += number;
+    }
+
+    public static int getNumero_de_funcionarios() {
+        return numero_de_funcionarios;
     }
 
     private void CadastraFuncionario(Scanner sc) throws Exception{

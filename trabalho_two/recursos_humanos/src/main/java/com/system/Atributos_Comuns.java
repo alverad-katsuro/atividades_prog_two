@@ -3,7 +3,7 @@ package com.system;
 public class Atributos_Comuns extends Endereco {
     private String nome;
     private String email;
-    private int telefone;
+    private long telefone;
 
     protected void setEmail(String email) {
         this.email = email;
@@ -21,11 +21,11 @@ public class Atributos_Comuns extends Endereco {
         return nome;
     }
 
-    protected void setTelefone(int telefone) {
+    protected void setTelefone(long telefone) {
         this.telefone = telefone;
     }
 
-    protected int getTelefone() {
+    protected long getTelefone() {
         return telefone;
     }
 }

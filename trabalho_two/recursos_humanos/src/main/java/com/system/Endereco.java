@@ -1,5 +1,7 @@
 package com.system;
 
+import java.util.Scanner;
+
 public class Endereco {
     private String endereco[] = new String[4];
 
@@ -7,10 +9,7 @@ public class Endereco {
         setEndereco(rua, bairro, cidade, estado);
     }
 
-    public Endereco(){
-        String temp = "A definir";
-        setEndereco(temp, temp, temp, temp);
-    }
+    public Endereco(){}
 
     protected String[] getEndereco() {
         return endereco;
@@ -39,4 +38,14 @@ public class Endereco {
         this.endereco[3] = estado;
     }
     
+    protected void definirEndereco(Scanner sc){
+        System.out.printf("Digite a rua: ");
+        setEnderecoRua(sc.nextLine());
+        System.out.printf("Digite a bairro: ");
+        setEnderecoBairro(sc.nextLine());
+        System.out.printf("Digite a cidade: ");
+        setEnderecoCidade(sc.nextLine());
+        System.out.printf("Digite a Estado: ");
+        setEnderecoEstado(sc.nextLine());
+    }
 }

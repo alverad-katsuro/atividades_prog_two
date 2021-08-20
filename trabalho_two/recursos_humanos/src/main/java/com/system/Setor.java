@@ -2,6 +2,7 @@ package com.system;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.Scanner;
 
 public enum Setor {
     REQUISITOS,
@@ -18,6 +19,10 @@ public enum Setor {
         this.chefe = chefe;
     }
 
+    public void setChefe(Scanner sc) throws Exception {
+        this.chefe = new Funcionario(sc);
+    }
+
     public Funcionario getChefe() {
         return this.chefe;
     }
@@ -26,8 +31,8 @@ public enum Setor {
         this.funcionarios.add(funcionario);
     }
 
-    void addFuncionario() throws Exception {
-        Funcionario funcionario = new Funcionario();
+    void addFuncionario(Scanner sc) throws Exception {
+        Funcionario funcionario = new Funcionario(sc);
         this.funcionarios.add(funcionario);
     }
 

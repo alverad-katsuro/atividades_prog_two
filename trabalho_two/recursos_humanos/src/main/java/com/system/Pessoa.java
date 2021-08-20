@@ -29,7 +29,7 @@ public class Pessoa extends Atributos_Comuns{
     }
 
     protected  void ajustaInformacoes(Scanner sc) throws Exception {
-        System.out.printf("Digite o sexo da pessoa\n1. Masculino\n2.Feminino\n Resposta: ");
+        System.out.printf("Digite o sexo da pessoa\n1. Masculino\n2. Feminino\n Resposta: ");
         setSexo(sc.nextInt());
         System.out.printf("Digite o dia de nascimento: ");
         setDia(sc.nextInt());

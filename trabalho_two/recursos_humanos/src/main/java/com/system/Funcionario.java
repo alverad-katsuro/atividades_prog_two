@@ -14,11 +14,11 @@ public class Funcionario extends Pessoa {
     private static int numero_de_funcionarios = 0;
 
     public Funcionario(Scanner sc) throws Exception{
-        CadastraFuncionario(sc);
-        modify_Numero_de_funcionarios(1);
         ajustaNomeCPF(sc);
+        CadastraFuncionario(sc);
         ajustaInformacoes(sc);
         definirEndereco(sc);
+        modify_Numero_de_funcionarios(1);
     }
 
     protected Cargo getCargo() {

@@ -115,7 +115,9 @@ public class Interface {
     }
 
     private void cadastraChefeObrigatorio(Scanner sc) throws Exception{
+        System.out.println("Cadastro dos Chefes dos Setores");
         for (Setor setor : getEmpresa().getSetores()) {
+            System.out.printf("Cadastro do Chefe do Setor: %s%n", setor.toString());
             setor.setChefe(sc);
         }
     }

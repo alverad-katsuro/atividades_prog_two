@@ -28,18 +28,18 @@ public enum Setor {
     }
 
     void addFuncionario(Funcionario funcionario) {
-        this.funcionarios.add(funcionario);
+        getFuncionarios().add(funcionario);
     }
 
     void addFuncionario(Scanner sc) throws Exception {
         Funcionario funcionario = new Funcionario(sc);
-        this.funcionarios.add(funcionario);
+        addFuncionario(funcionario);
     }
 
     boolean removeFuncionario(Funcionario funcionario){
-        for (int i = 0; i < this.funcionarios.size(); i++) {
-            if (funcionario == this.funcionarios.get(i)) {
-                this.funcionarios.remove(i);
+        for (int i = 0; i < getFuncionarios().size(); i++) {
+            if (funcionario == getFuncionarios().get(i)) {
+                getFuncionarios().remove(i);
                 return true;
             }
         }
@@ -47,7 +47,7 @@ public enum Setor {
     }
 
     void addContrato(UUID contrato) {
-        this.contratos.add(contrato);
+        getContratos().add(contrato);
     }
     
     public ArrayList<UUID> getContratos() {

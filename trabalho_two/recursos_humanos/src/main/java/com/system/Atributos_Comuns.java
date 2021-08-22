@@ -7,14 +7,12 @@ public class Atributos_Comuns extends Endereco {
     private long telefone;
 
     protected  void defineNome(Scanner sc) throws Exception {
-        sc.nextLine();
         System.out.printf("Digite o nome da pessoa: ");
         String nome = sc.nextLine();
         setNome(nome);
     }
 
     protected  void defineEmail(Scanner sc) throws Exception {
-        sc.nextLine();
         System.out.printf("Digite o email da pessoa: ");
         String email = sc.nextLine();
         while (!email.contains("@")) {

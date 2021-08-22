@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Funcionario extends Pessoa {
-    private Cargo cargo;
+    private Cargo cargo = Cargo.COLABORADOR;
     private final float salario_minimo = 1127.0f;
     private float salario;
     private Setor setor;

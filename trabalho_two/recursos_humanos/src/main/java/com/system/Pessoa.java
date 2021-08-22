@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Pessoa extends Atributos_Comuns{
     private long cpf;
-    private char sexo;
+    private String sexo;
     private int idade;
     private int dia;
     private int mes;
@@ -16,11 +16,14 @@ public class Pessoa extends Atributos_Comuns{
     protected  void defineCPF(Scanner sc) throws Exception {
         System.out.printf("Digite o cpf da pessoa: ");
         setCpf(sc.nextLong());
+        sc.nextLine();
     }
 
     protected  void defineSexo(Scanner sc) throws Exception {
         System.out.printf("Digite o sexo da pessoa\nM. Masculino\nF. Feminino\n Resposta: ");
-        setSexo(sc.next().charAt(0));
+        String sexo = sc.nextLine();
+        sexo = sexo.toUpperCase();
+        setSexo(sexo);
     }
 
     protected  void defineDataNascimento(Scanner sc) throws Exception {
@@ -30,6 +33,7 @@ public class Pessoa extends Atributos_Comuns{
         setMes(sc.nextInt());
         System.out.printf("Digite o ano de nascimento: ");
         setAno(sc.nextInt());
+        sc.nextLine();
         calculaIdade();
     }
 
@@ -98,15 +102,15 @@ public class Pessoa extends Atributos_Comuns{
         return idade;
     }
 
-    private void setSexo(char sexo) throws Exception{
-        if (sexo == 'M' || sexo == 'm'  || sexo == 'F' || sexo == 'f'){
+    private void setSexo(String sexo) throws Exception{
+        if (sexo.equals("M") || sexo.equals("F")){
             this.sexo = sexo;
         } else {
             throw new Exception("SEXO INVALIDO");
         }
     }
 
-    protected char getSexo(){
+    protected String getSexo(){
         return this.sexo;
     }
 

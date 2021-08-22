@@ -1,12 +1,16 @@
 package com.system;
 
 import java.util.Scanner;
+import java.util.UUID;
+
 
 public class Interface {
     private Empresa empresa;
 
     public Interface(Scanner sc) throws Exception{
-        cria_empresa(sc);
+        //cria_empresa(sc);
+        Empresa empresa = new Empresa("dono", "nome", "email@asad", 91984487808l, 12345678912345l);
+        setEmpresa(empresa);
     }
 
     public void cria_empresa(Scanner sc) throws Exception{
@@ -24,6 +28,7 @@ public class Interface {
         CNPJ = sc.nextLong();
         Empresa empresa = new Empresa(dono, nome, email, telefone, CNPJ);
         setEmpresa(empresa);
+        sc.nextLine();
         cadastraChefeObrigatorio(sc);
     }
 
@@ -87,6 +92,7 @@ public class Interface {
 
     private Funcionario buscaOneFuncionario(Scanner sc) throws Exception{
         int escolha = escolhe_modo_busca(sc);
+        sc.nextLine();
         switch (escolha) {
             case 0:
                System.out.printf("Digite a matricula do funcionario: ");
@@ -103,6 +109,7 @@ public class Interface {
 
     public void buscarFuncionario(Scanner sc) throws Exception{
         int escolha = escolhe_modo_busca(sc);
+        sc.nextLine();
         switch (escolha) {
             case 1:
                 System.out.printf("Digite o nome do funcionario: ");
@@ -138,24 +145,44 @@ public class Interface {
         }
     }
 
+    public void showContratos(){
+        for (Setor setor : getEmpresa().getSetores()) {
+            for (UUID id : setor.getContratos()) {
+                System.out.printf("Setor: %s Contrato: %s", setor.toString(), id.toString());
+            }
+        }
+    }
+
+    public void addFuncionario_in_contrato(Scanner sc) throws Exception{
+        Funcionario funcionario = buscaOneFuncionario(sc);
+        showContratos();
+        System.out.print("Digite o contrato desejado: ");
+        UUID id = returnContratos(sc.nextLine());
+        while (id == null) {
+            System.out.print("Digite o contrato desejado: ");
+            id = returnContratos(sc.nextLine());
+        }
+        funcionario.setContrato(id);
+    }
+
     public void admitirFuncionario(Scanner sc) throws Exception{
         Funcionario funcionario = new Funcionario(sc);
         Setor escolha = escolhe_setor(sc);
         switch (escolha) {
             case REQUISITOS:
-                escolha.addFuncionario(funcionario);
+                modulo_admitir(escolha, funcionario, sc);
                 break;
             case MODELAGEM:
-                escolha.addFuncionario(funcionario);
+                modulo_admitir(escolha, funcionario, sc);
                 break;
             case CODIFICACAO:
-                escolha.addFuncionario(funcionario);
+                modulo_admitir(escolha, funcionario, sc);
                 break;
             case TESTE:
-                escolha.addFuncionario(funcionario);
+                modulo_admitir(escolha, funcionario, sc);
                 break;
             case RECURSOS_HUMANOS:
-                escolha.addFuncionario(funcionario);
+                modulo_admitir(escolha, funcionario, sc);
                 break;
         }
     }
@@ -184,6 +211,29 @@ public class Interface {
         }
     }
 
+    private void modulo_admitir(Setor escolha, Funcionario funcionario, Scanner sc) throws Exception{
+        if (escolha.getContratos().size() == 0) {
+            getEmpresa().addContrato(sc, escolha);
+            funcionario.setContrato(escolha.getContratos().get(0));
+            escolha.addFuncionario(funcionario);
+            funcionario.setCargo(Cargo.CHEFE);
+            escolha.setChefe(funcionario);
+        } else{
+            addFuncionario_in_contrato(sc);
+        }
+    }
+
+    private UUID returnContratos(String contrato){
+        for (Setor setor : getEmpresa().getSetores()) {
+            for (UUID id : setor.getContratos()) {
+                if (id.toString().equals(contrato)) {
+                    return id;
+                }
+            }
+        }
+        return null;
+    }
+
     private void cadastraChefeObrigatorio(Scanner sc) throws Exception{
         System.out.println("Cadastro dos Chefes dos Setores");
         for (Setor setor : getEmpresa().getSetores()) {
@@ -195,7 +245,7 @@ public class Interface {
     private Funcionario getFuncionario(String nome){
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
-                if (funcionario.getNome() == nome) {
+                if (funcionario.getNome().equals(nome)) {
                     formatoutput(funcionario, setor);
                     return funcionario;
                 }
@@ -207,7 +257,7 @@ public class Interface {
     private Funcionario getFuncionario(String matricula, int teste){
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
-                if (funcionario.getMatricula().toString() == matricula) {
+                if (funcionario.getMatricula().toString().equals(matricula)) {
                     formatoutput(funcionario, setor);
                     return funcionario;
                 }
@@ -254,9 +304,15 @@ public class Interface {
     }
 
     private void getFuncionarios(int sexo){
+        String sexo_string;
+        if (sexo == 1) {
+            sexo_string = "M";
+        } else {
+            sexo_string = "F";
+        }
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
-                if (funcionario.getSexo() == sexo) {
+                if (funcionario.getSexo() == sexo_string) {
                     formatoutput(funcionario, setor);
                 }
             }
@@ -265,13 +321,9 @@ public class Interface {
 
     private void getFuncionarios(Setor setor){
         System.out.printf("\nO setor %s tem %d funcionarios\n", setor.toString(), setor.getFuncionarios().size());
-        for (Setor setor_list : getEmpresa().getSetores()) {
-            if (setor == setor_list) {
-                for (Funcionario funcionario : setor.getFuncionarios()) {
-                    formatoutput(funcionario, setor);
-                }
+            for (Funcionario funcionario : setor.getFuncionarios()) {
+                formatoutput(funcionario, setor);
             }
-        }
     }
 
     private void getFuncionarios(String estado){
@@ -325,7 +377,12 @@ public class Interface {
     }
 
     private void formatoutput(Funcionario funcionario, Setor setor){
-        System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %.11d Cargo: %s Salario: %.f Contrato: %s Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
+        if (funcionario.getContrato() == null) {
+            System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %011d Cargo: %s Salario: %.2f Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
+        } else{
+            System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %011d Cargo: %s Salario: %.2f Contrato: %s Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato().toString(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
+
+        }
     }
 
 }

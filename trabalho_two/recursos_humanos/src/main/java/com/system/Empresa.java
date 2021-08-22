@@ -7,7 +7,7 @@ public class Empresa extends Atributos_Comuns {
     private String dono;
     private final long cnpj;
     private ArrayList<Contrato> contratos = new ArrayList<>();
-    private final Setor[] setores = {Setor.CODIFICACAO, Setor.MODELAGEM, Setor.RECURSOS_HUMANOS, Setor.REQUISITOS, Setor.TESTE};
+    private final Setor[] setores = {Setor.REQUISITOS, Setor.MODELAGEM, Setor.CODIFICACAO, Setor.TESTE, Setor.RECURSOS_HUMANOS,};
     
     public Empresa(String dono, String nome, String email, long telefone, long CNPJ) throws Exception{
         setDono(dono);

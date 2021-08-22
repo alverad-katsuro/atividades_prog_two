@@ -12,15 +12,6 @@ public class Pessoa extends Atributos_Comuns{
     private int mes;
     private int ano;
 
-    public Pessoa(String nome, long cpf) throws Exception {
-        setNome(nome);
-        setCpf(cpf);
-    }
-
-    protected Pessoa() {
-
-    }
-
     protected  void ajustaNomeCPF(Scanner sc) throws Exception {
         System.out.printf("Digite o nome da pessoa: ");
         setNome(sc.nextLine());

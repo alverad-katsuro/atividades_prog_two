@@ -5,12 +5,7 @@ import java.util.Scanner;
 public class Endereco {
     private String endereco[] = new String[4];
 
-    public Endereco(String rua, String bairro, String cidade, String estado){
-        setEndereco(rua, bairro, cidade, estado);
-    }
-
-    public Endereco(){}
-
+    
     protected String[] getEndereco() {
         return endereco;
     }

@@ -1,6 +1,7 @@
 package com.system;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Empresa extends Atributos_Comuns {
     private String dono;
@@ -38,4 +39,8 @@ public class Empresa extends Atributos_Comuns {
     public ArrayList<Contrato> getContratos() {
         return contratos;
     }    
+
+    public void addContrato(Scanner sc, Setor setor) throws Exception{
+        getContratos().add(new Contrato(setor, sc));
+    }
 }

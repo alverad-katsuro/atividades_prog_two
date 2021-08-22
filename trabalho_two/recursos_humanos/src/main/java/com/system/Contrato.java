@@ -11,15 +11,34 @@ public class Contrato {
     public Contrato(Setor setor, Scanner sc) throws Exception{
         this.setor = setor;
         setor.addContrato(getId());
-        addFuncionario(sc);
+        if (getSetor().getFuncionarios().size() > 0) {
+            System.out.printf("Digite\n1. Adicionar funcionario existente\n2. Contratar funcionario\nEscolha: ");
+            switch (sc.nextInt()) {
+                case 1:
+                    while (true) {
+                        System.out.printf("Digite o cpf do funcionario: ");
+                        Funcionario funcionario = buscaFuncionario(sc.nextLong());
+                        if (funcionario != null) {
+                            addFuncionario(funcionario);
+                            break;
+                        } else{
+                            System.out.println("Funcionario não encontrado");
+                        }    
+                    }
+                    break;
+                default:
+                    addFuncionario(sc);
+                    break;
+            }
+        }
     }
     
     protected UUID getId() {
         return id;
     }
 
-    protected void getChefe(){
-        this.setor.getChefe();
+    protected Funcionario getChefe(){
+        return this.setor.getChefe();
     }
 
     protected Setor getSetor() {

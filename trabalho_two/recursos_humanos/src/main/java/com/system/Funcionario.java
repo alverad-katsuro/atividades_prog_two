@@ -7,20 +7,35 @@ import java.util.UUID;
 
 public class Funcionario extends Pessoa {
     private Cargo cargo;
-    private float salario = 1127.0f;
+    private final float salario_minimo = 1127.0f;
+    private float salario;
     private Setor setor;
     private UUID contrato;
     final Date data_de_ingresso = new Date(System.currentTimeMillis());
     private static int numero_de_funcionarios = 0;
+    private final UUID matricula = UUID.randomUUID();
 
     public Funcionario(Scanner sc) throws Exception{
-        ajustaNomeCPF(sc);
-        CadastraFuncionario(sc);
-        ajustaInformacoes(sc);
-        definirEndereco(sc);
+        defineNome(sc);
+        defineCPF(sc);
+        defineSexo(sc);
+        defineDataNascimento(sc);
+        defineEmail(sc);
+        defineEndereco(sc);
+        defineSalario(sc);
+        defineTelefone(sc);
         modify_Numero_de_funcionarios(1);
+        System.out.println("Matricula ID: "+ getMatricula());
     }
 
+    public UUID getMatricula() {
+        return matricula;
+    }
+
+    public Date getData_de_ingresso() {
+        return data_de_ingresso;
+    }
+    
     protected Cargo getCargo() {
         return cargo;
     }
@@ -41,7 +56,10 @@ public class Funcionario extends Pessoa {
         return salario;
     }
 
-    protected void setSalario(float salario) {
+    private void setSalario(float salario) throws Exception {
+        if (salario < salario_minimo) {
+            throw new Exception("SALARIO INFERIOR AO SALARIO MINIMO");
+        }
         this.salario = salario;
     }
 
@@ -61,7 +79,8 @@ public class Funcionario extends Pessoa {
         return numero_de_funcionarios;
     }
 
-    private void CadastraFuncionario(Scanner sc) throws Exception{
-        ajustaInformacoes(sc);
+    protected void defineSalario(Scanner sc) throws Exception{
+        System.out.printf("Digite o salario do funcionario: ");
+        setSalario(sc.nextFloat());
     }
 }

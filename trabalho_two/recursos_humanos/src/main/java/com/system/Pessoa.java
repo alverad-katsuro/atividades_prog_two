@@ -6,31 +6,33 @@ import java.util.Scanner;
 
 public class Pessoa extends Atributos_Comuns{
     private long cpf;
-    private int sexo;
+    private char sexo;
     private int idade;
     private int dia;
     private int mes;
     private int ano;
 
-    protected  void ajustaNomeCPF(Scanner sc) throws Exception {
-        System.out.printf("Digite o nome da pessoa: ");
-        setNome(sc.nextLine());
+    protected  void defineCPF(Scanner sc) throws Exception {
         System.out.printf("Digite o cpf da pessoa: ");
         setCpf(sc.nextLong());
     }
 
-    protected  void ajustaInformacoes(Scanner sc) throws Exception {
-        System.out.printf("Digite o sexo da pessoa\n1. Masculino\n2. Feminino\n Resposta: ");
-        setSexo(sc.nextInt());
+    protected  void defineSexo(Scanner sc) throws Exception {
+        System.out.printf("Digite o sexo da pessoa\nM. Masculino\nF. Feminino\n Resposta: ");
+        setSexo(sc.next().charAt(0));
+    }
+
+    protected  void defineDataNascimento(Scanner sc) throws Exception {
         System.out.printf("Digite o dia de nascimento: ");
         setDia(sc.nextInt());
         System.out.printf("Digite o mes de nascimento: ");
         setMes(sc.nextInt());
         System.out.printf("Digite o ano de nascimento: ");
         setAno(sc.nextInt());
+        calculaIdade();
     }
 
-    protected void calculaIdade() {
+    public void calculaIdade() {
         int dia, mes, ano;
         SimpleDateFormat format_year = new SimpleDateFormat("yyyy");
         SimpleDateFormat format_mouth = new SimpleDateFormat("MM");
@@ -53,7 +55,7 @@ public class Pessoa extends Atributos_Comuns{
         }
     }
 
-    protected void setDia(int dia) throws Exception {
+    private void setDia(int dia) throws Exception {
         if (dia < 0 || dia > 31) {
             throw new Exception("Dia invalido");
         }
@@ -64,7 +66,7 @@ public class Pessoa extends Atributos_Comuns{
         return dia;
     }
 
-    protected void setMes(int mes) throws Exception{
+    private void setMes(int mes) throws Exception{
         if (mes < 0 || mes > 12) {
             throw new Exception("Mes invalido");
         }
@@ -75,7 +77,7 @@ public class Pessoa extends Atributos_Comuns{
         return mes;
     }
 
-    protected void setAno(int ano) throws Exception{
+    private void setAno(int ano) throws Exception{
         if (ano < 0 || ano > 2021) {
             throw new Exception("Ano invalido");
         }
@@ -86,7 +88,7 @@ public class Pessoa extends Atributos_Comuns{
         return ano;
     }
 
-    protected void setIdade(int idade) {
+    private void setIdade(int idade) {
         this.idade = idade;
     }
 
@@ -94,15 +96,19 @@ public class Pessoa extends Atributos_Comuns{
         return idade;
     }
 
-    protected void setSexo(int sexo) {
-        this.sexo = sexo;
+    private void setSexo(char sexo) throws Exception{
+        if (sexo == 'M' || sexo == 'm'  || sexo == 'F' || sexo == 'f'){
+            this.sexo = sexo;
+        } else {
+            throw new Exception("SEXO INVALIDO");
+        }
     }
 
-    protected int getSexo(){
+    protected char getSexo(){
         return this.sexo;
     }
 
-    protected void setCpf(long cpf) throws Exception{
+    private void setCpf(long cpf) throws Exception{
         if ((String.valueOf(cpf).length()) != 11) {
             throw new Exception("CPF INVALIDO");
         }

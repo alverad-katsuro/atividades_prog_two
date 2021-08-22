@@ -15,15 +15,15 @@ public enum Setor {
     private ArrayList<UUID> contratos = new ArrayList<>();
     private Funcionario chefe;
 
-    public void setChefe(Funcionario chefe) {
+    protected void setChefe(Funcionario chefe) {
         this.chefe = chefe;
     }
 
-    public void setChefe(Scanner sc) throws Exception {
+    protected void setChefe(Scanner sc) throws Exception {
         this.chefe = new Funcionario(sc);
     }
 
-    public Funcionario getChefe() {
+    protected Funcionario getChefe() {
         return this.chefe;
     }
 

@@ -26,10 +26,79 @@ public class Interface {
         setEmpresa(empresa);
         cadastraChefeObrigatorio(sc);
     }
+
+    public void informacoesSetor(Scanner sc){
+        for (Setor setor : getEmpresa().getSetores()) {
+            System.out.printf("O %s tem %s como chefe, %d contratos e %d funcionarios", setor.toString(), setor.getChefe(), setor.getContratos().size(), setor.getFuncionarios().size());
+        }
+    }
+
+    public void atualizarFuncionario(Scanner sc) throws Exception{
+        Funcionario funcionario = buscaOneFuncionario(sc);
+        while (true) {
+            if (funcionario != null) {
+                break;
+            }
+        }
+        System.out.print("DIGITE O ATRIBUTO QUE VOCE QUER MODIFICAR: ");
+        String mod_att = sc.nextLine();
+        switch (mod_att) {
+            case ("NOME"): {
+                funcionario.defineNome(sc);
+            }
+            case ("ENDERECO"): {
+                funcionario.defineEndereco(sc);
+                break;
+            }
+            case ("SEXO"): {
+                funcionario.defineSexo(sc);
+                break;
+            }
+            case ("CPF"): {
+                funcionario.defineCPF(sc);
+                break;
+            }
+            case ("EMAIL"): {
+                funcionario.defineEmail(sc);
+                break;
+            }
+            case ("TELEFONE"): {
+                System.out.print("INSERIR TELEFONE: ");
+                long change_telefone = sc.nextLong();
+                funcionario.setTelefone(change_telefone);
+                break;
+            }
+            case ("SALARIO"): {
+                funcionario.defineSalario(sc);
+                break;
+            }
+        }
+    }
+
+    public void novoContrato(Scanner sc) throws Exception{
+        Setor setor = escolhe_setor(sc);
+        getEmpresa().addContrato(sc, setor);
+    }
   
     public void cadastraChefe(Scanner sc) throws Exception{
         Setor escolha = escolhe_setor(sc);
         escolha.setChefe(sc);
+    }
+
+    private Funcionario buscaOneFuncionario(Scanner sc) throws Exception{
+        int escolha = escolhe_modo_busca(sc);
+        switch (escolha) {
+            case 0:
+               System.out.printf("Digite a matricula do funcionario: ");
+                return getFuncionario(sc.nextLine(), 5);
+            case 1:
+                System.out.printf("Digite o nome do funcionario: ");
+                return getFuncionario(sc.nextLine());
+            case 2:
+                System.out.printf("Digite o CPF do funcionario: ");
+                return getFuncionario(sc.nextLong());
+        }
+        return null;
     }
 
     public void buscarFuncionario(Scanner sc) throws Exception{
@@ -51,6 +120,7 @@ public class Interface {
                 } else if (temp == 2){
                     getFuncionarios(2);
                 }
+                break;
             case 4:
                 System.out.printf("Digite o Estado de busca: ");
                 getFuncionarios(sc.nextLine());
@@ -61,10 +131,10 @@ public class Interface {
                 break;
             case 6:
                 getFuncionario_min_max_sal();
-                break;  
+                break;
             case 7:
                 getFuncionarios();
-                break;  
+                break;
         }
     }
 
@@ -134,21 +204,32 @@ public class Interface {
         return null;
     }
 
-    private void getFuncionario_min_max_sal(){
-        Funcionario max = getEmpresa().getSetores()[0].getChefe();
-        Funcionario min = getEmpresa().getSetores()[0].getChefe();
+    private Funcionario getFuncionario(String matricula, int teste){
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
-                if (funcionario.getSalario() > max.getSalario()) {
-                    max = funcionario;
-                }
-                if (funcionario.getSalario() < min.getSalario()) {
-                    min = funcionario;
+                if (funcionario.getMatricula().toString() == matricula) {
+                    formatoutput(funcionario, setor);
+                    return funcionario;
                 }
             }
         }
-        formatoutput(max, max.getSetor());
-        formatoutput(min, min.getSetor());
+        return null;
+    }
+
+    private void getFuncionario_min_max_sal(){
+        Funcionario max_min[] = {getEmpresa().getSetores()[0].getChefe(), getEmpresa().getSetores()[0].getChefe()};
+        for (Setor setor : getEmpresa().getSetores()) {
+            for (Funcionario funcionario : setor.getFuncionarios()) {
+                if (funcionario.getSalario() > max_min[0].getSalario()) {
+                    max_min[0] = funcionario;
+                }
+                if (funcionario.getSalario() < max_min[1].getSalario()) {
+                    max_min[1] = funcionario;
+                }
+            }
+        }
+        formatoutput(max_min[0], max_min[0].getSetor());
+        formatoutput(max_min[1], max_min[1].getSetor());
     }
 
     private Funcionario getFuncionario(long cpf){
@@ -223,7 +304,7 @@ public class Interface {
 
     private int escolhe_modo_busca(Scanner sc) {
         int escolha;
-        System.out.printf("Digite\n1. Busca por Nome\n2. Busca por CPF\n3. Busca por Sexo\n4. Busca por Estado\n5. Busca por Setor\n6. Maior e Menor Salario\n7. Listar Todos\nEscolha: ");
+        System.out.printf("Digite\n0. Busca por Matricula\n1. Busca por Nome\n2. Busca por CPF\n3. Busca por Sexo\n4. Busca por Estado\n5. Busca por Setor\n6. Maior e Menor Salario\n7. Listar Todos\nEscolha: ");
         escolha = sc.nextInt();
         return escolha;
     }
@@ -244,7 +325,7 @@ public class Interface {
     }
 
     private void formatoutput(Funcionario funcionario, Setor setor){
-        System.out.printf("Nome: %s Setor: %s CPF: %d Cargo: %s Salario: %.f Contrato: %s%n", funcionario.getNome(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato());
+        System.out.printf("Nome: %s Setor: %s CPF: %d Cargo: %s Salario: %.f Contrato: %s Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
     }
 
 }

@@ -33,7 +33,7 @@ public class Endereco {
         this.endereco[3] = estado;
     }
     
-    protected void definirEndereco(Scanner sc){
+    protected void defineEndereco(Scanner sc){
         System.out.printf("Digite a rua: ");
         setEnderecoRua(sc.nextLine());
         System.out.printf("Digite a bairro: ");

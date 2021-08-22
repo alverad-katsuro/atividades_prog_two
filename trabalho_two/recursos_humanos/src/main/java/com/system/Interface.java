@@ -325,7 +325,7 @@ public class Interface {
     }
 
     private void formatoutput(Funcionario funcionario, Setor setor){
-        System.out.printf("Nome: %s Setor: %s CPF: %.11d Cargo: %s Salario: %.f Contrato: %s Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
+        System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %.11d Cargo: %s Salario: %.f Contrato: %s Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
     }
 
 }

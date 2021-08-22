@@ -52,6 +52,10 @@ public class Funcionario extends Pessoa {
         this.contrato = contrato;
     }
 
+    public float getSalario_minimo() {
+        return salario_minimo;
+    }
+
     protected float getSalario() {
         return salario;
     }
@@ -81,6 +85,11 @@ public class Funcionario extends Pessoa {
 
     protected void defineSalario(Scanner sc) throws Exception{
         System.out.printf("Digite o salario do funcionario: ");
+        float salario = sc.nextFloat();
+        while (salario < getSalario_minimo()) {
+            System.out.printf("Digite o salario do funcionario: ");
+            salario = sc.nextFloat();
+        }
         setSalario(sc.nextFloat());
     }
 }

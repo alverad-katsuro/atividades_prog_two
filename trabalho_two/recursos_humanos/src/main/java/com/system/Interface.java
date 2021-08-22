@@ -161,27 +161,8 @@ public class Interface {
     }
 
     public void demitirFuncionario(Scanner sc) throws Exception{
-        int forma_de_demitir;
-        System.out.printf("Digite\n1. Entrar com CPF\n2. Entrar com Nome\nEscolha: ");
-        forma_de_demitir = sc.nextInt();
-        switch (forma_de_demitir) {
-            case 1:
-                System.out.printf("Digite o CPF: ");
-                if (demiteFuncionarioModulo(sc.nextLong())) {
-                    System.out.println("Funcionario Demitido!");
-                } else{
-                    System.out.println("Funcionario não encontrado!");
-                }
-                break;
-            case 2:
-                System.out.printf("Digite o Nome: ");
-                if (demiteFuncionarioModulo(sc.nextLine())) {
-                    System.out.println("Funcionario Demitido!");
-                } else{
-                    System.out.println("Funcionario não encontrado!");
-                }
-                break;
-        }
+        System.out.printf("Digite o CPF: ");
+        System.out.println(demiteFuncionarioModulo(sc.nextLong())? "Funcionario Demitido!" : "Funcionario não encontrado!");
     }
 
     private void cadastraChefeObrigatorio(Scanner sc) throws Exception{

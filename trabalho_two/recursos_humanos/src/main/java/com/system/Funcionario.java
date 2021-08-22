@@ -90,6 +90,6 @@ public class Funcionario extends Pessoa {
             System.out.printf("Digite o salario do funcionario: ");
             salario = sc.nextFloat();
         }
-        setSalario(sc.nextFloat());
+        setSalario(salario);
     }
 }

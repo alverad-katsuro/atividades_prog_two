@@ -113,13 +113,9 @@ public class Interface {
                 getFuncionario(sc.nextLong());
                 break;
             case 3:
-                System.out.printf("Digite\n1. Masculino\n2. Feminino\nEscolha: ");
-                int temp = sc.nextInt();
-                if (temp == 1){
-                    getFuncionarios(1);
-                } else if (temp == 2){
-                    getFuncionarios(2);
-                }
+                System.out.printf("Digite\n'M'. Masculino\n'F'. Feminino\nEscolha: ");
+                char temp = sc.next().toUpperCase().charAt(0);
+                getFuncionarios(temp);
                 break;
             case 4:
                 System.out.printf("Digite o Estado de busca: ");
@@ -234,7 +230,7 @@ public class Interface {
         }
     }
 
-    private void getFuncionarios(int sexo){
+    private void getFuncionarios(char sexo){
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
                 if (funcionario.getSexo() == sexo) {

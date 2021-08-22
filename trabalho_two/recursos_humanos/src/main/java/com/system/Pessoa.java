@@ -1,6 +1,7 @@
 package com.system;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -41,17 +42,17 @@ public class Pessoa extends Atributos_Comuns{
         ano = Integer.parseInt(format_year.format(date).toString());
         mes = Integer.parseInt(format_mouth.format(date).toString());
         dia = Integer.parseInt(format_day.format(date).toString());
-        if (getMes() > mes) {
-            setIdade((short)(ano - getAno()));
-            System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
+        if (getMes() < mes) {
+            setIdade((ano - getAno()));
+            //System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
         } else if (mes == getMes()) {
             if (dia >= getDia()){
                 setIdade((short)(ano - getAno()));
-                System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
+                //System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
             }
         } else if (mes > getMes()) {
             setIdade((short) (ano - getAno() - 1));
-            System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
+            //System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
         }
     }
 
@@ -78,8 +79,9 @@ public class Pessoa extends Atributos_Comuns{
     }
 
     private void setAno(int ano) throws Exception{
-        if (ano < 0 || ano > 2021) {
-            throw new Exception("Ano invalido");
+        Calendar calendario = Calendar.getInstance();
+        if (ano < 0 || ano > calendario.get(Calendar.YEAR)) {
+            throw new Exception("ANO INVALIDO");
         }
         this.ano = ano;
     }
@@ -108,10 +110,7 @@ public class Pessoa extends Atributos_Comuns{
         return this.sexo;
     }
 
-    private void setCpf(long cpf) throws Exception{
-        if ((String.valueOf(cpf).length()) != 11) {
-            throw new Exception("CPF INVALIDO");
-        }
+    private void setCpf(long cpf){
         this.cpf = cpf;
     }
 

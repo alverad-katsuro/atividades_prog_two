@@ -7,17 +7,25 @@ public class Atributos_Comuns extends Endereco {
     private long telefone;
 
     protected  void defineNome(Scanner sc) throws Exception {
+        sc.nextLine();
         System.out.printf("Digite o nome da pessoa: ");
-        setNome(sc.nextLine());
+        String nome = sc.nextLine();
+        setNome(nome);
     }
 
     protected  void defineEmail(Scanner sc) throws Exception {
+        sc.nextLine();
         System.out.printf("Digite o email da pessoa: ");
-        setEmail(sc.nextLine());
+        String email = sc.nextLine();
+        while (!email.contains("@")) {
+            System.out.printf("Digite o email da pessoa: ");
+            email = sc.nextLine();
+        }
+        setEmail(email);
     }
 
     protected  void defineTelefone(Scanner sc) throws Exception {
-        System.out.printf("Digite o telefone da pessoa: ");
+        System.out.printf("Digite o telefone da pessoa com DD: ");
         setTelefone(sc.nextLong());
     }
 
@@ -37,10 +45,7 @@ public class Atributos_Comuns extends Endereco {
         return nome;
     }
 
-    protected void setTelefone(long telefone) throws Exception {
-        if ((String.valueOf(telefone).length()) != 11) {
-            throw new Exception("TELEFONE INVALIDO");
-        }
+    protected void setTelefone(long telefone){
         this.telefone = telefone;
     }
 

@@ -187,7 +187,7 @@ public class Interface {
     private void cadastraChefeObrigatorio(Scanner sc) throws Exception{
         System.out.println("Cadastro dos Chefes dos Setores");
         for (Setor setor : getEmpresa().getSetores()) {
-            System.out.printf("Cadastro do Chefe do Setor: %s%n", setor.toString());
+            System.out.println("Cadastro do Chefe do Setor: " + setor.toString());
             setor.setChefe(sc);
         }
     }
@@ -325,7 +325,7 @@ public class Interface {
     }
 
     private void formatoutput(Funcionario funcionario, Setor setor){
-        System.out.printf("Nome: %s Setor: %s CPF: %d Cargo: %s Salario: %.f Contrato: %s Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
+        System.out.printf("Nome: %s Setor: %s CPF: %.11d Cargo: %s Salario: %.f Contrato: %s Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
     }
 
 }

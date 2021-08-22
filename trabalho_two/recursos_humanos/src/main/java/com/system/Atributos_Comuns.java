@@ -25,6 +25,7 @@ public class Atributos_Comuns extends Endereco {
     protected  void defineTelefone(Scanner sc) throws Exception {
         System.out.printf("Digite o telefone da pessoa com DD: ");
         setTelefone(sc.nextLong());
+        sc.nextLine();
     }
 
     protected void setEmail(String email) {

@@ -20,7 +20,8 @@ public enum Setor {
     }
 
     protected void setChefe(Scanner sc) throws Exception {
-        this.chefe = new Funcionario(sc);
+        setChefe((new Funcionario(sc)));
+        addFuncionario(getChefe());
     }
 
     protected Funcionario getChefe() {

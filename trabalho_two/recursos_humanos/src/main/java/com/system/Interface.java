@@ -8,9 +8,9 @@ public class Interface {
     private Empresa empresa;
 
     public Interface(Scanner sc) throws Exception{
-        //cria_empresa(sc);
-        Empresa empresa = new Empresa("dono", "nome", "email@asad", 91984487808l, 12345678912345l);
-        setEmpresa(empresa);
+        cria_empresa(sc);
+        //Empresa empresa = new Empresa("dono", "nome", "email@asad", 91984487808l, 12345678912345l);
+        //setEmpresa(empresa);
     }
 
     public void cria_empresa(Scanner sc) throws Exception{
@@ -34,7 +34,7 @@ public class Interface {
 
     public void informacoesSetor(Scanner sc){
         for (Setor setor : getEmpresa().getSetores()) {
-            System.out.printf("O %s tem %s como chefe, %d contratos e %d funcionarios", setor.toString(), setor.getChefe(), setor.getContratos().size(), setor.getFuncionarios().size());
+            System.out.printf("O %s tem %s como chefe, %d contratos e %d funcionarios %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
         }
     }
 
@@ -91,8 +91,7 @@ public class Interface {
     }
 
     private Funcionario buscaOneFuncionario(Scanner sc) throws Exception{
-        int escolha = escolhe_modo_busca(sc);
-        sc.nextLine();
+        int escolha = escolhe_modo_busca_one(sc);
         switch (escolha) {
             case 0:
                System.out.printf("Digite a matricula do funcionario: ");
@@ -358,6 +357,15 @@ public class Interface {
         int escolha;
         System.out.printf("Digite\n0. Busca por Matricula\n1. Busca por Nome\n2. Busca por CPF\n3. Busca por Sexo\n4. Busca por Estado\n5. Busca por Setor\n6. Maior e Menor Salario\n7. Listar Todos\nEscolha: ");
         escolha = sc.nextInt();
+        sc.nextLine();
+        return escolha;
+    }
+
+    private int escolhe_modo_busca_one(Scanner sc) {
+        int escolha;
+        System.out.printf("Digite\n0. Busca por Matricula\n1. Busca por Nome\n2. Busca por CPF\nEscolha: ");
+        escolha = sc.nextInt();
+        sc.nextLine();
         return escolha;
     }
 

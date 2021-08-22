@@ -9,7 +9,8 @@ public class Main {
         while (true) {
             System.out.println("1. REGISTRAR FUNCIONARIO\n2. ENCONTRAR FUNCIONARIO\n3. ATUALIZAR OS DADOS\n4. DEMITIR FUNCIONARIO\n5. VISUALIZAR SETORES");
             System.out.printf("\nESCOLHER AÇÃO: ");
-            int main_action = sc.nextInt(); 
+            int main_action = sc.nextInt();
+            sc.nextLine(); 
             if (main_action == 0) {
                 break;
             }

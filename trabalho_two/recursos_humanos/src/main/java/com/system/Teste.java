@@ -1,7 +1,6 @@
 package com.system;
 
 import java.util.Scanner;
-import java.util.UUID;
 
 public class Teste {
     public static void main(String[] args) throws Exception {

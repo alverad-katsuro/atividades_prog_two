@@ -136,24 +136,24 @@ public class Interface {
         int escolha = escolhe_modo_busca(sc);
         switch (escolha) {
             case 0:
-                System.out.printf("Digite a matricula do funcionario: ");
+                System.out.printf("\033[1;34mDigite a matricula do funcionario:\033[1;97m ");
                 getFuncionario(sc.nextLine(), 5);
             case 1:
-                System.out.printf("Digite o nome do funcionario: ");
+                System.out.printf("\033[1;34mDigite o nome do funcionario:\033[1;97m ");
                 getFuncionario(sc.nextLine());
                 break;
             case 2:
-                System.out.printf("Digite o CPF do funcionario: ");
+                System.out.printf("\033[1;34mDigite o CPF do funcionario:\033[1;97m ");
                 getFuncionario(sc.nextLong());
                 break;
             case 3:
-                System.out.printf("Digite\n1. Masculino\n2. Feminino\nEscolha: ");
+                System.out.printf("\033[1;34mDigite\n1. Masculino\n2. Feminino\nEscolha:\033[1;97m ");
                 int temp = sc.nextInt();
                 sc.nextLine();
                 getFuncionarios(temp);
                 break;
             case 4:
-                System.out.printf("Digite o Estado de busca: ");
+                System.out.printf("\033[1;34mDigite o Estado de busca:\033[1;97m ");
                 getFuncionarios(sc.nextLine());
                 break;
             case 5:
@@ -175,18 +175,6 @@ public class Interface {
                 System.out.printf("Setor: %s Contrato: %s%n", setor.toString(), id.toString());
             }
         }
-    }
-
-    public void addFuncionario_in_contrato(Scanner sc, Funcionario funcionario) throws Exception{
-        showContratos();
-        System.out.print("Digite o contrato desejado: ");
-        Contrato contrato = returnContratos(sc.nextLine());
-        while (contrato == null) {
-            System.out.print("Digite o contrato desejado: ");
-            contrato = returnContratos(sc.nextLine());
-        }
-        contrato.addFuncionario(funcionario);
-        funcionario.setContrato(contrato.getId());
     }
 
     public void admitirFuncionario(Scanner sc) throws Exception{
@@ -214,9 +202,9 @@ public class Interface {
     public void demitirFuncionario(Scanner sc) throws Exception{
         Funcionario funcionario = buscaOneFuncionario(sc);
         if (demiteFuncionarioModulo(funcionario, sc)) {
-            System.out.println("Funcionario Demitido!");
+            System.out.println("\033[1;34mFuncionario Demitido!");
         } else{
-            System.out.println("Funcionario não encontrado!");
+            System.out.println("\033[1;91mFuncionario não encontrado!");
         }
     }
 
@@ -228,15 +216,6 @@ public class Interface {
         Contrato contrato = getEmpresa().addContrato(sc, setor);
         contrato.addFuncionario(funcionario);
         funcionario.setContrato(contrato.getId());
-    }
-
-    private Contrato returnContratos(String contrato){
-        for (Contrato contrato_get : getEmpresa().getContratos()) {
-            if (contrato_get.getId().toString().equals(contrato)) {
-                return contrato_get;
-            }
-        }
-        return null;
     }
 
     private Funcionario getFuncionario(String nome){
@@ -352,7 +331,7 @@ public class Interface {
 
     private int escolhe_modo_busca(Scanner sc) {
         int escolha;
-        System.out.printf("Digite\n0. Busca por Matricula\n1. Busca por Nome\n2. Busca por CPF\n3. Busca por Sexo\n4. Busca por Estado\n5. Busca por Setor\n6. Maior e Menor Salario\n7. Listar Todos\nEscolha: ");
+        System.out.printf("\033[1;34mDigite\n0. Busca por Matricula\n1. Busca por Nome\n2. Busca por CPF\n3. Busca por Sexo\n4. Busca por Estado\n5. Busca por Setor\n6. Maior e Menor Salario\n7. Listar Todos\nEscolha:\033[1;97m ");
         escolha = sc.nextInt();
         sc.nextLine();
         return escolha;
@@ -360,7 +339,7 @@ public class Interface {
 
     private int escolhe_modo_busca_one(Scanner sc) {
         int escolha;
-        System.out.printf("Digite\n0. Busca por Matricula\n1. Busca por Nome\n2. Busca por CPF\nEscolha: ");
+        System.out.printf("\033[1;34mDigite\n0. Busca por Matricula\n1. Busca por Nome\n2. Busca por CPF\nEscolha:\033[1;97m ");
         escolha = sc.nextInt();
         sc.nextLine();
         return escolha;
@@ -368,7 +347,7 @@ public class Interface {
 
     private Setor escolhe_setor(Scanner sc) {
         int escolha;
-        System.out.printf("Digite\n1.Setor de Requisitos\n2.Setor de Modelagem\n3.Setor de Codificação\n4.Setor de Testes\n5.Recursos Humanos\nEscolha: ");
+        System.out.printf("\033[1;34mDigite\n1.Setor de Requisitos\n2.Setor de Modelagem\n3.Setor de Codificação\n4.Setor de Testes\n5.Recursos Humanos\nEscolha:\033[1;97m ");
         escolha = sc.nextInt();
         sc.nextLine();
         return getEmpresa().getSetores()[escolha - 1];
@@ -384,11 +363,26 @@ public class Interface {
 
     private void formatoutput(Funcionario funcionario, Setor setor){
         if (funcionario.getContrato() == null) {
-            System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %011d Cargo: %s Salario: %.2f Data de Ingresso: %s Matricula: %s;%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
+            formatoutput_modulo(funcionario);
         } else{
-            System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %011d Cargo: %s Salario: %.2f Contrato: %s Data de Ingresso: %s Matricula: %s;%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato().toString(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
+            formatoutput_modulo(funcionario);
+            System.out.printf("\033[1;34mContrato:          \033[1;97m%s%n", funcionario.getContrato().toString());
 
         }
+    }
+
+    private void formatoutput_modulo(Funcionario funcionario){
+        System.out.println();
+        System.out.printf("\033[1;34m%25s%n", "INFORMAÇÔES");
+        System.out.printf("\033[1;34mNome:              \033[1;97m%s%n", funcionario.getNome());
+        System.out.printf("\033[1;34mTelefone:          \033[1;97m%011d%n", funcionario.getTelefone());
+        System.out.printf("\033[1;34mCPF:               \033[1;97m%011d%n", funcionario.getCpf());
+        System.out.printf("\033[1;34mIdade:             \033[1;97m%d%n", funcionario.getIdade());
+        System.out.printf("\033[1;34mMatricula:         \033[1;97m%s%n", funcionario.getMatricula().toString());
+        System.out.printf("\033[1;34mSetor:             \033[1;97m%s%n", funcionario.getSetor().toString());
+        System.out.printf("\033[1;34mCargo:             \033[1;97m%s%n", funcionario.getCargo().toString());
+        System.out.printf("\033[1;34mSalario:           \033[1;97m%.2f%n", funcionario.getSalario());
+        System.out.printf("\033[1;34mData de Ingresso:  \033[1;97m%s%n", funcionario.getData_de_ingresso());
     }
 
 }

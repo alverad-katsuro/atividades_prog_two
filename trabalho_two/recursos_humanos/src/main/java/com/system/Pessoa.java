@@ -14,24 +14,24 @@ public class Pessoa extends Atributos_Comuns{
     private int ano;
 
     protected  void defineCPF(Scanner sc) throws Exception {
-        System.out.printf("Digite o cpf da pessoa: ");
+        System.out.printf("\033[1;34mDigite o cpf da pessoa:\033[1;97m ");
         setCpf(sc.nextLong());
         sc.nextLine();
     }
 
     protected  void defineSexo(Scanner sc) throws Exception {
-        System.out.printf("Digite o sexo da pessoa\nM. Masculino\nF. Feminino\n Resposta: ");
+        System.out.printf("\033[1;34mDigite o sexo da pessoa\nM. Masculino\nF. Feminino\n Resposta:\033[1;97m ");
         String sexo = sc.nextLine();
         sexo = sexo.toUpperCase();
         setSexo(sexo);
     }
 
     protected  void defineDataNascimento(Scanner sc) throws Exception {
-        System.out.printf("Digite o dia de nascimento: ");
+        System.out.printf("\033[1;34mDigite o dia de nascimento:\033[1;97m ");
         setDia(sc.nextInt());
-        System.out.printf("Digite o mes de nascimento: ");
+        System.out.printf("\033[1;34mDigite o mes de nascimento:\033[1;97m ");
         setMes(sc.nextInt());
-        System.out.printf("Digite o ano de nascimento: ");
+        System.out.printf("\033[1;34mDigite o ano de nascimento:\033[1;97m ");
         setAno(sc.nextInt());
         sc.nextLine();
         calculaIdade();
@@ -62,7 +62,7 @@ public class Pessoa extends Atributos_Comuns{
 
     private void setDia(int dia) throws Exception {
         if (dia < 0 || dia > 31) {
-            throw new Exception("Dia invalido");
+            throw new Exception("\033[1;91mDia invalido");
         }
         this.dia = dia;
     }
@@ -73,7 +73,7 @@ public class Pessoa extends Atributos_Comuns{
 
     private void setMes(int mes) throws Exception{
         if (mes < 0 || mes > 12) {
-            throw new Exception("Mes invalido");
+            throw new Exception("\033[1;91mMes invalido");
         }
         this.mes = mes;
     }
@@ -85,7 +85,7 @@ public class Pessoa extends Atributos_Comuns{
     private void setAno(int ano) throws Exception{
         Calendar calendario = Calendar.getInstance();
         if (ano < 0 || ano > calendario.get(Calendar.YEAR)) {
-            throw new Exception("ANO INVALIDO");
+            throw new Exception("\033[1;91mANO INVALIDO");
         }
         this.ano = ano;
     }
@@ -106,7 +106,7 @@ public class Pessoa extends Atributos_Comuns{
         if (sexo.equals("M") || sexo.equals("F")){
             this.sexo = sexo;
         } else {
-            throw new Exception("SEXO INVALIDO");
+            throw new Exception("\033[1;91mSEXO INVALIDO");
         }
     }
 

@@ -8,8 +8,8 @@ public class Main {
         Interface interface_one = new Interface(sc);
         while (true) {
             System.out.println("--------------------------");
-            System.out.println("1. REGISTRAR FUNCIONARIO\n2. ENCONTRAR FUNCIONARIO\n3. ATUALIZAR OS DADOS\n4. DEMITIR FUNCIONARIO\n5. VISUALIZAR SETORES");
-            System.out.printf("\nESCOLHER AÇÃO: ");
+            System.out.println("\033[1;34m1. REGISTRAR FUNCIONARIO\n2. ENCONTRAR FUNCIONARIO\n3. ATUALIZAR OS DADOS\n4. DEMITIR FUNCIONARIO\n5. VISUALIZAR SETORES");
+            System.out.printf("\nESCOLHER AÇÃO: \033[1;97m");
             int main_action = sc.nextInt();
             sc.nextLine(); 
             System.out.println("--------------------------");

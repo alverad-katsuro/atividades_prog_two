@@ -25,7 +25,7 @@ public class Funcionario extends Pessoa {
         defineSalario(sc);
         defineTelefone(sc);
         modify_Numero_de_funcionarios(1);
-        System.out.printf("Funcionario: %s Cargo: %s Matricula ID: %s%n%n",getNome(), getCargo().toString(), getMatricula().toString());
+        System.out.printf("\033[1;34mFuncionario: \033[1;97m%s \033[1;34mCargo: \033[1;97m%s \033[1;34mMatricula ID: \033[1;97m%s%n%n",getNome(), getCargo().toString(), getMatricula().toString());
     }
 
     public UUID getMatricula() {
@@ -62,7 +62,7 @@ public class Funcionario extends Pessoa {
 
     private void setSalario(float salario) throws Exception {
         if (salario < salario_minimo) {
-            throw new Exception("SALARIO INFERIOR AO SALARIO MINIMO");
+            throw new Exception("\033[1;91mSALARIO INFERIOR AO SALARIO MINIMO");
         }
         this.salario = salario;
     }
@@ -84,10 +84,10 @@ public class Funcionario extends Pessoa {
     }
 
     protected void defineSalario(Scanner sc) throws Exception{
-        System.out.printf("Digite o salario do funcionario: ");
+        System.out.printf("\033[1;34mDigite o salario do funcionario:\033[1;97m ");
         float salario = sc.nextFloat();
         while (salario < getSalario_minimo()) {
-            System.out.printf("Digite o salario do funcionario: ");
+            System.out.printf("\033[1;34mDigite o salario do funcionario:\033[1;97m ");
             salario = sc.nextFloat();
         }
         setSalario(salario);

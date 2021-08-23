@@ -34,13 +34,13 @@ public class Endereco {
     }
     
     protected void defineEndereco(Scanner sc){
-        System.out.printf("Digite a rua: ");
+        System.out.printf("\033[1;34mDigite a rua:\033[1;97m ");
         setEnderecoRua(sc.nextLine());
-        System.out.printf("Digite a bairro: ");
+        System.out.printf("\033[1;34mDigite a bairro:\033[1;97m ");
         setEnderecoBairro(sc.nextLine());
-        System.out.printf("Digite a cidade: ");
+        System.out.printf("\033[1;34mDigite a cidade:\033[1;97m ");
         setEnderecoCidade(sc.nextLine());
-        System.out.printf("Digite a Estado: ");
+        System.out.printf("\033[1;34mDigite a Estado:\033[1;97m ");
         setEnderecoEstado(sc.nextLine());
     }
 }

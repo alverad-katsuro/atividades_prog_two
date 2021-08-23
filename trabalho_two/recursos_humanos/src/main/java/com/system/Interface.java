@@ -8,9 +8,9 @@ public class Interface {
     private Empresa empresa;
 
     public Interface(Scanner sc) throws Exception{
-        cria_empresa(sc);
-        //Empresa empresa = new Empresa("dono", "nome", "email@asad", 91984487808l, 12345678912345l);
-        //setEmpresa(empresa);
+        //cria_empresa(sc);
+        Empresa empresa = new Empresa("dono", "nome", "email@asad", 91984487808l, 12345678912345l);
+        setEmpresa(empresa);
     }
 
     public void cria_empresa(Scanner sc) throws Exception{
@@ -101,9 +101,12 @@ public class Interface {
                 return getFuncionario(sc.nextLine());
             case 2:
                 System.out.printf("Digite o CPF do funcionario: ");
-                return getFuncionario(sc.nextLong());
+                long cpf = sc.nextLong();
+                sc.nextLine();
+                return getFuncionario(cpf);
+            default:
+                return null;
         }
-        return null;
     }
 
     public void buscarFuncionario(Scanner sc) throws Exception{
@@ -147,13 +150,12 @@ public class Interface {
     public void showContratos(){
         for (Setor setor : getEmpresa().getSetores()) {
             for (UUID id : setor.getContratos()) {
-                System.out.printf("Setor: %s Contrato: %s", setor.toString(), id.toString());
+                System.out.printf("Setor: %s Contrato: %s%n", setor.toString(), id.toString());
             }
         }
     }
 
-    public void addFuncionario_in_contrato(Scanner sc) throws Exception{
-        Funcionario funcionario = buscaOneFuncionario(sc);
+    public void addFuncionario_in_contrato(Scanner sc, Funcionario funcionario) throws Exception{
         showContratos();
         System.out.print("Digite o contrato desejado: ");
         UUID id = returnContratos(sc.nextLine());
@@ -161,6 +163,7 @@ public class Interface {
             System.out.print("Digite o contrato desejado: ");
             id = returnContratos(sc.nextLine());
         }
+        System.out.println(funcionario.getNome());
         funcionario.setContrato(id);
     }
 
@@ -218,7 +221,7 @@ public class Interface {
             funcionario.setCargo(Cargo.CHEFE);
             escolha.setChefe(funcionario);
         } else{
-            addFuncionario_in_contrato(sc);
+            addFuncionario_in_contrato(sc, funcionario);
         }
     }
 
@@ -373,6 +376,7 @@ public class Interface {
         int escolha;
         System.out.printf("Digite\n1.Setor de Requisitos\n2.Setor de Modelagem\n3.Setor de Codificação\n4.Setor de Testes\n5.Recursos Humanos\nEscolha: ");
         escolha = sc.nextInt();
+        sc.nextLine();
         return getEmpresa().getSetores()[escolha - 1];
     }
 

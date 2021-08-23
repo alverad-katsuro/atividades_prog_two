@@ -7,10 +7,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Interface interface_one = new Interface(sc);
         while (true) {
+            System.out.println("--------------------------");
             System.out.println("1. REGISTRAR FUNCIONARIO\n2. ENCONTRAR FUNCIONARIO\n3. ATUALIZAR OS DADOS\n4. DEMITIR FUNCIONARIO\n5. VISUALIZAR SETORES");
             System.out.printf("\nESCOLHER AÇÃO: ");
             int main_action = sc.nextInt();
             sc.nextLine(); 
+            System.out.println("--------------------------");
             if (main_action == 0) {
                 break;
             }

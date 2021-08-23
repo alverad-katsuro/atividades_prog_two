@@ -38,7 +38,11 @@ public class Interface {
 
     public void informacoesSetor(){
         for (Setor setor : getEmpresa().getSetores()) {
-            System.out.printf("O Setor: %s tem %s como chefe, %d contratos e %d funcionarios %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
+            if (setor.getChefe() == null) {
+                System.out.printf("O Setor: %s tem %s não tem chefe e possui %d contratos e %d funcionarios %n", setor.toString(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
+            } else{
+                System.out.printf("O Setor: %s tem %s como chefe e possui %d contratos e %d funcionarios %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
+            }
         }
     }
 

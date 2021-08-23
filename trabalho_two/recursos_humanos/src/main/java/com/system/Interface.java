@@ -223,7 +223,7 @@ public class Interface {
 
     private void modulo_admitir(Setor setor, Funcionario funcionario, Scanner sc) throws Exception{
         if (setor.getContratos().size() == 0) {
-            Contrato contrato = getEmpresa().addContrato(sc, escolha);
+            Contrato contrato = getEmpresa().addContrato(sc, setor);
             contrato.addFuncionario(funcionario);
             funcionario.setContrato(contrato.getId());
             setor.addFuncionario(funcionario);

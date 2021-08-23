@@ -11,9 +11,6 @@ public class Empresa extends Atributos_Comuns {
     
     public Empresa(String dono, String nome, String email, long telefone, long CNPJ) throws Exception{
         setDono(dono);
-        if ((String.valueOf(CNPJ).length()) != 14) {
-            throw new Exception("CNPJ INVALIDO");
-        }
         this.cnpj = CNPJ;
         setNome(nome);
         setEmail(email);

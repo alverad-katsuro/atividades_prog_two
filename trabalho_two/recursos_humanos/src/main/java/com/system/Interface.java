@@ -33,7 +33,6 @@ public class Interface {
         Empresa empresa = new Empresa(dono, nome, email, telefone, CNPJ);
         setEmpresa(empresa);
         sc.nextLine();
-        cadastraChefeObrigatorio(sc);
     }
 
     public void informacoesSetor(){
@@ -244,14 +243,6 @@ public class Interface {
             }
         }
         return null;
-    }
-
-    private void cadastraChefeObrigatorio(Scanner sc) throws Exception{
-        System.out.println("Cadastro dos Chefes dos Setores");
-        for (Setor setor : getEmpresa().getSetores()) {
-            System.out.println("Cadastro do Chefe do Setor: " + setor.toString());
-            setor.setChefe(sc);
-        }
     }
 
     private Funcionario getFuncionario(String nome){

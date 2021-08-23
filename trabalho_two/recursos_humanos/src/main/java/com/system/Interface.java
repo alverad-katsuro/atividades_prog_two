@@ -147,8 +147,9 @@ public class Interface {
                 getFuncionario(sc.nextLong());
                 break;
             case 3:
-                System.out.printf("Digite\n'M'. Masculino\n'F'. Feminino\nEscolha: ");
-                char temp = sc.next().toUpperCase().charAt(0);
+                System.out.printf("Digite\n1. Masculino\n2. Feminino\nEscolha: ");
+                int temp = sc.nextInt();
+                sc.nextLine();
                 getFuncionarios(temp);
                 break;
             case 4:
@@ -265,9 +266,15 @@ public class Interface {
     }
 
     private void getFuncionario_min_max_sal(){
-        Funcionario max_min[] = {getEmpresa().getSetores()[0].getChefe(), getEmpresa().getSetores()[0].getChefe()};
+        Funcionario max_min[] = new Funcionario[2];
+        Boolean teste = true;
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
+                if (teste) {
+                    max_min[0] = funcionario;
+                    max_min[1] = funcionario;
+                    teste = false;
+                }
                 if (funcionario.getSalario() > max_min[0].getSalario()) {
                     max_min[0] = funcionario;
                 }
@@ -276,7 +283,9 @@ public class Interface {
                 }
             }
         }
+        System.out.println("Maior Salario");
         formatoutput(max_min[0], max_min[0].getSetor());
+        System.out.println("Menor Salario");
         formatoutput(max_min[1], max_min[1].getSetor());
     }
 
@@ -377,9 +386,9 @@ public class Interface {
 
     private void formatoutput(Funcionario funcionario, Setor setor){
         if (funcionario.getContrato() == null) {
-            System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %011d Cargo: %s Salario: %.2f Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
+            System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %011d Cargo: %s Salario: %.2f Data de Ingresso: %s Matricula: %s;%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
         } else{
-            System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %011d Cargo: %s Salario: %.2f Contrato: %s Data de Ingresso: %s Matricula: %s%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato().toString(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
+            System.out.printf("Nome: %s Numero: %d Setor: %s CPF: %011d Cargo: %s Salario: %.2f Contrato: %s Data de Ingresso: %s Matricula: %s;%n", funcionario.getNome(), funcionario.getTelefone(), setor, funcionario.getCpf(), funcionario.getCargo().toString(),funcionario.getSalario(), funcionario.getContrato().toString(), funcionario.getData_de_ingresso().toString(), funcionario.getMatricula().toString());
 
         }
     }

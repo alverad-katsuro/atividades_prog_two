@@ -25,7 +25,7 @@ public class Funcionario extends Pessoa {
         defineSalario(sc);
         defineTelefone(sc);
         modify_Numero_de_funcionarios(1);
-        System.out.printf("Funcionario: %s Matricula ID: %s%n%n",getNome(), getMatricula().toString());
+        System.out.printf("Funcionario: %s Cargo: %s Matricula ID: %s%n%n",getNome(), getCargo().toString(), getMatricula().toString());
     }
 
     public UUID getMatricula() {

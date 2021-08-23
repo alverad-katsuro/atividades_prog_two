@@ -8,9 +8,9 @@ public class Interface {
     private Empresa empresa;
 
     public Interface(Scanner sc) throws Exception{
-        //cria_empresa(sc);
-        Empresa empresa = new Empresa("dono", "nome", "email@asad", 91984487808l, 12345678912345l);
+        Empresa empresa = new Empresa("Reginaldo Santos", "RHTec", "rhtec@rhtec.com", 91912345678l, 12345678912345l);
         setEmpresa(empresa);
+        cadastraChefe(sc);
     }
 
     public void cria_empresa(Scanner sc) throws Exception{
@@ -55,6 +55,22 @@ public class Interface {
             case ("NOME"): {
                 funcionario.defineNome(sc);
                 break;
+            }
+            case ("IDADE"): {
+                funcionario.defineDataNascimento(sc);
+                break;
+            }
+            case ("CARGO"):{
+                System.out.printf("Digite\n1. Chefe\n2. Colaborador\nResposta: ");
+                int resposta = sc.nextInt();
+                if (resposta == 1) {
+                    funcionario.setCargo(Cargo.CHEFE);
+                } else if (resposta == 2){
+                    funcionario.setCargo(Cargo.COLABORADOR);
+                } else{
+                    System.out.println("Invalida");
+                }
+                sc.nextLine();
             }
             case ("ENDERECO"): {
                 funcionario.defineEndereco(sc);
@@ -197,27 +213,11 @@ public class Interface {
     }
 
     public void demitirFuncionario(Scanner sc) throws Exception{
-        int forma_de_demitir;
-        System.out.printf("Digite\n1. Entrar com CPF\n2. Entrar com Nome\nEscolha: ");
-        forma_de_demitir = sc.nextInt();
-        sc.nextLine();
-        switch (forma_de_demitir) {
-            case 1:
-                System.out.printf("Digite o CPF: ");
-                if (demiteFuncionarioModulo(sc.nextLong(), sc)) {
-                    System.out.println("Funcionario Demitido!");
-                } else{
-                    System.out.println("Funcionario não encontrado!");
-                }
-                break;
-            case 2:
-                System.out.printf("Digite o Nome: ");
-                if (demiteFuncionarioModulo(sc.nextLine(), sc)) {
-                    System.out.println("Funcionario Demitido!");
-                } else{
-                    System.out.println("Funcionario não encontrado!");
-                }
-                break;
+        Funcionario funcionario = buscaOneFuncionario(sc);
+        if (demiteFuncionarioModulo(funcionario, sc)) {
+            System.out.println("Funcionario Demitido!");
+        } else{
+            System.out.println("Funcionario não encontrado!");
         }
     }
 
@@ -226,7 +226,6 @@ public class Interface {
             Contrato contrato = getEmpresa().addContrato(sc, setor);
             contrato.addFuncionario(funcionario);
             funcionario.setContrato(contrato.getId());
-            setor.addFuncionario(funcionario);
             funcionario.setCargo(Cargo.CHEFE);
             setor.setChefe(funcionario);
         } else{
@@ -345,18 +344,9 @@ public class Interface {
         }
     }
 
-    private Boolean demiteFuncionarioModulo(long cpf, Scanner sc){
+    private Boolean demiteFuncionarioModulo(Funcionario funcionario, Scanner sc) throws Exception{
         for (Contrato contrato : getEmpresa().getContratos()) {
-            if (contrato.demitirFuncionario(cpf, sc)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private Boolean demiteFuncionarioModulo(String nome, Scanner sc){
-        for (Contrato contrato : getEmpresa().getContratos()) {
-            if (contrato.demitirFuncionario(nome, sc)) {
+            if (contrato.demitirFuncionario(funcionario, sc)) {
                 return true;
             }
         }

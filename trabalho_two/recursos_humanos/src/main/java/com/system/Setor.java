@@ -16,7 +16,12 @@ public enum Setor {
     private Funcionario chefe;
 
     protected void setChefe(Funcionario chefe) {
-        this.chefe = chefe;
+        if (getChefe() == null) {
+            this.chefe = chefe;
+        } else{
+            getChefe().setCargo(Cargo.COLABORADOR);
+            this.chefe = chefe;
+        }
     }
 
     protected void setChefe(Scanner sc) throws Exception {

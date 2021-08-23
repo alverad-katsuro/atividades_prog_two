@@ -50,12 +50,13 @@ public class Contrato {
         getSetor().addFuncionario(funcionario);
         funcionario.setContrato(getId());
         getSetor().addContrato(getId());
-        this.funcionarios.add(funcionario);
+        getFuncionarios().add(funcionario);
     }
 
-    protected void addFuncionario(Scanner sc) throws Exception{
+    protected Funcionario addFuncionario(Scanner sc) throws Exception{
         Funcionario funcionario = new Funcionario(sc);
-        this.funcionarios.add(funcionario);
+        getFuncionarios().add(funcionario);
+        return funcionario;
     }
 
     protected ArrayList<Funcionario> getFuncionarios() {
@@ -90,23 +91,8 @@ public class Contrato {
         return null;
     }
 
-    protected boolean demitirFuncionario(long cpf, Scanner sc){
-        Funcionario funcionario_demitido = buscaFuncionario(cpf);
-        if (funcionario_demitido == null) {
-            return false;
-        }
-        is_boss_or_demit(funcionario_demitido, sc);
-        return true;
-    }
-
-    protected boolean demitirFuncionario(String nome, Scanner sc){
-        Funcionario funcionario_demitido = buscaFuncionario(nome);
-        if (funcionario_demitido == null) {
-            return false;
-        }
-        is_boss_or_demit(funcionario_demitido, sc);
-
-        return true;
+    protected boolean demitirFuncionario(Funcionario funcionario_demitido, Scanner sc) throws Exception{
+        return is_boss_or_demit(funcionario_demitido, sc);
     }
 
     private boolean removeFuncionario(Funcionario funcionario){
@@ -120,12 +106,22 @@ public class Contrato {
         return false;
     }
 
-    private void is_boss_or_demit(Funcionario funcionario_demitido, Scanner sc){
+    private boolean is_boss_or_demit(Funcionario funcionario_demitido, Scanner sc) throws Exception{
         if (funcionario_demitido.getCpf() == getSetor().getChefe().getCpf()) {
-            System.out.printf("Digite o CPF do novo Chefe do Setor: ");
-            getSetor().setChefe(buscaFuncionario(sc.nextInt()));
+            System.out.println(getSetor().getFuncionarios().size());
+            if (getSetor().getFuncionarios().size() >= 2){
+                System.out.printf("Digite o CPF do novo Chefe do Setor: ");
+                Funcionario funcionario = buscaFuncionario(sc.nextLong());
+                getSetor().setChefe(funcionario);
+                addFuncionario(funcionario);
+            } else if (getSetor().getFuncionarios().size() == 1) {
+                System.out.println("Cadastro do novo chefe");
+                Funcionario funcionario = addFuncionario(sc);
+                getSetor().setChefe(funcionario);
+                addFuncionario(funcionario);
+            }
         }
         getSetor().removeFuncionario(funcionario_demitido);
-        removeFuncionario(funcionario_demitido);
+        return removeFuncionario(funcionario_demitido);
     }
 }

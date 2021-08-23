@@ -94,7 +94,7 @@ public class Interface {
         int escolha = escolhe_modo_busca_one(sc);
         switch (escolha) {
             case 0:
-               System.out.printf("Digite a matricula do funcionario: ");
+                System.out.printf("Digite a matricula do funcionario: ");
                 return getFuncionario(sc.nextLine(), 5);
             case 1:
                 System.out.printf("Digite o nome do funcionario: ");
@@ -111,8 +111,10 @@ public class Interface {
 
     public void buscarFuncionario(Scanner sc) throws Exception{
         int escolha = escolhe_modo_busca(sc);
-        sc.nextLine();
         switch (escolha) {
+            case 0:
+                System.out.printf("Digite a matricula do funcionario: ");
+                getFuncionario(sc.nextLine(), 5);
             case 1:
                 System.out.printf("Digite o nome do funcionario: ");
                 getFuncionario(sc.nextLine());
@@ -314,7 +316,7 @@ public class Interface {
         }
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
-                if (funcionario.getSexo() == sexo_string) {
+                if (funcionario.getSexo().equals(sexo_string)) {
                     formatoutput(funcionario, setor);
                 }
             }

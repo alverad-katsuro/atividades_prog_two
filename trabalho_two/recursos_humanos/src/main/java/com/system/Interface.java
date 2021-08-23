@@ -10,7 +10,6 @@ public class Interface {
     public Interface(Scanner sc) throws Exception{
         Empresa empresa = new Empresa("Reginaldo Santos", "RHTec", "rhtec@rhtec.com", 91912345678l, 12345678912345l);
         setEmpresa(empresa);
-        cadastraChefe(sc);
     }
 
     public void cria_empresa(Scanner sc) throws Exception{
@@ -35,10 +34,10 @@ public class Interface {
         sc.nextLine();
     }
 
-    public void informacoesSetor(){
+    public void informacoesSetor(){5
         for (Setor setor : getEmpresa().getSetores()) {
             if (setor.getChefe() == null) {
-                System.out.printf("O Setor: %s tem %s não tem chefe e possui %d contratos e %d funcionarios %n", setor.toString(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
+                System.out.printf("O Setor: %s não possui chefe, contratos e funcionarios %n", setor.toString());
             } else{
                 System.out.printf("O Setor: %s tem %s como chefe e possui %d contratos e %d funcionarios %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
             }

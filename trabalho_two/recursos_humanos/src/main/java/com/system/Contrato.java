@@ -49,7 +49,6 @@ public class Contrato {
         funcionario.setSetor(getSetor());
         getSetor().addFuncionario(funcionario);
         funcionario.setContrato(getId());
-        getSetor().addContrato(getId());
         getFuncionarios().add(funcionario);
     }
 

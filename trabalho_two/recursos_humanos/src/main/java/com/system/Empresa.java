@@ -38,7 +38,7 @@ public class Empresa extends Atributos_Comuns {
     }    
 
     public Contrato addContrato(Scanner sc, Setor setor) throws Exception{
-        Contrato temp = new Contrato(setor, sc);
+        Contrato temp = new Contrato(setor);
         getContratos().add(temp);
         return temp;
     }

@@ -221,15 +221,13 @@ public class Interface {
     }
 
     private void modulo_admitir(Setor setor, Funcionario funcionario, Scanner sc) throws Exception{
-        if (setor.getContratos().size() == 0) {
-            Contrato contrato = getEmpresa().addContrato(sc, setor);
-            contrato.addFuncionario(funcionario);
-            funcionario.setContrato(contrato.getId());
+        if (setor.getChefe() == null) {
             funcionario.setCargo(Cargo.CHEFE);
             setor.setChefe(funcionario);
-        } else{
-            addFuncionario_in_contrato(sc, funcionario);
-        }
+        } 
+        Contrato contrato = getEmpresa().addContrato(sc, setor);
+        contrato.addFuncionario(funcionario);
+        funcionario.setContrato(contrato.getId());
     }
 
     private Contrato returnContratos(String contrato){
@@ -344,8 +342,8 @@ public class Interface {
     }
 
     private Boolean demiteFuncionarioModulo(Funcionario funcionario, Scanner sc) throws Exception{
-        for (Contrato contrato : getEmpresa().getContratos()) {
-            if (contrato.demitirFuncionario(funcionario, sc)) {
+        for (Setor setor : getEmpresa().getSetores()) {
+            if (setor.demitirFuncionario(funcionario, sc)) {
                 return true;
             }
         }

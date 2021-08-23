@@ -36,7 +36,7 @@ public class Interface {
         cadastraChefeObrigatorio(sc);
     }
 
-    public void informacoesSetor(Scanner sc){
+    public void informacoesSetor(){
         for (Setor setor : getEmpresa().getSetores()) {
             System.out.printf("O Setor: %s tem %s como chefe, %d contratos e %d funcionarios %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
         }

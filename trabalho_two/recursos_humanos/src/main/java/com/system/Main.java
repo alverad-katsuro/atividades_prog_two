@@ -38,7 +38,7 @@ public class Main {
                 break;
             }
             case (5): {
-                interface_one.informacoesSetor(sc);
+                interface_one.informacoesSetor();
                 break;
             }
         }

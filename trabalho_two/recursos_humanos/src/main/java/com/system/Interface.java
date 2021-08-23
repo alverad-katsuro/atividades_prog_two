@@ -34,7 +34,7 @@ public class Interface {
         sc.nextLine();
     }
 
-    public void informacoesSetor(){5
+    public void informacoesSetor(){
         for (Setor setor : getEmpresa().getSetores()) {
             if (setor.getChefe() == null) {
                 System.out.printf("O Setor: %s não possui chefe, contratos e funcionarios %n", setor.toString());

@@ -90,21 +90,21 @@ public class Contrato {
         return null;
     }
 
-    protected boolean demitirFuncionario(long cpf){
+    protected boolean demitirFuncionario(long cpf, Scanner sc){
         Funcionario funcionario_demitido = buscaFuncionario(cpf);
         if (funcionario_demitido == null) {
             return false;
         }
-        is_boss_or_demit(funcionario_demitido);
+        is_boss_or_demit(funcionario_demitido, sc);
         return true;
     }
 
-    protected boolean demitirFuncionario(String nome){
+    protected boolean demitirFuncionario(String nome, Scanner sc){
         Funcionario funcionario_demitido = buscaFuncionario(nome);
         if (funcionario_demitido == null) {
             return false;
         }
-        is_boss_or_demit(funcionario_demitido);
+        is_boss_or_demit(funcionario_demitido, sc);
 
         return true;
     }
@@ -120,12 +120,10 @@ public class Contrato {
         return false;
     }
 
-    private void is_boss_or_demit(Funcionario funcionario_demitido){
+    private void is_boss_or_demit(Funcionario funcionario_demitido, Scanner sc){
         if (funcionario_demitido.getCpf() == getSetor().getChefe().getCpf()) {
-            Scanner sc = new Scanner(System.in);
             System.out.printf("Digite o CPF do novo Chefe do Setor: ");
             getSetor().setChefe(buscaFuncionario(sc.nextInt()));
-            sc.close();
         }
         getSetor().removeFuncionario(funcionario_demitido);
         removeFuncionario(funcionario_demitido);

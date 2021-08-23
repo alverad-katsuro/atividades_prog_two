@@ -204,7 +204,7 @@ public class Interface {
         switch (forma_de_demitir) {
             case 1:
                 System.out.printf("Digite o CPF: ");
-                if (demiteFuncionarioModulo(sc.nextLong())) {
+                if (demiteFuncionarioModulo(sc.nextLong(), sc)) {
                     System.out.println("Funcionario Demitido!");
                 } else{
                     System.out.println("Funcionario não encontrado!");
@@ -212,7 +212,7 @@ public class Interface {
                 break;
             case 2:
                 System.out.printf("Digite o Nome: ");
-                if (demiteFuncionarioModulo(sc.nextLine())) {
+                if (demiteFuncionarioModulo(sc.nextLine(), sc)) {
                     System.out.println("Funcionario Demitido!");
                 } else{
                     System.out.println("Funcionario não encontrado!");
@@ -345,18 +345,18 @@ public class Interface {
         }
     }
 
-    private Boolean demiteFuncionarioModulo(long cpf){
+    private Boolean demiteFuncionarioModulo(long cpf, Scanner sc){
         for (Contrato contrato : getEmpresa().getContratos()) {
-            if (contrato.demitirFuncionario(cpf)) {
+            if (contrato.demitirFuncionario(cpf, sc)) {
                 return true;
             }
         }
         return false;
     }
 
-    private Boolean demiteFuncionarioModulo(String nome){
+    private Boolean demiteFuncionarioModulo(String nome, Scanner sc){
         for (Contrato contrato : getEmpresa().getContratos()) {
-            if (contrato.demitirFuncionario(nome)) {
+            if (contrato.demitirFuncionario(nome, sc)) {
                 return true;
             }
         }

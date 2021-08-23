@@ -16,9 +16,9 @@ public class Interface {
     public void cria_empresa(Scanner sc) throws Exception{
         String nome, email, dono;
         long CNPJ, telefone;
-        System.out.println("--------------------------------------")
-        System.out.println("CADASTRO DA EMPRESA")
-        System.out.println("--------------------------------------")
+        System.out.println("--------------------------------------");
+        System.out.println("CADASTRO DA EMPRESA");
+        System.out.println("--------------------------------------");
         System.out.printf("Digite o nome do Dono da Empresa: ");
         dono = sc.nextLine();
         System.out.printf("Digite o nome da Empresa: ");
@@ -29,7 +29,7 @@ public class Interface {
         telefone = sc.nextLong();
         System.out.printf("Digite o CNPJ da Empresa: ");
         CNPJ = sc.nextLong();
-        System.out.println("--------------------------------------")
+        System.out.println("--------------------------------------");
         Empresa empresa = new Empresa(dono, nome, email, telefone, CNPJ);
         setEmpresa(empresa);
         sc.nextLine();
@@ -38,7 +38,7 @@ public class Interface {
 
     public void informacoesSetor(Scanner sc){
         for (Setor setor : getEmpresa().getSetores()) {
-            System.out.printf("O %s tem %s como chefe, %d contratos e %d funcionarios %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
+            System.out.printf("O Setor: %s tem %s como chefe, %d contratos e %d funcionarios %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
         }
     }
 
@@ -54,6 +54,7 @@ public class Interface {
         switch (mod_att) {
             case ("NOME"): {
                 funcionario.defineNome(sc);
+                break;
             }
             case ("ENDERECO"): {
                 funcionario.defineEndereco(sc);
@@ -164,13 +165,13 @@ public class Interface {
     public void addFuncionario_in_contrato(Scanner sc, Funcionario funcionario) throws Exception{
         showContratos();
         System.out.print("Digite o contrato desejado: ");
-        UUID id = returnContratos(sc.nextLine());
-        while (id == null) {
+        Contrato contrato = returnContratos(sc.nextLine());
+        while (contrato == null) {
             System.out.print("Digite o contrato desejado: ");
-            id = returnContratos(sc.nextLine());
+            contrato = returnContratos(sc.nextLine());
         }
-        System.out.println(funcionario.getNome());
-        funcionario.setContrato(id);
+        contrato.addFuncionario(funcionario);
+        funcionario.setContrato(contrato.getId());
     }
 
     public void admitirFuncionario(Scanner sc) throws Exception{
@@ -199,6 +200,7 @@ public class Interface {
         int forma_de_demitir;
         System.out.printf("Digite\n1. Entrar com CPF\n2. Entrar com Nome\nEscolha: ");
         forma_de_demitir = sc.nextInt();
+        sc.nextLine();
         switch (forma_de_demitir) {
             case 1:
                 System.out.printf("Digite o CPF: ");
@@ -219,24 +221,23 @@ public class Interface {
         }
     }
 
-    private void modulo_admitir(Setor escolha, Funcionario funcionario, Scanner sc) throws Exception{
-        if (escolha.getContratos().size() == 0) {
-            getEmpresa().addContrato(sc, escolha);
-            funcionario.setContrato(escolha.getContratos().get(0));
-            escolha.addFuncionario(funcionario);
+    private void modulo_admitir(Setor setor, Funcionario funcionario, Scanner sc) throws Exception{
+        if (setor.getContratos().size() == 0) {
+            Contrato contrato = getEmpresa().addContrato(sc, escolha);
+            contrato.addFuncionario(funcionario);
+            funcionario.setContrato(contrato.getId());
+            setor.addFuncionario(funcionario);
             funcionario.setCargo(Cargo.CHEFE);
-            escolha.setChefe(funcionario);
+            setor.setChefe(funcionario);
         } else{
             addFuncionario_in_contrato(sc, funcionario);
         }
     }
 
-    private UUID returnContratos(String contrato){
-        for (Setor setor : getEmpresa().getSetores()) {
-            for (UUID id : setor.getContratos()) {
-                if (id.toString().equals(contrato)) {
-                    return id;
-                }
+    private Contrato returnContratos(String contrato){
+        for (Contrato contrato_get : getEmpresa().getContratos()) {
+            if (contrato_get.getId().toString().equals(contrato)) {
+                return contrato_get;
             }
         }
         return null;
@@ -337,7 +338,7 @@ public class Interface {
     private void getFuncionarios(String estado){
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
-                if (funcionario.getEndereco()[3] == estado) {
+                if (funcionario.getEndereco()[3].equals(estado)) {
                     formatoutput(funcionario, setor);
                 }
             }

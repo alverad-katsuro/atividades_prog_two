@@ -16,6 +16,9 @@ public class Interface {
     public void cria_empresa(Scanner sc) throws Exception{
         String nome, email, dono;
         long CNPJ, telefone;
+        System.out.println("--------------------------------------")
+        System.out.println("CADASTRO DA EMPRESA")
+        System.out.println("--------------------------------------")
         System.out.printf("Digite o nome do Dono da Empresa: ");
         dono = sc.nextLine();
         System.out.printf("Digite o nome da Empresa: ");
@@ -26,6 +29,7 @@ public class Interface {
         telefone = sc.nextLong();
         System.out.printf("Digite o CNPJ da Empresa: ");
         CNPJ = sc.nextLong();
+        System.out.println("--------------------------------------")
         Empresa empresa = new Empresa(dono, nome, email, telefone, CNPJ);
         setEmpresa(empresa);
         sc.nextLine();

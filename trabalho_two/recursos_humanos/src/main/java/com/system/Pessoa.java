@@ -1,17 +1,23 @@
 package com.system;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public class Pessoa extends Atributos_Comuns{
     private long cpf;
     private String sexo;
+    private LocalDate data_nascimento;
     private int idade;
-    private int dia;
-    private int mes;
-    private int ano;
+
+    /* Metodo para definir a data de nascimento da pessoa interativamente */
+    protected void defineDataNascimento(Scanner sc) {
+        System.out.printf("\033[1;34mEntre com a data de nascimento:\033[1;97m ");
+        String data_nascimento_string = sc.nextLine();; 
+        setData_nascimento(data_nascimento_string);
+        calculateAge(getData_nascimento(), LocalDate.now());
+    }
 
     /* Metodo para definir o CPF da pessoa interativamente */
     protected  void defineCPF(Scanner sc) throws Exception {
@@ -28,76 +34,40 @@ public class Pessoa extends Atributos_Comuns{
         setSexo(sexo);
     }
 
-    /* Metodo para definir a data de nascimento da pessoa interativamente */
-    protected  void defineDataNascimento(Scanner sc) throws Exception {
-        System.out.printf("\033[1;34mDigite o dia de nascimento:\033[1;97m ");
-        setDia(sc.nextInt());
-        System.out.printf("\033[1;34mDigite o mes de nascimento:\033[1;97m ");
-        setMes(sc.nextInt());
-        System.out.printf("\033[1;34mDigite o ano de nascimento:\033[1;97m ");
-        setAno(sc.nextInt());
-        sc.nextLine();
-        calculaIdade();
-    }
-
     /* Metodo responsavel por calcular a idade da pessoa a partir da data de nascimento */
-    public void calculaIdade() {
-        int dia, mes, ano;
-        SimpleDateFormat format_year = new SimpleDateFormat("yyyy");
-        SimpleDateFormat format_mouth = new SimpleDateFormat("MM");
-        SimpleDateFormat format_day = new SimpleDateFormat("dd");
-        Date date = new Date(System.currentTimeMillis());
-        ano = Integer.parseInt(format_year.format(date).toString());
-        mes = Integer.parseInt(format_mouth.format(date).toString());
-        dia = Integer.parseInt(format_day.format(date).toString());
-        if (getMes() < mes) {
-            setIdade((ano - getAno()));
-            //System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
-        } else if (mes == getMes()) {
-            if (dia >= getDia()){
-                setIdade((short)(ano - getAno()));
-                //System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
-            }
-        } else if (mes > getMes()) {
-            setIdade((short) (ano - getAno() - 1));
-            //System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
+    private int calculateAge(LocalDate birthDate, LocalDate currentDate) {
+        if ((birthDate != null) && (currentDate != null)) {
+            int idade = Period.between(birthDate, currentDate).getYears();
+            setIdade(idade);
+            return idade;
+        } else {
+            return 0;
         }
     }
 
     /* Metodos de encapsulamento abaixo --> autoexplicativo */
 
-    private void setDia(int dia) throws Exception {
-        if (dia < 0 || dia > 31) {
-            throw new Exception("\033[1;91mDia invalido");
-        }
-        this.dia = dia;
+    protected void setData_nascimento(String data_nascimento) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate data = LocalDate.parse(data_nascimento, fmt);
+        this.data_nascimento = data;
+    }
+
+    public LocalDate getData_nascimento() {
+        return data_nascimento;
     }
 
     protected int getDia() {
-        return dia;
-    }
-
-    private void setMes(int mes) throws Exception{
-        if (mes < 0 || mes > 12) {
-            throw new Exception("\033[1;91mMes invalido");
-        }
-        this.mes = mes;
+        return getData_nascimento().getDayOfMonth();
     }
 
     protected int getMes() {
-        return mes;
+        return getData_nascimento().getMonthValue();
     }
 
-    private void setAno(int ano) throws Exception{
-        Calendar calendario = Calendar.getInstance();
-        if (ano < 0 || ano > calendario.get(Calendar.YEAR)) {
-            throw new Exception("\033[1;91mANO INVALIDO");
-        }
-        this.ano = ano;
-    }
 
     protected int getAno() {
-        return ano;
+        return getData_nascimento().getYear();
     }
 
     private void setIdade(int idade) {

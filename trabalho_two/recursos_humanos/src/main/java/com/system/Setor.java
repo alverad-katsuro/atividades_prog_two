@@ -57,6 +57,9 @@ public enum Setor {
         if (funcionario_demitido.getCpf() == getChefe().getCpf()) {
             System.out.println(getFuncionarios().size());
             if (getFuncionarios().size() >= 2){
+                for (Funcionario funcionario : getColaboradores()) {
+                    System.out.printf("Nome: %s CPF: %d%n", funcionario.getNome(), funcionario.getCpf());
+                }
                 System.out.printf("Digite o CPF do novo Chefe do Setor: ");
                 Funcionario funcionario = buscaFuncionario(sc.nextLong());
                 setChefe(funcionario);

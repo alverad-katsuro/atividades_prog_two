@@ -306,12 +306,19 @@ public class Interface {
         } else {
             sexo_string = "F";
         }
+        int contador = 0;
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
                 if (funcionario.getSexo().equals(sexo_string)) {
                     formatoutput(funcionario, setor);
+                    contador += 1;
                 }
             }
+        }
+        if (sexo_string == "M") {
+            System.out.printf("A %d homens na empresa%n", contador);
+        } else {   
+            System.out.printf("A %d mulheres na empresa%n", contador);
         }
     }
 

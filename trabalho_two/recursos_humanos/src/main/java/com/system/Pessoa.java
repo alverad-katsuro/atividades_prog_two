@@ -65,6 +65,7 @@ public class Pessoa extends Atributos_Comuns{
     protected void setData_nascimento(String data_nascimento) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate data = LocalDate.parse(data_nascimento, fmt);
+        calculateAge(data, LocalDate.now());
         this.data_nascimento = data;
     }
 
@@ -101,7 +102,7 @@ public class Pessoa extends Atributos_Comuns{
         return idade;
     }
 
-    private void setSexo(String sexo) throws Exception{
+    protected void setSexo(String sexo) throws Exception{
         if (sexo.equals("M") || sexo.equals("F")){
             this.sexo = sexo;
         } else {
@@ -113,7 +114,7 @@ public class Pessoa extends Atributos_Comuns{
         return this.sexo;
     }
 
-    private void setCpf(long cpf){
+    protected void setCpf(long cpf){
         this.cpf = cpf;
     }
 

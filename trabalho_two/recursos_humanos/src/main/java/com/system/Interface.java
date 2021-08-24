@@ -128,6 +128,10 @@ public class Interface {
             case ("FERIAS"):{
                 funcionario.setFerias(sc);
             }
+            case ("SETOR"):{
+                demiteFuncionarioModulo(funcionario, sc);
+                admitir(funcionario, sc);
+            }
         }
     }
  
@@ -229,6 +233,16 @@ public class Interface {
             setor.setChefe(funcionario);
         } else{
             funcionario = new Funcionario(sc);
+        }
+        getEmpresa().addContrato(sc, setor, funcionario);
+    }
+
+    /* Admitindo funcionario */
+    private void admitir(Funcionario funcionario, Scanner sc) throws Exception{
+        Setor setor = escolhe_setor(sc);
+        if (setor.getChefe() == null) {
+            funcionario.setCargo(Cargo.CHEFE);;
+            setor.setChefe(funcionario);
         }
         getEmpresa().addContrato(sc, setor, funcionario);
     }

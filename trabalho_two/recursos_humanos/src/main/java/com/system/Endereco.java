@@ -26,6 +26,10 @@ public class Endereco {
         this.endereco[3] = estado;
     }
 
+    protected void setEndereco(String endereco[]) {
+        this.endereco = endereco;
+    }
+
     protected String[] getEndereco() {
         return endereco;
     }

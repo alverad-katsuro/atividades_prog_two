@@ -18,22 +18,35 @@ public class Funcionario extends Pessoa {
     private LocalDate ferias[] = new LocalDate[2];
     private final Date data_de_ingresso = new Date(System.currentTimeMillis());
     private final float salario_minimo = 1127.0f;
-    private final UUID matricula = UUID.randomUUID();
+    private final UUID matricula;
     private static int numero_de_funcionarios = 0;
 
     /* Construtor */
     public Funcionario(Scanner sc) throws Exception{
+        this.matricula = UUID.randomUUID();
         simplificaConstrutor(sc);
     }
     
     /* Construtor */
     public Funcionario(Scanner sc, Cargo cargo) throws Exception{
+        this.matricula = UUID.randomUUID();
         setCargo(cargo);
         simplificaConstrutor(sc);
     }
-
-    public Funcionario() throws Exception{
-
+    
+    /* Construtor */
+    public Funcionario(Funcionario funcionario) throws Exception{
+        this.matricula = funcionario.getMatricula();
+        setNome(funcionario.getNome());
+        setCpf(funcionario.getCpf());
+        setSexo(funcionario.getSexo());
+        setData_nascimento(funcionario.getData_nascimento().toString());
+        setEmail(funcionario.getEmail());
+        setEndereco(funcionario.getEndereco());
+        setSalario(funcionario.getSalario());
+        setTelefone(funcionario.getTelefone());
+        modify_Numero_de_funcionarios(1);
+        System.out.printf("\033[1;34mFuncionario: \033[1;97m%s \033[1;34mCargo: \033[1;97m%s \033[1;34mMatricula ID: \033[1;97m%s%n%n",getNome(), getCargo().toString(), getMatricula().toString());
     }
 
     /* Modulo usado nos dois construtores --> feito para evitar repetição */

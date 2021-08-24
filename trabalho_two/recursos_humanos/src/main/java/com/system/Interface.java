@@ -65,8 +65,7 @@ public class Interface {
         System.out.printf("CNPJ:                            \033[1;97m%014d%n", getEmpresa().getCNPJ());
         System.out.printf("Email:                           \033[1;97m%s%n", getEmpresa().getEmail());
         System.out.printf("Telefone:                        \033[1;97m%d%n", getEmpresa().getTelefone());
-        System.out.printf("Numeros de FUncionarios:         \033[1;97m%d%n", getEmpresa().getContratos().size());
-        System.out.println();
+        System.out.printf("Numeros de FUncionarios:         \033[1;97m%d%n%n", getEmpresa().getContratos().size());
     }
 
     /* Metodo que ira definir atualizar os dados dos funcionarios --> acessivel pelo menu */

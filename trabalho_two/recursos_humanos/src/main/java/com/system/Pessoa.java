@@ -13,12 +13,14 @@ public class Pessoa extends Atributos_Comuns{
     private int mes;
     private int ano;
 
+    /* Metodo para definir o CPF da pessoa interativamente */
     protected  void defineCPF(Scanner sc) throws Exception {
-        System.out.printf("\033[1;34mDigite o cpf da pessoa:\033[1;97m ");
+        System.out.printf("\033[1;34mDigite o CPF da pessoa:\033[1;97m ");
         setCpf(sc.nextLong());
         sc.nextLine();
     }
 
+    /* Metodo para definir o sexo da pessoa interativamente */
     protected  void defineSexo(Scanner sc) throws Exception {
         System.out.printf("\033[1;34mDigite o sexo da pessoa\nM. Masculino\nF. Feminino\n Resposta:\033[1;97m ");
         String sexo = sc.nextLine();
@@ -26,6 +28,7 @@ public class Pessoa extends Atributos_Comuns{
         setSexo(sexo);
     }
 
+    /* Metodo para definir a data de nascimento da pessoa interativamente */
     protected  void defineDataNascimento(Scanner sc) throws Exception {
         System.out.printf("\033[1;34mDigite o dia de nascimento:\033[1;97m ");
         setDia(sc.nextInt());
@@ -37,6 +40,7 @@ public class Pessoa extends Atributos_Comuns{
         calculaIdade();
     }
 
+    /* Metodo responsavel por calcular a idade da pessoa a partir da data de nascimento */
     public void calculaIdade() {
         int dia, mes, ano;
         SimpleDateFormat format_year = new SimpleDateFormat("yyyy");
@@ -59,6 +63,8 @@ public class Pessoa extends Atributos_Comuns{
             //System.out.printf("A idade do %s é %d anos%n", getNome(), getIdade());
         }
     }
+
+    /* Metodos de encapsulamento abaixo --> autoexplicativo */
 
     private void setDia(int dia) throws Exception {
         if (dia < 0 || dia > 31) {

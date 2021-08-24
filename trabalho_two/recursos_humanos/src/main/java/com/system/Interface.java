@@ -1,8 +1,7 @@
 package com.system;
 
+import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.UUID;
-
 
 public class Interface {
     private Empresa empresa;
@@ -12,6 +11,7 @@ public class Interface {
         setEmpresa(empresa);
     }
 
+    /* Metodo não utilizado --> serve para reaproveitar codigo/cadastrar a empresa interativamente */
     public void cria_empresa(Scanner sc) throws Exception{
         String nome, email, dono;
         long CNPJ, telefone;
@@ -34,16 +34,24 @@ public class Interface {
         sc.nextLine();
     }
 
+    /* Metodo que ira definir as ferias --> acessivel pelo menu */
+    protected void setFerias(Scanner sc) throws Exception{
+        Funcionario funcionario = buscaOneFuncionario(sc);
+        funcionario.setFerias(sc);
+    }
+
+    /* Metodo que ira retornar as informações pertinentes dos setores --> acessivel pelo menu */
     public void informacoesSetor(){
         for (Setor setor : getEmpresa().getSetores()) {
             if (setor.getChefe() == null) {
-                System.out.printf("O Setor: %s não possui chefe, contratos e funcionarios %n", setor.toString());
+                System.out.printf("O Setor: %s não possui chefe, contratos e colaboradores %n", setor.toString());
             } else{
-                System.out.printf("O Setor: %s tem %s como chefe e possui %d contratos e %d funcionarios %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
+                System.out.printf("O Setor: %s tem %s como chefe e possui %d contratos e %d colaboradores %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
             }
         }
     }
 
+    /* Metodo que ira definir atualizar os dados dos funcionarios --> acessivel pelo menu */
     public void atualizarFuncionario(Scanner sc) throws Exception{
         Funcionario funcionario = buscaOneFuncionario(sc);
         while (true) {
@@ -100,19 +108,13 @@ public class Interface {
                 funcionario.defineSalario(sc);
                 break;
             }
+            case ("FERIAS"):{
+                funcionario.setFerias(sc);
+            }
         }
     }
-
-    public void novoContrato(Scanner sc) throws Exception{
-        Setor setor = escolhe_setor(sc);
-        getEmpresa().addContrato(sc, setor);
-    }
-  
-    public void cadastraChefe(Scanner sc) throws Exception{
-        Setor escolha = escolhe_setor(sc);
-        escolha.setChefe(sc);
-    }
-
+ 
+    /* Metodo que ira buscar um funcionario e apresenta-lo na tela --> acessivel pelo menu */
     private Funcionario buscaOneFuncionario(Scanner sc) throws Exception{
         int escolha = escolhe_modo_busca_one(sc);
         switch (escolha) {
@@ -132,6 +134,7 @@ public class Interface {
         }
     }
 
+    /* Metodo que ira buscar um funcionario ou varios funcionarios e apresenta-lo na tela --> acessivel pelo menu */
     public void buscarFuncionario(Scanner sc) throws Exception{
         int escolha = escolhe_modo_busca(sc);
         switch (escolha) {
@@ -169,55 +172,52 @@ public class Interface {
         }
     }
 
-    public void showContratos(){
-        for (Setor setor : getEmpresa().getSetores()) {
-            for (UUID id : setor.getContratos()) {
-                System.out.printf("Setor: %s Contrato: %s%n", setor.toString(), id.toString());
-            }
-        }
-    }
-
+    /* Metodo que ira admitir um funcionario --> acessivel pelo menu */
     public void admitirFuncionario(Scanner sc) throws Exception{
-        Funcionario funcionario = new Funcionario(sc);
         Setor escolha = escolhe_setor(sc);
         switch (escolha) {
             case REQUISITOS:
-                modulo_admitir(escolha, funcionario, sc);
+                modulo_admitir(escolha, sc);
                 break;
             case MODELAGEM:
-                modulo_admitir(escolha, funcionario, sc);
+                modulo_admitir(escolha, sc);
                 break;
             case CODIFICACAO:
-                modulo_admitir(escolha, funcionario, sc);
+                modulo_admitir(escolha, sc);
                 break;
             case TESTE:
-                modulo_admitir(escolha, funcionario, sc);
+                modulo_admitir(escolha, sc);
                 break;
             case RECURSOS_HUMANOS:
-                modulo_admitir(escolha, funcionario, sc);
+                modulo_admitir(escolha, sc);
                 break;
         }
     }
 
+    /* Metodo que ira demitir um funcionario e apresenta-lo na tela --> acessivel pelo menu */
     public void demitirFuncionario(Scanner sc) throws Exception{
         Funcionario funcionario = buscaOneFuncionario(sc);
         if (demiteFuncionarioModulo(funcionario, sc)) {
-            System.out.println("\033[1;34mFuncionario Demitido!");
+            System.out.println("\033[1;92mFuncionario Demitido!");
         } else{
             System.out.println("\033[1;91mFuncionario não encontrado!");
         }
     }
 
-    private void modulo_admitir(Setor setor, Funcionario funcionario, Scanner sc) throws Exception{
+    /* Continuação do demitir funcionario --> usado para evitar repetir codigo */
+    private void modulo_admitir(Setor setor, Scanner sc) throws Exception{
+        Funcionario funcionario;
         if (setor.getChefe() == null) {
-            funcionario.setCargo(Cargo.CHEFE);
+            funcionario = new Funcionario(sc, Cargo.CHEFE);
             setor.setChefe(funcionario);
-        } 
-        Contrato contrato = getEmpresa().addContrato(sc, setor);
-        contrato.addFuncionario(funcionario);
-        funcionario.setContrato(contrato.getId());
+        } else{
+            funcionario = new Funcionario(sc);
+        }
+        getEmpresa().addContrato(sc, setor, funcionario);
     }
 
+    /* Metodos usados para as diversas formas de busca */
+    /* ################## INICIO ###################### */
     private Funcionario getFuncionario(String nome){
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
@@ -320,15 +320,19 @@ public class Interface {
         }
     }
 
+    /*############################ FIM ############################ */
+
+    /* Modulo usado ao demitir funcionario --> esta evitando repetição tambem */
     private Boolean demiteFuncionarioModulo(Funcionario funcionario, Scanner sc) throws Exception{
         for (Setor setor : getEmpresa().getSetores()) {
-            if (setor.demitirFuncionario(funcionario, sc)) {
+            if (setor.getFuncionarios().size() > 0 && setor.demitirFuncionario(funcionario, sc)) {
                 return true;
             }
         }
         return false;
     }
 
+    /* Modulo usadopara escolher a forma de encontrar o funcionario --> opção disponivel no menu */
     private int escolhe_modo_busca(Scanner sc) {
         int escolha;
         System.out.printf("\033[1;34mDigite\n0. Busca por Matricula\n1. Busca por Nome\n2. Busca por CPF\n3. Busca por Sexo\n4. Busca por Estado\n5. Busca por Setor\n6. Maior e Menor Salario\n7. Listar Todos\nEscolha:\033[1;97m ");
@@ -337,6 +341,7 @@ public class Interface {
         return escolha;
     }
 
+    /* Modulo usadopara escolher a forma de encontrar o funcionario --> opção disponivel no menu */
     private int escolhe_modo_busca_one(Scanner sc) {
         int escolha;
         System.out.printf("\033[1;34mDigite\n0. Busca por Matricula\n1. Busca por Nome\n2. Busca por CPF\nEscolha:\033[1;97m ");
@@ -345,6 +350,7 @@ public class Interface {
         return escolha;
     }
 
+    /* Modulo usadopara escolher a forma de encontrar o funcionario --> opção disponivel no menu */
     private Setor escolhe_setor(Scanner sc) {
         int escolha;
         System.out.printf("\033[1;34mDigite\n1.Setor de Requisitos\n2.Setor de Modelagem\n3.Setor de Codificação\n4.Setor de Testes\n5.Recursos Humanos\nEscolha:\033[1;97m ");
@@ -353,6 +359,7 @@ public class Interface {
         return getEmpresa().getSetores()[escolha - 1];
     }
 
+    /* ENCAPSULAMENTO DA EMPRESA --> como é uma empresa fixa definimos ela como atributo da INTERFACE */
     private void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
@@ -361,16 +368,18 @@ public class Interface {
         return empresa;
     }
 
+    /* OUTPUT --> define o formato da exibição dos funcionarios */
     private void formatoutput(Funcionario funcionario, Setor setor){
         if (funcionario.getContrato() == null) {
             formatoutput_modulo(funcionario);
         } else{
             formatoutput_modulo(funcionario);
             System.out.printf("\033[1;34mContrato:          \033[1;97m%s%n", funcionario.getContrato().toString());
-
+            System.out.println();
         }
     }
 
+    /* (SIMPLIFICAÇÂO/EVITAR REPETIÇÂO) OUTPUT --> define o formato da exibição dos funcionarios */
     private void formatoutput_modulo(Funcionario funcionario){
         System.out.println();
         System.out.printf("\033[1;34m%25s%n", "INFORMAÇÔES");
@@ -382,6 +391,20 @@ public class Interface {
         System.out.printf("\033[1;34mSetor:             \033[1;97m%s%n", funcionario.getSetor().toString());
         System.out.printf("\033[1;34mCargo:             \033[1;97m%s%n", funcionario.getCargo().toString());
         System.out.printf("\033[1;34mSalario:           \033[1;97m%.2f%n", funcionario.getSalario());
+        System.out.printf("\033[1;34mEndereço:          \033[1;97mRua %s, %s, %s, %s%n", funcionario.getEndereco()[0], funcionario.getEndereco()[1], funcionario.getEndereco()[2], funcionario.getEndereco()[3]);
+        if (funcionario.getFerias() != null) {
+            if (LocalDate.now().isBefore(funcionario.getFerias()[0])) {
+                System.out.printf("\033[1;34mFerias em:         \033[1;97m%s ate %s%n", funcionario.getFerias()[0].toString(), funcionario.getFerias()[1].toString());
+                
+            } else if (LocalDate.now().isAfter(funcionario.getFerias()[0]) && LocalDate.now().isBefore(funcionario.getFerias()[1])) {   
+                System.out.printf("\033[1;34mFerias:            \033[1;97maté %s%n", funcionario.getFerias()[1]);
+            } else {
+                System.out.printf("\033[1;34mFerias:            \033[1;97maté %s%n", "Sem Férias Cadastrada para este ano");
+            }
+            
+        } else {
+            System.out.printf("\033[1;34mFerias:            \033[1;97m%s%n", "Sem Férias Cadastrada");
+        }
         System.out.printf("\033[1;34mData de Ingresso:  \033[1;97m%s%n", funcionario.getData_de_ingresso());
     }
 

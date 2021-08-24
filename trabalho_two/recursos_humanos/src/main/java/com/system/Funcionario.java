@@ -52,7 +52,7 @@ public class Funcionario extends Pessoa {
 
     /* Definição interativa das ferias do funcionario */
     protected void setFerias(Scanner sc) throws Exception{
-        System.out.println("Entre com a data do seu nascimento: (dd/mm/yyyy) ");
+        System.out.println("Entre com a data que começa as ferias: (dd/mm/yyyy) ");
         String str = sc.nextLine();
         System.out.printf("Entre com a quantidade de dias de ferias: ");
         int dias = sc.nextInt(); 

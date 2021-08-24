@@ -42,11 +42,17 @@ public class Interface {
 
     /* Metodo que ira retornar as informações pertinentes dos setores --> acessivel pelo menu */
     public void informacoesSetor(){
+        double custo = 0;
+        int contador = 0;
+        for (Contrato contrato : getEmpresa().getContratos()) {
+            custo += contrato.getFuncionario().getSalario();
+            contador += 1;
+        }
         for (Setor setor : getEmpresa().getSetores()) {
             if (setor.getChefe() == null) {
                 System.out.printf("O Setor: %s não possui chefe, contratos e colaboradores %n", setor.toString());
             } else{
-                System.out.printf("O Setor: %s tem %s como chefe e possui %d contratos e %d colaboradores %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1);
+                System.out.printf("O Setor: %s tem %s como chefe e possui %d contratos e %d colaboradores com média salarial %.2f e custo %.2f %n", setor.toString(), setor.getChefe().getNome(), setor.getContratos().size(), setor.getFuncionarios().size() - 1, custo/contador, custo);
             }
         }
     }
@@ -307,26 +313,33 @@ public class Interface {
             sexo_string = "F";
         }
         int contador = 0;
+        double salario_med = 0;
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
                 if (funcionario.getSexo().equals(sexo_string)) {
                     formatoutput(funcionario, setor);
                     contador += 1;
+                    salario_med += funcionario.getSalario();
                 }
             }
         }
         if (sexo_string == "M") {
-            System.out.printf("A %d homens na empresa%n", contador);
+            System.out.printf("A %d homens na empresa com media salárial de: %.2f%n", contador, salario_med/contador);
         } else {   
-            System.out.printf("A %d mulheres na empresa%n", contador);
+            System.out.printf("A %d mulheres na empresa com media salárial de: %.2f%n", contador, salario_med/contador);
         }
     }
 
     private void getFuncionarios(Setor setor){
+        int contador = 0;
+        double salario_med = 0;
         System.out.printf("\nO setor %s tem %d funcionarios\n", setor.toString(), setor.getFuncionarios().size());
-            for (Funcionario funcionario : setor.getFuncionarios()) {
-                formatoutput(funcionario, setor);
-            }
+        for (Funcionario funcionario : setor.getFuncionarios()) {
+            formatoutput(funcionario, setor);
+            contador += 1;
+            salario_med += funcionario.getSalario();
+        }
+        System.out.printf("\nA média salarial do setor é: %.2f%n", salario_med/contador);
     }
 
     private void getFuncionarios(String estado){

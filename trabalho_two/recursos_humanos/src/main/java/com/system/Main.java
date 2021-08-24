@@ -9,7 +9,7 @@ public class Main {
         Interface interface_one = new Interface(sc);
         while (true) {
             System.out.println("--------------------------");
-            System.out.println("\033[1;34m1. REGISTRAR FUNCIONARIO\n2. ENCONTRAR FUNCIONARIO\n3. ATUALIZAR OS DADOS\n4. DEMITIR FUNCIONARIO\n5. VISUALIZAR SETORES\n6. DEFINIR FERIAS");
+            System.out.println("\033[1;34m0. Encerrar\n1. REGISTRAR FUNCIONARIO\n2. ENCONTRAR FUNCIONARIO\n3. ATUALIZAR OS DADOS\n4. DEMITIR FUNCIONARIO\n5. DEFINIR FERIAS\n6. VISUALIZAR INFORMAÇÔES DOS SETORES\n7. VISUALIZAR INFORMAÇÔES DA EMPRESA");
             System.out.printf("\nESCOLHER AÇÃO: \033[1;97m");
             int main_action = sc.nextInt();
             sc.nextLine(); 
@@ -19,7 +19,6 @@ public class Main {
             }
             menuInicial(interface_one, sc, main_action);
         }
-        sc.close();
     }
 
     /* Primeiro menu apresentado ao funcionario do RH com os requisitos funcionais do mesmo */
@@ -41,12 +40,16 @@ public class Main {
                 interface_one.demitirFuncionario(sc);
                 break;
             }
-            case (5): {
+            case (5):{
+                interface_one.setFerias(sc);
+                break;
+            }
+            case (6): {
                 interface_one.informacoesSetor();
                 break;
             }
-            case (6):{
-                interface_one.setFerias(sc);
+            case (7): {
+                interface_one.informacoesEmpresa();
                 break;
             }
         }

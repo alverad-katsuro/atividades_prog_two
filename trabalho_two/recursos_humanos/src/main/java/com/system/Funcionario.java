@@ -32,6 +32,10 @@ public class Funcionario extends Pessoa {
         simplificaConstrutor(sc);
     }
 
+    public Funcionario() throws Exception{
+
+    }
+
     /* Modulo usado nos dois construtores --> feito para evitar repetição */
     private void simplificaConstrutor(Scanner sc) throws Exception{
         defineNome(sc);

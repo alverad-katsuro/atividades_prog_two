@@ -51,6 +51,18 @@ public class Interface {
         }
     }
 
+    /* Metodo que ira retornar as informações pertinentes da empresa --> acessivel pelo menu */
+    public void informacoesEmpresa(){
+        System.out.printf("\033[1;34m%25s%n", "INFORMAÇÔES DA EMPRESA");
+        System.out.printf("Dono:                            \033[1;97m%s%n", getEmpresa().getDono());
+        System.out.printf("Nome:                            \033[1;97m%s%n", getEmpresa().getNome());
+        System.out.printf("CNPJ:                            \033[1;97m%014d%n", getEmpresa().getCNPJ());
+        System.out.printf("Email:                           \033[1;97m%s%n", getEmpresa().getEmail());
+        System.out.printf("Telefone:                        \033[1;97m%d%n", getEmpresa().getTelefone());
+        System.out.printf("Numeros de FUncionarios:         \033[1;97m%d%n", getEmpresa().getContratos().size());
+        System.out.println();
+    }
+
     /* Metodo que ira definir atualizar os dados dos funcionarios --> acessivel pelo menu */
     public void atualizarFuncionario(Scanner sc) throws Exception{
         Funcionario funcionario = buscaOneFuncionario(sc);
@@ -392,7 +404,7 @@ public class Interface {
         System.out.printf("\033[1;34mCargo:             \033[1;97m%s%n", funcionario.getCargo().toString());
         System.out.printf("\033[1;34mSalario:           \033[1;97m%.2f%n", funcionario.getSalario());
         System.out.printf("\033[1;34mEndereço:          \033[1;97mRua %s, %s, %s, %s%n", funcionario.getEndereco()[0], funcionario.getEndereco()[1], funcionario.getEndereco()[2], funcionario.getEndereco()[3]);
-        if (funcionario.getFerias() != null) {
+        if (funcionario.getFerias()[0] != null) {
             if (LocalDate.now().isBefore(funcionario.getFerias()[0])) {
                 System.out.printf("\033[1;34mFerias em:         \033[1;97m%s ate %s%n", funcionario.getFerias()[0].toString(), funcionario.getFerias()[1].toString());
                 

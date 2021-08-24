@@ -239,7 +239,7 @@ public class Interface {
     private Funcionario getFuncionario(String nome){
         for (Setor setor : getEmpresa().getSetores()) {
             for (Funcionario funcionario : setor.getFuncionarios()) {
-                if (funcionario.getNome().equals(nome)) {
+                if (funcionario.getNome_completo().equals(nome)) {
                     formatoutput(funcionario, setor);
                     return funcionario;
                 }
@@ -415,7 +415,7 @@ public class Interface {
     private void formatoutput_modulo(Funcionario funcionario){
         System.out.println();
         System.out.printf("\033[1;34m%25s%n", "INFORMAÇÔES");
-        System.out.printf("\033[1;34mNome:              \033[1;97m%s%n", funcionario.getNome());
+        System.out.printf("\033[1;34mNome:              \033[1;97m%s%n", funcionario.getNome_completo());
         System.out.printf("\033[1;34mTelefone:          \033[1;97m%011d%n", funcionario.getTelefone());
         System.out.printf("\033[1;34mCPF:               \033[1;97m%011d%n", funcionario.getCpf());
         System.out.printf("\033[1;34mIdade:             \033[1;97m%d%n", funcionario.getIdade());

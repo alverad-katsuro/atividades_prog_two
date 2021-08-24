@@ -10,6 +10,16 @@ public class Pessoa extends Atributos_Comuns{
     private String sexo;
     private LocalDate data_nascimento;
     private int idade;
+    private String sobrenome;
+
+    // DEFININDO SOBRENOME
+    @Override
+    protected void defineNome(Scanner sc) throws Exception {
+        super.defineNome(sc);
+        System.out.printf("\033[1;34mDigite o sobrenome:\033[1;97m ");
+        String sobrenome = sc.nextLine();
+        setSobrenome(sobrenome);
+    }
 
     /* Metodo para definir a data de nascimento da pessoa interativamente */
     protected void defineDataNascimento(Scanner sc) {
@@ -47,10 +57,23 @@ public class Pessoa extends Atributos_Comuns{
 
     /* Metodos de encapsulamento abaixo --> autoexplicativo */
 
+    protected String getNome_completo() {
+        String nome_completo = getNome() + " " + getSobrenome();
+        return nome_completo;
+    }
+
     protected void setData_nascimento(String data_nascimento) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate data = LocalDate.parse(data_nascimento, fmt);
         this.data_nascimento = data;
+    }
+
+    protected void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    protected String getSobrenome() {
+        return sobrenome;
     }
 
     public LocalDate getData_nascimento() {

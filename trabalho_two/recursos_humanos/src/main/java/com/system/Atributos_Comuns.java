@@ -8,7 +8,7 @@ public class Atributos_Comuns extends Endereco {
 
     /* Aqui vai ser definido o nome da pessoa, observe que há um output pro usuario */
     protected  void defineNome(Scanner sc) throws Exception {
-        System.out.printf("\033[1;34mDigite o nome da pessoa:\033[1;97m ");
+        System.out.printf("\033[1;34mDigite o nome:\033[1;97m ");
         String nome = sc.nextLine();
         setNome(nome);
     }

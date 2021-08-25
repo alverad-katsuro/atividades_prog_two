@@ -59,13 +59,13 @@ public class Interface {
 
     /* Metodo que ira retornar as informações pertinentes da empresa --> acessivel pelo menu */
     public void informacoesEmpresa(){
-        System.out.printf("\033[1;34m%25s%n", "INFORMAÇÔES DA EMPRESA");
-        System.out.printf("Dono:                            \033[1;97m%s%n", getEmpresa().getDono());
-        System.out.printf("Nome:                            \033[1;97m%s%n", getEmpresa().getNome());
-        System.out.printf("CNPJ:                            \033[1;97m%014d%n", getEmpresa().getCNPJ());
-        System.out.printf("Email:                           \033[1;97m%s%n", getEmpresa().getEmail());
-        System.out.printf("Telefone:                        \033[1;97m%d%n", getEmpresa().getTelefone());
-        System.out.printf("Numeros de FUncionarios:         \033[1;97m%d%n%n", getEmpresa().getContratos().size());
+        System.out.printf("\033[1;34m           %s%n", "INFORMAÇÔES DA EMPRESA");
+        System.out.printf("\033[1;34mDono:                            \033[1;97m%s%n", getEmpresa().getDono());
+        System.out.printf("\033[1;34mNome:                            \033[1;97m%s%n", getEmpresa().getNome());
+        System.out.printf("\033[1;34mCNPJ:                            \033[1;97m%014d%n", getEmpresa().getCNPJ());
+        System.out.printf("\033[1;34mEmail:                           \033[1;97m%s%n", getEmpresa().getEmail());
+        System.out.printf("\033[1;34mTelefone:                        \033[1;97m%d%n", getEmpresa().getTelefone());
+        System.out.printf("\033[1;34mNumeros de Funcionarios:         \033[1;97m%d%n%n", getEmpresa().getContratos().size());
     }
 
     /* Metodo que ira definir atualizar os dados dos funcionarios --> acessivel pelo menu */

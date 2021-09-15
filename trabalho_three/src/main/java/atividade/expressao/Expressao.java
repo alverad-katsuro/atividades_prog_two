@@ -31,7 +31,7 @@ public class Expressao {
                 first = false; 
             } else if (c == '\n') {
                 if (temp.contains("^")) {
-                    lista.add(arruma_expressao(temp));
+                    lista.add(((temp).replace("^", "**")));
                 } else {
                     lista.add(temp);
                 }
@@ -39,11 +39,6 @@ public class Expressao {
             } else if (!first && c != '\n') {
                 temp += (char)c;
             }
-        }
-        if (temp.contains("^")) {
-            lista.add(arruma_expressao(temp));
-        } else {
-            lista.add(temp);
         }
         leitor.close();
         do {
@@ -71,38 +66,6 @@ public class Expressao {
             } catch (UnsupportedOperationException e) {
             }
         } while (!lista.isEmpty());
-    }
-
-    public static String arruma_expressao(String expressao) {
-        char char_temp[] = expressao.toCharArray();
-        Queue<Integer> fila = procura_element(char_temp);
-        int index = fila.poll();
-        do {
-            for (int i = index; i < expressao.length(); i++) {
-                if (index + 1 == i) {
-                } else if (i + 1 == expressao.length()) {
-                    char_temp = ((new String(char_temp)) + ')').toCharArray();
-                }else if (char_temp[i] == ' ') {
-                    char_temp[i] = ')';
-                    break;
-                } else if (char_temp[i] == ')'){
-                    break;
-                }
-            }
-            for (int i = index; i >= 0; i--) {
-                if (index - 1 == i) {
-                } else if (i == 0){
-                    char_temp = ('(' + (new String(char_temp))).toCharArray();
-                }else if (char_temp[i] == ' ') {
-                    char_temp[i] = '(';
-                    break;
-                } else if (char_temp[i] == '('){
-                    break;
-                }
-            }
-            index = fila.poll();
-        } while (!fila.isEmpty());
-        return (new String(char_temp));
     }
 
     public static Queue<Integer> procura_element(char expressao[]) {

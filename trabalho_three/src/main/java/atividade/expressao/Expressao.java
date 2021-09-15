@@ -77,7 +77,7 @@ public class Expressao {
             }
             cont++;
         }
-        fila.add(0);
+        fila.add(00);
         return fila;
     }
 }

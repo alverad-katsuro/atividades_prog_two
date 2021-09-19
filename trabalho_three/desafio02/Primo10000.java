@@ -3,7 +3,7 @@ public class Primo10000 {
     public static boolean isPrimeNumber(int x) {
         //UM NUMERO PRIMO E UM NUMERO DIVISIVEL APENAS POR 1 E ELE MESMO
         for (int n = 2; n < x; n++) { //considerando que todo numero natural seja divisivel por 1
-            if ((x % n) == 0) { //entao caso o numero seja divisivel por qualquer numero que nao seja ele mesmo
+            if ((x % n) == 0) { //entao caso o numero seja divisivel por qualquer numero maior que 1 que nao seja ele mesmo
                 return false; //a funcao retorna falso
             }
         }

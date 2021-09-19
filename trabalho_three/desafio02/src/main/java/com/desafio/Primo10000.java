@@ -1,3 +1,5 @@
+package com.desafio;
+
 /*Escreva um programa para listar todos os números primos entre 1 e 10000*/
 public class Primo10000 {
     public static boolean isPrimeNumber(int x) {

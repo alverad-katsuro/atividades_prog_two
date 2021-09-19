@@ -1,3 +1,5 @@
+package com.xadrez;
+
 import java.util.Random;
 import java.util.LinkedHashMap;
 import java.util.Scanner;

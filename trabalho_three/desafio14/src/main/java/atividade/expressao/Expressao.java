@@ -1,4 +1,6 @@
 package atividade.expressao;
+import atividade.expressao.dependencias.*;
+import atividade.expressao.dependencias.excessao.*;
 
 import java.io.LineNumberReader;
 import java.util.LinkedList;
@@ -46,23 +48,9 @@ public class Expressao {
         leitor.close();
         do {
             try{
-                String saida = lista.poll();
-                boolean erro = false;
-                // verifica se há erro de sintaxe ex: + +, - -, etc
-                String teste[] = {"+", "-", "/", "*", "^"};
-                for (String string : teste) {
-                    for (String string2 : teste) {
-                        if (saida.contains(string + " " + string2)){
-                            erro = true;
-                            break;
-                        }
-                    }    
-                }
-                if (erro){
-                    System.out.println("ERR SYNTAX");
-                } else {
-                    System.out.println(grovy.evaluate(saida));
-                }
+                System.out.println(grovy.evaluate(lista.poll()));
+            } catch (SyntaxErrorExpression e) {
+                System.out.println("ERR SYNTAX");
             } catch (ArithmeticException e) {
                 System.out.println("ERR DIVBYZERO");
             } catch (MultipleCompilationErrorsException e) {

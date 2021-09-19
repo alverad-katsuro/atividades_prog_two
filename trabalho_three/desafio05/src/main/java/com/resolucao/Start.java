@@ -17,7 +17,7 @@ public class Start {
     public static void main(String[] path) {
         try {
             Gson gson = new Gson();
-            Reader read = new FileReader(path[0]);
+            Reader read = new FileReader("./funcionario.json");
             System.out.println(read);
             JsonReader reader = gson.newJsonReader(read);
             JsonElement element = JsonParser.parseReader(reader);

@@ -29,7 +29,6 @@ import java.util.Collections;
       catch (NoSuchElementException e) {
         return -1; //caso nao exista divisor comum, entao retorna -1
       }
-
     }
     public static void main(String[] args) throws IOException {
         String fileName = "frac.txt"; //nome do arquivo
@@ -84,9 +83,7 @@ import java.util.Collections;
               }
               catch (ArithmeticException e) {
                 System.out.println("ERR"); //DIVISAO POR ZERO
-
               }
-
             }
             else { //caso o operador se enquadre na linha 64
               System.out.printf("%d%n", (n1/n2)); //entao basta printar o valor da divisao exata entre o numerador e o denominador

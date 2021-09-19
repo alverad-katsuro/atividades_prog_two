@@ -30,7 +30,7 @@ import java.util.Collections;
 
     }
     public static void main(String[] args) throws IOException {
-        String fileName = "c:\\users\\mmaciel\\downloads\\java things\\frac.txt"; 
+        String fileName = "frac.txt"; //se der erro prestar atencao no path
         File file = new File(fileName);   
         byte[] fileContent = Files.readAllBytes(file.toPath());
         String expression = "";

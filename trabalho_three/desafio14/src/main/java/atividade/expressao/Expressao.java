@@ -14,6 +14,7 @@ import groovy.lang.GroovyShell;
 
 public class Expressao {
     public static void main(String[] args) throws IOException {
+        // passa o caminho do arquivo
         expressao("./src/main/java/atividade/expressao/d14.txt");
     }
 
@@ -25,12 +26,14 @@ public class Expressao {
         Queue<String> lista = new LinkedList<>();
         boolean first = true;
         String temp = "";
+        // abaixo é adicionado as linhas na fila, isto é, as expressões -> 1 linha == 1 expressão
         while((c = leitor.read()) != -1) {
             if (first){
                 temp = "" + (char)c;
                 first = false; 
             } else if (c == '\n') {
                 if (temp.contains("^")) {
+                    // converte o sinal ^ para ** entendido pela lib Groovy
                     lista.add(((temp).replace("^", "**")));
                 } else {
                     lista.add(temp);
@@ -45,6 +48,7 @@ public class Expressao {
             try{
                 String saida = lista.poll();
                 boolean erro = false;
+                // verifica se há erro de sintaxe ex: + +, - -, etc
                 String teste[] = {"+", "-", "/", "*", "^"};
                 for (String string : teste) {
                     for (String string2 : teste) {

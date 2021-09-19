@@ -1,5 +1,6 @@
 package com.resolucao.classes;
 
+/// Descreve todos os atributos dos funcionarios
 public class Funcionario {
     private int id;
     private String nome;

@@ -23,6 +23,7 @@ public class Start {
             JsonElement element = JsonParser.parseReader(reader);
             JsonObject objeto = element.getAsJsonObject();
             Areas area = new Areas();
+            // Trata as areas retirando as caracteristicas do json -> ex: RH --> Recursos Humanos
             while (!objeto.get("areas").getAsJsonArray().isEmpty()) {
                 area.addAreas(objeto.get("areas")
                 .getAsJsonArray()
@@ -38,11 +39,13 @@ public class Start {
             }
             Empresa empresa = new Empresa();
             empresa.setArea(area);
+            // add os funcionarios na empresa e instancia eles como objeto
             while (!objeto.get("funcionarios").getAsJsonArray().isEmpty()) {
                 Funcionario funcionario = gson.fromJson(objeto.get("funcionarios").getAsJsonArray().remove(0).getAsJsonObject(), Funcionario.class);
                 funcionario.setArea(area.getAreas_comp(funcionario.getArea()));
                 empresa.addFuncionarios(funcionario);
             }
+            /// output dos requisitos
             empresa.maiorMenorSalario();
             empresa.maiorMenorSalario_area();
             empresa.moreFunc();

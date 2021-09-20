@@ -1,39 +1,47 @@
 package atividade.expressao.dependencias;
-import atividade.expressao.dependencias.excessao.*;
-
 import java.util.ArrayList;
 
+import atividade.expressao.dependencias.excessao.SyntaxErrorExpression;
+
 public class Eval {
+    /*
     public static void main(String[] args) throws SyntaxErrorExpression {
-        String operacao = "5/5+2^2";
-        calculadora(operacao);
+        String operacao = "5 + ( 465 + 1";
+        System.out.println(calculadora(operacao));
     }
+    */
 
     public static double calculadora(String expressao) throws SyntaxErrorExpression {
         ArrayList<String> expressao_dividida = slice(expressao);
         if (expressao_dividida.contains("(")) {
-            slice_parentese(expressao_dividida);
+            expressao_dividida = slice_parentese(expressao_dividida);
         } else {
-            System.out.println(operacoes_basicas(expressao_dividida));
+            operacoes_basicas(expressao_dividida);
         }
-        return 5;
+        return Double.parseDouble(expressao_dividida.get(0));
     }
 
     ////////// tenho que pegar a expressao mais interna (5+5 + (1+2)) -> (1+2) == interna
     public static ArrayList<String> slice_parentese(ArrayList<String> expressao) throws SyntaxErrorExpression {
         if (expressao.contains("(")){
             ArrayList<String> sub_expressao = new ArrayList<>();
-            
-            int index_ini = expressao.indexOf("(");
             int index_end = expressao.indexOf(")");
-            for (int i = 0; i <= index_ini - index_end; i++) {
+            int index_ini = -1;
+            for (int i = 0; i < index_end; i++) {
+                if (expressao.get(i).equals("(")) {
+                    index_ini = i;
+                }
+            }
+            expressao.remove(index_ini);
+            for (int i = (index_ini); i < index_end - 1; i++) {
                 String temporaria = expressao.remove(index_ini);
                 sub_expressao.add(temporaria);
             }
-            System.out.println(sub_expressao);
-            return operacoes_basicas(slice_parentese(sub_expressao));
+            expressao.remove(index_ini);
+            expressao.add(index_ini, operacoes_basicas(slice_parentese(sub_expressao)).get(0));
+            return slice_parentese(expressao);
+
         } else {
-            //System.out.println(expressao);
             expressao = operacoes_basicas(expressao);
             return expressao;
         }
@@ -88,8 +96,24 @@ public class Eval {
     public static ArrayList<String> slice(String expressao) throws SyntaxErrorExpression {
         procura_erro(expressao);
         ArrayList<String> expressao_dividida = new ArrayList<>();
+        int conta_index = 0;
         for (String string : expressao.replace(" ", "").split("")) {
-            expressao_dividida.add(string);
+            if (expressao_dividida.isEmpty()) {
+                expressao_dividida.add(string);
+            } else {
+                if ("+-*/()^".contains(string)) {
+                    expressao_dividida.add(string);                    
+                    conta_index += 1;
+                } else {
+                    String posicao = expressao_dividida.get(conta_index);
+                    if ("+-*/()^".contains(posicao)) {
+                        expressao_dividida.add("");
+                        conta_index += 1;
+                    }
+                    posicao = expressao_dividida.remove(conta_index);
+                    expressao_dividida.add(posicao + string);
+                }
+            }
         }
         if ("+-/^*".contains(expressao_dividida.get(0)) || "+-/^*".contains(expressao_dividida.get(expressao_dividida.size()-1))){
             throw new SyntaxErrorExpression();

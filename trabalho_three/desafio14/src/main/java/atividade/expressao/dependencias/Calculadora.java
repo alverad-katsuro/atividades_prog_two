@@ -20,7 +20,11 @@ public class Calculadora {
 
     // Está função tem a responsabilidade de realizar e retornar os valores da divisão
     public static double divisao(double a, double b){
-        return (a/b);
+        if (b == 0){
+            throw new ArithmeticException();
+        } else {
+            return (a/b);
+        }
     }
 
     // Está função tem a responsabilidade retorna o resto da divisão

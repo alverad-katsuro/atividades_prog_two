@@ -36,6 +36,7 @@ public class Expressao {
             }
         }
         leitor.close();
+        lista.add(temp);
         do {
             try{
                 System.out.println(Eval.calculadora(lista.poll()));

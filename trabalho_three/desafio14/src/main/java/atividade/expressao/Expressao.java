@@ -1,18 +1,15 @@
 package atividade.expressao;
-import atividade.expressao.dependencias.*;
-import atividade.expressao.dependencias.excessao.*;
-
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.LineNumberReader;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import org.codehaus.groovy.control.MultipleCompilationErrorsException;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
+import atividade.expressao.dependencias.Eval;
+import atividade.expressao.dependencias.excessao.SyntaxErrorExpression;
 
 public class Expressao {
     public static void main(String[] args) throws IOException {
@@ -21,8 +18,6 @@ public class Expressao {
     }
 
     public static void expressao (String path) throws IOException{
-        Binding bind = new Binding();
-        GroovyShell grovy = new GroovyShell(bind); 
         LineNumberReader leitor = new LineNumberReader(new FileReader(new File(path)));
         int c = 0;
         Queue<String> lista = new LinkedList<>();
@@ -34,12 +29,7 @@ public class Expressao {
                 temp = "" + (char)c;
                 first = false; 
             } else if (c == '\n') {
-                if (temp.contains("^")) {
-                    // converte o sinal ^ para ** entendido pela lib Groovy
-                    lista.add(((temp).replace("^", "**")));
-                } else {
-                    lista.add(temp);
-                }
+                lista.add(temp);
                 first = true;
             } else if (!first && c != '\n') {
                 temp += (char)c;
@@ -48,7 +38,7 @@ public class Expressao {
         leitor.close();
         do {
             try{
-                System.out.println(grovy.evaluate(lista.poll()));
+                System.out.println(Eval.calculadora(lista.poll()));
             } catch (SyntaxErrorExpression e) {
                 System.out.println("ERR SYNTAX");
             } catch (ArithmeticException e) {

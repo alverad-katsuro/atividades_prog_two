@@ -4,13 +4,13 @@ package com.desafio;
 public class Primo10000 {
     public static boolean isPrimeNumber(int x) {
         //UM NUMERO PRIMO E UM NUMERO DIVISIVEL APENAS POR 1 E ELE MESMO
+        if (x == 1) { //como o numero 1 nao e considerado primo
+            return false; //entao 1 especificamente retorna falso
+        }
         for (int n = 2; n < x; n++) { //considerando que todo numero natural seja divisivel por 1
             if ((x % n) == 0) { //entao caso o numero seja divisivel por qualquer numero maior que 1 que nao seja ele mesmo
                 return false; //a funcao retorna falso
             }
-        }
-        if (x == 1) { //como o numero 1 nao e considerado primo
-            return false; //entao 1 especificamente retorna falso
         }
         return true; //se chegou aqui, o numero e primo por nao ser divisivel por nenhum numero natural excluindo 1 menor que ele
     }

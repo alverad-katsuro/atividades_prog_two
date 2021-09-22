@@ -3,6 +3,7 @@ package com.xadrez;
 import java.util.Random;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
+
 public class XadrezContagem {
     private static final int NULO = 0; //CONSTANTE PARA CADA PECA OU AUSENCIA DA MESMA
     private static final int PEAO = 1;
@@ -74,10 +75,15 @@ public class XadrezContagem {
                     int a = 0; //controle de posicao
                     int[] ur_table = new int[64]; //armazena o valor de cada posicao do usuario
                     do {
-                        System.out.printf("%d - DIGITE O VALOR DA PECA%n", a);
+                        //System.out.printf("%d - DIGITE O VALOR DA PECA%n", a);
+                        // tem que ver como limpa tela eu n sei hahaha
+                        imprime(ur_table, a);
                         int peca = for_ints.nextInt(); //deve ser entre -1 e 7 (sem extremos) para pular iteracao
                         if ((peca > -1) && peca < 7) {
                             ur_table[a++] = peca; //armazena no array o valor do input
+                        }
+                        if (a % 8 == 0) {
+                            imprime(ur_table, a);
                         }
                     } while (a < 64); //ate ter 64 pecas selecionadas
                     int[][] t_board = construirTab(ur_table); //cria um tabuleiro de elementos selecionados
@@ -129,4 +135,27 @@ public class XadrezContagem {
             }
         }
     }
+
+    public static void imprime(int vetor[], int posicao) {
+        if (posicao == 0) {
+            System.out.println("DIGITE O VALOR DA PECA");
+        } else {
+            String saida = "";
+            int intervalos_existentes[] = {8,16,24,32,40,48,56,64};
+            int intervalo = 8;
+            for (int j : intervalos_existentes) {
+                if (posicao < j) {
+                    intervalo = j;
+                    break;
+                }
+            }
+            for (int j = intervalo - 8; j < intervalo; j++) {
+                saida += vetor[j] +" ";
+            }
+            System.out.println("DIGITE O VALOR DA PECA");
+            System.out.printf("%s ", saida);
+        }
+        
+    }
+
 }

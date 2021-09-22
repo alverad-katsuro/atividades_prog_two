@@ -70,7 +70,7 @@ public class XadrezContagem {
     public static void main(String[] args) {
         Scanner for_ints = new Scanner(System.in);
         while (true) {
-            System.out.println("DIGITE 1 PARA DIGITAR ELEMENTO POR ELEMENTO\nDIGITE 2 PARA DIGITAR LINHA POR LINHA\nDIGITE 3 PARA CRIAR UM TABULERO ALEATORIO");
+            System.out.println("DIGITE 1 PARA DIGITAR ELEMENTO POR ELEMENTO\nDIGITE 2 PARA DIGITAR LINHA POR LINHA\nDIGITE 3 PARA CRIAR UM TABULEIRO ALEATORIO");
             int choose = for_ints.nextInt(); //input do usuario
             switch (choose) {
                 case (1): {

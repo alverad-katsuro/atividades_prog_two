@@ -48,14 +48,16 @@ public class XadrezContagem {
         }        
         return ocorrencias; //retorna Hash
     }
+    
     public static void info(LinkedHashMap<Integer, Integer> dados_o) {
-        int[] again = new int[7]; //array pro printf
-        int a = 0; //controle de atribuicao ao array
-        for( Integer key : dados_o.keySet() ){ //para cada chave contida no Set de Chaves
-            again[a++] = dados_o.get(key); //atribui a cada posicao do array o numero de vezes que ocorreu cada posicao
-         } //como index 0 esta o nulo, again[0] nao sera necessario no printf
-         System.out.printf("Peão: %d peça(s)%nBispo: %d peça(s)%nCavalo: %d peça(s)%nTorre: %d peça(s)%nRainha: %d peça(s)%nRei: %d peça(s)", again[1], again[2], again[3], again[4], again[5], again[6]);
+         System.out.printf("Peão: %d peça(s)%n", dados_o.get(1));
+         System.out.printf("Bispo: %d peça(s)%n", dados_o.get(2));
+         System.out.printf("Cavalo: %d peça(s)%n", dados_o.get(3));
+         System.out.printf("Torre: %d peça(s)%n", dados_o.get(4));
+         System.out.printf("Rainha: %d peça(s)%n", dados_o.get(5));
+         System.out.printf("Rei: %d peça(s)%n", dados_o.get(6));
     }
+    
     public static void printarTabuleiro(int[][] tabuleiro) {
         for (int x = 0; x < tabuleiro.length; x++) {
             System.out.print("\n"); //espaco para quebrar linha

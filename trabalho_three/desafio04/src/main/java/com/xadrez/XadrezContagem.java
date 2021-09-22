@@ -107,7 +107,7 @@ public class XadrezContagem {
                                 try{
                                     int chess_p = Integer.parseInt(elemento); //transforma codigo da peca (string) em inteiro
                                     if ((chess_p > -1) && (chess_p < 7)) {
-                                        ur_table[m++][a] = chess_p; //e adiciona na linha correspondente esse inteiro caso seja valido
+                                        ur_table[a][m++] = chess_p; //e adiciona na linha correspondente esse inteiro caso seja valido
                                     }
                                 }
                                 catch (NumberFormatException ex){

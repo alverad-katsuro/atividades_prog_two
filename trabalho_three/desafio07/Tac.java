@@ -6,10 +6,15 @@ import java.util.Stack;
 
 public class Tac {
     public static void main(String[] path) throws IOException {
-        long linhas_totais = count(path[0]);
+        long qt_char_linhas[] = count(path[0]);
+        long linhas_totais = qt_char_linhas[1];
         long linha_ini = 0, linha_stop = 0;
-        //int linhas_a_serem_lidas = Integer.parseInt(path[1]);
-        int linhas_a_serem_lidas = 2500000;
+        int linhas_a_serem_lidas;
+        if (path.length > 1) {
+            linhas_a_serem_lidas = (Integer.parseInt(path[1]) - 80) * 1024* 1024 / (2*(((int)(qt_char_linhas[0]/qt_char_linhas[1])) + 1));
+        } else {
+            linhas_a_serem_lidas = 400 * 1024* 1024 / (2*(((int)(qt_char_linhas[0]/qt_char_linhas[1])) + 1));
+        }
         if (linhas_a_serem_lidas <= linhas_totais){
             linha_stop = linhas_totais;
             linha_ini = linha_stop - linhas_a_serem_lidas;
@@ -35,8 +40,6 @@ public class Tac {
             }
             tac(path[0], linha_ini, linha_stop, linhas_totais);
         }
-        /*
-        */
     }
     
     public static void tac (String path, long start, long stop, long linhas_totais) throws IOException{
@@ -63,16 +66,25 @@ public class Tac {
         }
         while (!lista.isEmpty()) {
             System.out.print(lista.pop());
-            //System.exit(1);
         }
     }
 
-    public static int count(String path) throws IOException {
-        LineNumberReader leitor = new LineNumberReader(new FileReader(new File(path)));
-        while(leitor.ready()) {
-            leitor.readLine();
+    public static long[] count(String path){
+        try{
+            LineNumberReader leitor = new LineNumberReader(new FileReader(new File(path)));
+            long qt_char_linhas[] = new long[2];
+            int char_atual;
+            while((char_atual = leitor.read()) != -1) {
+                if (char_atual == '\n') {
+                    qt_char_linhas[1]++;
+                }
+                qt_char_linhas[0]++;
+            }
+            leitor.close();
+            return qt_char_linhas;
+        } catch (IOException e) {
+            System.out.println("Não achei o arquivo");
         }
-        leitor.close();
-        return leitor.getLineNumber();
+        return null;
     }
 }

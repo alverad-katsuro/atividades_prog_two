@@ -63,7 +63,7 @@ public class Pessoa extends Atributos_Comuns{
     }
 
     protected void setData_nascimento(String data_nascimento) {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         LocalDate data = LocalDate.parse(data_nascimento, fmt);
         calculateAge(data, LocalDate.now());
         this.data_nascimento = data;

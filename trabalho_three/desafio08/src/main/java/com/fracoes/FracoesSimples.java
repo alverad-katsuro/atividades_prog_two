@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Collections;
+
 public class FracoesSimples {
    public static int mdc(int n1, int n2) {
       Set<Integer> a1 = new HashSet<>(); //Conjunto para n1

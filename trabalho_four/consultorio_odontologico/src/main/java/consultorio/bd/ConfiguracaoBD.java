@@ -3,7 +3,7 @@ package consultorio.bd;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DAO {
+public class ConfiguracaoBD {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String user = "odonto";
 	private String senha = "odonto123";

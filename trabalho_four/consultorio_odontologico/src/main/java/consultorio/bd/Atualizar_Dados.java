@@ -13,7 +13,7 @@ public class Atualizar_Dados {
     private Atualizar_Dados(){}
 
     public static int insertCliente(Cliente cliente){
-        DAO dao = new DAO();
+        ConfiguracaoBD dao = new ConfiguracaoBD();
         String comando_sql = "insert into cliente (nome, idade, cpf, email, telefone, sexo, plano, endereco) values (?,?,?,?,?,?,?,?)";
         try {
             Connection con = dao.conectar();
@@ -45,8 +45,8 @@ public class Atualizar_Dados {
         }
     }
 
-    public static ArrayList<Cliente> searchClientLogical(String comando_sql){
-        DAO dao = new DAO();
+    private static ArrayList<Cliente> searchClientLogical(String comando_sql){
+        ConfiguracaoBD dao = new ConfiguracaoBD();
         try {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
@@ -59,7 +59,7 @@ public class Atualizar_Dados {
         }
     }
 
-    public static ArrayList<Cliente> searchClientExtract(ResultSet rs){
+    private static ArrayList<Cliente> searchClientExtract(ResultSet rs){
         ArrayList<Cliente> clientes = new ArrayList<>();
         try {
             while (rs.next()){
@@ -82,7 +82,7 @@ public class Atualizar_Dados {
     }
 
     public static boolean modifyClient(Cliente cliente){
-        DAO dao = new DAO();
+        ConfiguracaoBD dao = new ConfiguracaoBD();
         String comando_sql = "update cliente set endereco=?, nome=?, cpf=?, telefone=?, email=?, sexo=?, idade=?, plano=? where idcleint = ?";
         try {
             Connection con = dao.conectar();
@@ -106,7 +106,7 @@ public class Atualizar_Dados {
     }
 
     public static void insertDentista(Odontologista dentista){
-        DAO dao = new DAO();
+        ConfiguracaoBD dao = new ConfiguracaoBD();
         String comando_sql = "insert into cliente (nome, idade, cpf, email, telefone, sexo, crm, endereco) values (?,?,?,?,?,?,?,?)";
         try {
             Connection con = dao.conectar();
@@ -138,8 +138,8 @@ public class Atualizar_Dados {
         }
     }
 
-    public static ArrayList<Odontologista> searchDentistaLogical(String comando_sql){
-        DAO dao = new DAO();
+    private static ArrayList<Odontologista> searchDentistaLogical(String comando_sql){
+        ConfiguracaoBD dao = new ConfiguracaoBD();
         try {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
@@ -175,7 +175,7 @@ public class Atualizar_Dados {
     }
 
     public static boolean modifyDentista(Odontologista dentista){
-        DAO dao = new DAO();
+        ConfiguracaoBD dao = new ConfiguracaoBD();
         String comando_sql = "update cliente set endereco=?, nome=?, cpf=?, telefone=?, email=?, sexo=?, idade=?, crm=? where iddentista = ?";
         try {
             Connection con = dao.conectar();

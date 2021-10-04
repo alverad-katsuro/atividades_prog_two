@@ -1,11 +1,13 @@
 package consultorio.classes;
 
+import consultorio.classes.Enum.Sexo;
+
 public abstract class Pessoa extends Endereco_Abstract {
 	protected String nome;
 	protected String cpf;
 	protected String telefone;
 	protected String email;
-	protected String sexo;
+	protected Sexo sexo;
 	protected int idade;
 	
 	public Pessoa(String nome, String cpf, String telefone, String email, String sexo,
@@ -16,7 +18,7 @@ public abstract class Pessoa extends Endereco_Abstract {
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.email = email;
-		this.sexo = sexo;
+		this.sexo = comparaSexo(sexo.toUpperCase());
 		this.idade = idade;
 	}
 
@@ -26,7 +28,7 @@ public abstract class Pessoa extends Endereco_Abstract {
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.email = email;
-		this.sexo = sexo;
+		this.sexo = comparaSexo(sexo.toUpperCase());
 		this.idade = idade;
 	}
 
@@ -60,10 +62,10 @@ public abstract class Pessoa extends Endereco_Abstract {
 	protected void setEmail(String email) {
 		this.email = email;
 	}
-	public String getSexo() {
+	public Sexo getSexo() {
 		return sexo;
 	}
-	protected void setSexo(String sexo) {
+	protected void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
 	public int getIdade() {
@@ -71,5 +73,15 @@ public abstract class Pessoa extends Endereco_Abstract {
 	}
 	protected void setIdade(int idade) {
 		this.idade = idade;
-	}	
+	}
+
+	public static Sexo comparaSexo(String sexo){
+		switch (sexo) {
+			case "MASCULINO":
+				return Sexo.MASCULINO;
+			case "FEMININO":
+				return Sexo.FEMININO;
+		}
+		return null;
+	}
 }

@@ -12,7 +12,7 @@ import consultorio.classes.Odontologista;
 public class Atualizar_Dados {
     private Atualizar_Dados(){}
 
-    public static int insertCliente(Cliente cliente){
+    public static boolean insertCliente(Cliente cliente){
         ConfiguracaoBD dao = new ConfiguracaoBD();
         String comando_sql = "insert into cliente (nome, idade, cpf, email, telefone, sexo, plano, endereco) values (?,?,?,?,?,?,?,?)";
         try {
@@ -23,13 +23,14 @@ public class Atualizar_Dados {
             pst.setString(3, cliente.getCpf());
             pst.setString(4, cliente.getEmail());
             pst.setString(5, cliente.getTelefone());
-            pst.setString(6, cliente.getSexo());
+            pst.setString(6, cliente.getSexo().toString());
             pst.setString(7, cliente.getPlano());
             pst.setString(8, cliente.getEnderecoComplemento());
-            return pst.executeUpdate();
+            pst.executeUpdate();
+            return true;
         }catch(Exception e){
             System.out.println(e);
-            return 0;
+            return false;
         }
     }
 
@@ -92,7 +93,7 @@ public class Atualizar_Dados {
             pst.setString(3, cliente.getCpf());
             pst.setString(4, cliente.getTelefone());
             pst.setString(5, cliente.getEmail());
-            pst.setString(6, cliente.getSexo());
+            pst.setString(6, cliente.getSexo().toString());
             pst.setString(7, String.valueOf(cliente.getIdade()));
             pst.setString(8, cliente.getPlano());
             pst.setString(9, String.valueOf(cliente.getIdclient()));
@@ -105,9 +106,9 @@ public class Atualizar_Dados {
         }
     }
 
-    public static void insertDentista(Odontologista dentista){
+    public static boolean insertDentista(Odontologista dentista){
         ConfiguracaoBD dao = new ConfiguracaoBD();
-        String comando_sql = "insert into cliente (nome, idade, cpf, email, telefone, sexo, crm, endereco) values (?,?,?,?,?,?,?,?)";
+        String comando_sql = "insert into dentista (nome, idade, cpf, email, telefone, sexo, crm, endereco) values (?,?,?,?,?,?,?,?)";
         try {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
@@ -116,13 +117,16 @@ public class Atualizar_Dados {
             pst.setString(3, dentista.getCpf());
             pst.setString(4, dentista.getEmail());
             pst.setString(5, dentista.getTelefone());
-            pst.setString(6, dentista.getSexo());
-            pst.setString(7, dentista.getCRM());
+            pst.setString(6, dentista.getSexo().toString());
+            pst.setString(7, dentista.getCrm());
             pst.setString(8, dentista.getEnderecoComplemento());
+            System.out.println("adsffsa");
             pst.executeUpdate();
             con.close();
+            return true;
         }catch(Exception e){
             System.out.println(e);
+            return false;
         }
     }
 
@@ -165,7 +169,8 @@ public class Atualizar_Dados {
                 String telefone = rs.getString(7);
                 String sexo = rs.getString(8);
                 String endereco = rs.getString(9);
-                dentistas.add(new Odontologista(endereco, nome, cpf, telefone, email, sexo, idade, crm, iddentista));
+                String especializacao = rs.getString(10);
+                dentistas.add(new Odontologista(endereco, nome, cpf, telefone, email, sexo, idade, crm, iddentista, especializacao));
             }
             return dentistas;
         } catch (SQLException e){
@@ -185,10 +190,10 @@ public class Atualizar_Dados {
             pst.setString(3, dentista.getCpf());
             pst.setString(4, dentista.getTelefone());
             pst.setString(5, dentista.getEmail());
-            pst.setString(6, dentista.getSexo());
+            pst.setString(6, dentista.getSexo().toString());
             pst.setString(7, String.valueOf(dentista.getIdade()));
-            pst.setString(8, dentista.getCRM());
-            pst.setString(9, String.valueOf(dentista.getiddentista()));
+            pst.setString(8, dentista.getCrm());
+            pst.setString(9, String.valueOf(dentista.getIddentista()));
             pst.executeUpdate();
             con.close();
             return true;

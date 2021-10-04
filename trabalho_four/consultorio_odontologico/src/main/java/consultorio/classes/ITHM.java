@@ -10,7 +10,7 @@ public class ITHM {
     private ITHM(){}
 
 
-    public static Cliente createCliente(Scanner sc){
+    public static boolean createCliente(Scanner sc){
         String endereco, nome, cpf, telefone, email, sexo, plano;
         int idade;
         System.out.println("----------------- Cadastro do Cliente -----------------");
@@ -32,11 +32,11 @@ public class ITHM {
         System.out.print("Digite o Endereco: ");
         endereco = sc.nextLine();
         System.out.println("----------------------------------");
-        return (new Cliente(endereco, nome, cpf, telefone, email, sexo, idade, plano));
+        return Atualizar_Dados.insertCliente(new Cliente(endereco, nome, cpf, telefone, email, sexo, idade, plano));
     }
 
-    public static Odontologista createOdontologista(Scanner sc){
-        String endereco, nome, cpf, telefone, email, sexo, crm;
+    public static boolean createOdontologista(Scanner sc){
+        String endereco, nome, cpf, telefone, email, sexo, crm, especializacao;
         int idade;
         System.out.println("----------------- Cadastro do Odontologista -----------------");
         System.out.print("Digite o nome: ");
@@ -53,11 +53,13 @@ public class ITHM {
         idade = Integer.parseInt(sc.nextLine());
         System.out.print("Digite o Sexo[masculino/feminino]: ");
         sexo = sc.nextLine();
+        System.out.print("Digite a especializacao [PROTETICO, DENTISTA, CIRURGIAO]: ");
+        especializacao = sc.nextLine();
         System.out.println("Endereco formato -> 'rua, Nº xx, bairro, cidade, estado, país, complemento.'\nUse corretamente as virgulas ','");
         System.out.print("Digite o Endereco: ");
         endereco = sc.nextLine();
         System.out.println("----------------------------------");
-        return (new Odontologista(endereco, nome, cpf, telefone, email, sexo, idade, crm));
+        return Atualizar_Dados.insertDentista(new Odontologista(endereco, nome, cpf, telefone, email, sexo, idade, crm, especializacao));
     }
 
     public static ArrayList<Cliente> buscaCliente(Scanner sc){
@@ -105,7 +107,7 @@ public class ITHM {
             case "0":
                 return AgendarConsulta.searchConsulta(data);
             case "1":
-                System.out.println("Formato da data 'xxxx-xx-xx' -> ano-mes-dia");
+                System.out.println("Formato da data 'xxxx-xx-xx xx:xx' -> ano-mes-dia hora:minuto");
                 System.out.print("Digite o inicio do intervalo\nResposta: ");
                 data[0] = sc.nextLine();
                 System.out.print("Digite o fim do intervalo\nResposta: ");
@@ -115,7 +117,7 @@ public class ITHM {
         return null;
     }
 
-    public void modificaCliente(Scanner sc){
+    public static void modificaCliente(Scanner sc){
         String option[] = new String[2];
         option[0] = "cpf";
         System.out.println("----------------- Modifica Cliente -----------------");
@@ -143,7 +145,7 @@ public class ITHM {
                 cliente.setPlano(option[1]);
                 break; 
             case "sexo":
-                cliente.setSexo(option[1]);
+                cliente.setSexo(Pessoa.comparaSexo(option[1]));
                 break; 
             case "telefone":
                 cliente.setTelefone(option[1]);
@@ -152,7 +154,7 @@ public class ITHM {
         Atualizar_Dados.modifyClient(cliente);
     }
 
-    public void modificaOdontologista(Scanner sc){
+    public static void modificaOdontologista(Scanner sc){
         String option[] = new String[2];
         option[0] = "cpf";
         System.out.println("----------------- Modifica Odontologista -----------------");
@@ -177,15 +179,38 @@ public class ITHM {
                 odontologista.setIdade(Integer.parseInt(option[1]));
                 break; 
             case "crm":
-                odontologista.setCRM(option[1]);
+                odontologista.setCrm(option[1]);
                 break; 
             case "sexo":
-                odontologista.setSexo(option[1]);
+                odontologista.setSexo(Pessoa.comparaSexo(option[1]));
                 break; 
             case "telefone":
                 odontologista.setTelefone(option[1]);
                 break; 
         }
         Atualizar_Dados.modifyDentista(odontologista);
+    }
+
+    public static boolean createConsulta(Scanner sc){
+        String especializacao, crm_dentista, cpf_cliente, data;
+        float valor;
+        System.out.println("----------------- Agendamento de Consulta -----------------");
+        System.out.print("Digite a especialização: ");
+        especializacao = sc.nextLine();
+        System.out.print("Digite o CRM: ");
+        crm_dentista = sc.nextLine();
+        System.out.print("Digite o CPF do cliente: ");
+        cpf_cliente = sc.nextLine();
+        System.out.print("Digite a Data -> 'ano-mes-dia xx:xx': ");
+        data = sc.nextLine();
+        System.out.print("Digite o Valor da consulta: ");
+        valor = Float.parseFloat(sc.nextLine());
+        System.out.println("----------------------------------");
+        String teste_c[] = {"cpf", cpf_cliente};
+        String teste_d[] = {"Crm", crm_dentista};
+        if (Atualizar_Dados.searchClient(teste_c).size() > 0 && Atualizar_Dados.searchDentista(teste_d).size() > 0) {
+            return AgendarConsulta.agendarConsulta(new Consulta(especializacao, crm_dentista, cpf_cliente, data, valor, "PENDENTE"));
+        }
+        return false;
     }
 }

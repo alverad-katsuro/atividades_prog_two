@@ -1,16 +1,11 @@
 package consultorio;
 
-import consultorio.bd.Atualizar_Dados;
 import consultorio.classes.*;
 
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        Odontologista odo = new Odontologista("nome", "cpf", "telefone", "email", "MASCULINO", 5, "pais", "estado", "cidade", "bairro", "rua", "numero", "complemento", "sadasdsad", "PROTETICO");
-        Atualizar_Dados.insertDentista(odo);
-
-        /*
         Scanner sc = new Scanner(System.in);
         boolean cont = true;
         String escolhas;
@@ -20,24 +15,23 @@ public class App {
             escolhas = sc.nextLine();
             switch (escolhas) {
                 case "0":
-                    menuCadastro(sc);
-                    break;
+                menuCadastro(sc);
+                break;
                 case "1":
-                    menuAgendamento(sc);
-                    break;
+                menuAgendamento(sc);
+                break;
                 case "2":
-                    menuConsultas(sc);
-                    break;
+                menuConsultas(sc);
+                break;
                 case "3":
-                    menuRelatorio(sc);
-                    break;
+                menuRelatorio(sc);
+                break;
                 case "4":
-                    cont = false;
-                    break;
+                cont = false;
+                break;
             }
         }
         sc.close();
-         */
     }
 
     public static void menuCadastro(Scanner sc){

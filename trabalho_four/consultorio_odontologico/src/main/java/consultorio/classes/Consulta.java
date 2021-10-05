@@ -11,6 +11,7 @@ public class Consulta {
     private String data;
     private float valor;
     private Stats_Consulta realizada;
+    private String notas;
     
   
     public Consulta(String especializacao, String crm_dentista, String cpf_cliente, String data, float valor,
@@ -20,18 +21,19 @@ public class Consulta {
         this.cpf_cliente = cpf_cliente;
         this.data = data;
         this.valor = valor;
-        this.realizada = comparadorStatus(realizada);
+        this.realizada = comparadorStatus(realizada.toUpperCase());
     }
 
     public Consulta(int idConsulta, String especializacao, String crm_dentista, String cpf_cliente,
-            String data, float valor, String realizada) {
+            String data, float valor, String realizada, String notas) {
         IdConsulta = idConsulta;
-        this.especializacao = comparadorEspecialidade(especializacao);
+        this.especializacao = comparadorEspecialidade(especializacao.toUpperCase());
         this.crm_dentista = crm_dentista;
         this.cpf_cliente = cpf_cliente;
         this.data = data;
         this.valor = valor;
-        this.realizada = comparadorStatus(realizada);
+        this.realizada = comparadorStatus(realizada.toUpperCase());
+        this.notas = notas;
     }
 
     @Override
@@ -39,6 +41,14 @@ public class Consulta {
         return "Consulta [IdConsulta=" + IdConsulta + ", cpf_cliente=" + cpf_cliente + ", crm_dentista=" + crm_dentista
                 + ", data=" + data + ", especializacao=" + especializacao + ", realizada=" + realizada + ", valor="
                 + valor + "]";
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
     }
 
     public Stats_Consulta getRealizada() {

@@ -35,6 +35,9 @@ public class AgendarConsulta {
             case "0":
                 comando_sql = "SELECT * FROM consulta order by diaMesAno";
                 return searchConsultaLogical(comando_sql);
+            case "IdConsulta":
+                comando_sql = "SELECT * FROM consulta WHERE "+ option[0] + " = "+ option[1];
+                return searchConsultaLogical(comando_sql); 
             default:
                 comando_sql = "SELECT * FROM consulta WHERE diaMesAno BETWEEN " + option[0] +" and "+ option[1] +" order by diaMesAno";
                 return searchConsultaLogical(comando_sql); 
@@ -66,7 +69,8 @@ public class AgendarConsulta {
                 String realizada = rs.getString(5);
                 String data = rs.getString(6);
                 float valor = Float.parseFloat(rs.getString(7));
-                consultas.add(new Consulta(idConsulta, especializacao, crm_dentista, cpf_cliente, data, valor, realizada));
+                String notas = rs.getString(8);
+                consultas.add(new Consulta(idConsulta, especializacao, crm_dentista, cpf_cliente, data, valor, realizada, notas));
             }
             return consultas;
         } catch (Exception e) {
@@ -77,7 +81,7 @@ public class AgendarConsulta {
 
     public static boolean modifyConsulta(Consulta consulta){
         ConfiguracaoBD dao = new ConfiguracaoBD();
-        String comando_sql = "update cliente set especializacao=?, crm_dentista=?, cpf_cliente=?, data=?, valor=?, realizada=? where idcleint = ?";
+        String comando_sql = "update cliente set especializacao=?, crm_dentista=?, cpf_cliente=?, data=?, valor=?, realizada=?, notas=? where idcleint = ?";
         try {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
@@ -88,6 +92,7 @@ public class AgendarConsulta {
             pst.setString(5, Float.toString(consulta.getValor()));
             pst.setString(6, String.valueOf(consulta.getRealizada()));
             pst.setString(7, String.valueOf(consulta.getIdConsulta()));
+            pst.setString(8, consulta.getNotas());
             pst.executeUpdate();
             con.close();
             return true;

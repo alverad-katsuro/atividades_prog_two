@@ -101,7 +101,7 @@ public class ITHM {
     public static ArrayList<Consulta> consultarAgendamento(Scanner sc){
         String data[] = new String[2];
         System.out.println("----------------- Consulta Agendamento -----------------");
-        System.out.print("Digite\n0. Realizar busca por periodo\n1. Buscar Agendamento Especifico\nResposta: ");
+        System.out.print("Digite\n0. Listar todos Agendamentos\n1. Realizar busca por periodo\n2. Buscar Agendamento Especifico\nResposta: ");
         data[0] = sc.nextLine();
         switch (data[0]) {
             case "0":
@@ -113,8 +113,51 @@ public class ITHM {
                 System.out.print("Digite o fim do intervalo\nResposta: ");
                 data[1] = sc.nextLine();
                 return AgendarConsulta.searchConsulta(data);
+            case "3":
+                System.out.print("Digite a IdConsulta\nResposta: ");
+                data[1] = sc.nextLine();
+                data[0] = "IdConsulta";
+                return AgendarConsulta.searchConsulta(data);
         }
         return null;
+    }
+
+    public static boolean modificaConsulta(Scanner sc){
+        String id[] = new String[2];
+        id[0] = "IdConsulta";
+        System.out.println("----------------- Modifica Consulta -----------------");
+        System.out.print("Digite a IdConsulta\nResposta: ");
+        id[1] = sc.nextLine();
+        Consulta consulta = AgendarConsulta.searchConsulta(id).get(0);
+        System.out.print("Digite o rotulo do que deseja modificar [especializacao, crm_dentista, cpf_cliente, data, valor, realizada, notas]\nResposta: ");
+        id[0] = sc.nextLine();
+        System.out.print("Digite o novo valor do rotulo\nResposta: ");
+        id[1] = sc.nextLine();
+        switch (id[0]) {
+            case "especializacao":
+                consulta.setEspecializacao(Consulta.comparadorEspecialidade(id[1]));
+                break; 
+            case "crm_dentista":
+                consulta.setCrm_dentista(id[1]);
+                break; 
+            case "cpf_cliente":
+                consulta.setCpf_cliente(id[1]);
+                break; 
+            case "data":
+                consulta.setData(id[1]);
+                break; 
+            case "valor":
+                consulta.setValor(Float.parseFloat(id[1]));
+                break; 
+            case "realizada":
+                consulta.setRealizada(Consulta.comparadorStatus(id[1]));
+                break; 
+            case "notas":
+                consulta.setNotas(id[1]);
+                break; 
+        }
+        AgendarConsulta.modifyConsulta(consulta);
+        return true;
     }
 
     public static void modificaCliente(Scanner sc){

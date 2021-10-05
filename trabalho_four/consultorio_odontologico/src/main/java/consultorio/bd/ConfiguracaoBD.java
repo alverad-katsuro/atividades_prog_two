@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConfiguracaoBD {
-	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String user = "odonto";
-	private String senha = "odonto123";
-	private String url = "jdbc:mysql://138.36.20.69:10000/site_prog?useTimeZone=True&serverTimeZone=UTC";
+	private final String driver = "com.mysql.cj.jdbc.Driver";
+	private final String user = "odonto";
+	private final String senha = "odonto123";
+	private final String url = "jdbc:mysql://138.36.20.69:10000/site_prog?useTimeZone=True&serverTimeZone=UTC";
 	
 	Connection conectar() {
 		Connection con = null;

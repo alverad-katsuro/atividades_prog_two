@@ -20,6 +20,22 @@ public class Relatorio {
         String option[] = {"realizada", "REAGENDADOS"};
         System.out.printf("Há %d clientes esperando atendimento", AgendarConsulta.searchConsulta(option).size());
     }
+
+    public void clientesQueVieramMes(String data[]){
+        String comando_sql = "SELECT * FROM consulta WHERE realizada=REALIZADO and data BETWEEN "+ data[0] +" and " + data[1] + " order by data";
+        System.out.printf("Foram atendidos %d clientes no mês", AgendarConsulta.searchConsultaLogical(comando_sql).size());
+    }
+
+    public void clientesQueNaoVieramMes(String data[]){
+        String comando_sql = "SELECT * FROM consulta WHERE realizada=CANCELADO and data BETWEEN "+ data[0] +" and " + data[1] + " order by data";
+        System.out.printf("%d clientes não vieram ou cancelaram", AgendarConsulta.searchConsultaLogical(comando_sql).size());
+    }
+
+
+    public void clientesReagendadosMes(String data[]){
+        String comando_sql = "SELECT * FROM consulta WHERE realizada=REAGENDADO and data BETWEEN "+ data[0] +" and " + data[1] + " order by data";
+        System.out.printf("Há %d clientes reagendados", AgendarConsulta.searchConsultaLogical(comando_sql).size());
+    }
     
     public void clientesAtendidos(){
         String option[] = {"realizada", "ATENDIDO"};

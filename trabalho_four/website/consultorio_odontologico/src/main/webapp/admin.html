@@ -1,0 +1,81 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="pt"> <!--boa pratica pra engines colocar a linguagem do site-->
+<head>
+<meta charset="UTF-8">
+<title>OdontoLab</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+<script src="scripts/collapse_bar.js"></script>
+</head>
+<body>
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="admin.html"></a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="nav-links">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="nav-links" class="navbar-menu">
+      <div class="navbar-start">
+      	<a class="navbar-item" href='admin.html'>Home</a>
+      </div>
+      <div class="navbar-end">        
+        <a class="navbar-item" href='index.html'>
+            <strong>
+                SAIR
+            </strong>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <aside class="menu">
+    <p class="menu-label">
+      Geral
+    </p>
+    <ul class="menu-list">
+        <li>
+          <a class="is-active">Profissional</a>
+          <ul>
+            <li><a>Cadastrar Ortodontista</a></li>
+            <li><a>Alterar dados de Ortodontista</a></li>
+            <li><a>Demitir Ortodontista</a></li>  
+          </ul>
+        </li>
+      </ul>
+    <p class="menu-label">
+      Administração
+    </p>
+    <ul class="menu-list">
+      <li>
+        <a class="is-active">Gerar relatórios</a>
+        <ul>
+          <li><a>Consultas concluídas</a></li>
+          <li><a>Consultas pendentes</a></li>
+          <li><a>Consultas reagendadas</a></li>
+          <li><a>Consultas canceladas</a></li>
+
+        </ul>
+      </li>
+    </ul>
+    <p class="menu-label">
+        Conta
+      </p>
+      <ul class="menu-list">
+        <li>
+          <a class="is-active">Alterar dados da conta</a>
+          <ul>
+            <li><a>Alterar login</a></li>
+            <li><a>Alterar senha</a></li>
+          </ul>
+        </li>
+      </ul>
+  </aside>
+</div>
+</body>
+</html>

@@ -33,18 +33,21 @@ public class AgendarConsulta {
         String comando_sql;
         switch (option[0]) {
             case "0":
-                comando_sql = "SELECT * FROM consulta order by diaMesAno";
+                comando_sql = "SELECT * FROM consulta order by data";
                 return searchConsultaLogical(comando_sql);
             case "IdConsulta":
                 comando_sql = "SELECT * FROM consulta WHERE "+ option[0] + " = "+ option[1];
                 return searchConsultaLogical(comando_sql); 
+            case "realizada":
+                comando_sql = "SELECT * FROM consulta WHERE "+ option[0] + " = "+ option[1];
+                return searchConsultaLogical(comando_sql); 
             default:
-                comando_sql = "SELECT * FROM consulta WHERE diaMesAno BETWEEN " + option[0] +" and "+ option[1] +" order by diaMesAno";
+                comando_sql = "SELECT * FROM consulta WHERE data BETWEEN " + option[0] +" and "+ option[1] +" order by data";
                 return searchConsultaLogical(comando_sql); 
         }
     }
 
-    private static ArrayList<Consulta> searchConsultaLogical(String comando_sql){
+    public static ArrayList<Consulta> searchConsultaLogical(String comando_sql){
         ConfiguracaoBD dao = new ConfiguracaoBD();
         try {
             Connection con = dao.conectar();

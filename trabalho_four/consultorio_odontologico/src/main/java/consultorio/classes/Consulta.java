@@ -121,12 +121,14 @@ public class Consulta {
     }
 
     public static Stats_Consulta comparadorStatus(String string){
-        if (string.equals(Stats_Consulta.REALIZADA.toString())){
-            return Stats_Consulta.REALIZADA;
+        if (string.equals(Stats_Consulta.ATENDIDO.toString())){
+            return Stats_Consulta.ATENDIDO;
         } else if (string.equals(Stats_Consulta.PENDENTE.toString())){
             return Stats_Consulta.PENDENTE;
         } else if (string.equals(Stats_Consulta.CANCELADA.toString())){
             return Stats_Consulta.CANCELADA;
+        } else if (string.equals(Stats_Consulta.REAGENDADO.toString())){
+            return Stats_Consulta.REAGENDADO;
         } else {
             return null;
         }

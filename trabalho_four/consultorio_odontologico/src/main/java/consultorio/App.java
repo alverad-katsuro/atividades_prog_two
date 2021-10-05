@@ -7,6 +7,24 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        String userPass[] = new String[2];
+        System.out.print("Digite seu usuario: ");
+        userPass[0] = sc.nextLine();
+        System.out.print("Digite sua senha: ");
+        userPass[1] = sc.nextLine();
+        Contas contas = new Contas(userPass[0], userPass[1]);
+        switch (contas.getFuncao()) {
+            case ATENDENTE:
+                atendente(sc);
+                break;
+            case DENTISTA:
+                dentista(sc);
+                break;
+        }
+        sc.close();
+    }
+
+    public static void atendente(Scanner sc){
         boolean cont = true;
         String escolhas;
         while (cont) {
@@ -31,7 +49,27 @@ public class App {
                 break;
             }
         }
-        sc.close();
+    }
+
+    public static void dentista(Scanner sc){
+        boolean cont = true;
+        String escolhas;
+        while (cont) {
+            System.out.println("--------- Bem Vindo a OdontoLab ---------");
+            System.out.println("Digite\n0. Consultas\n1. Relatorio\n2. Sair");
+            escolhas = sc.nextLine();
+            switch (escolhas) {
+                case "0":
+                menuConsultas(sc);
+                break;
+                case "1":
+                menuRelatorio(sc);
+                break;
+                case "2":
+                cont = false;
+                break;
+            }
+        }
     }
 
     public static void menuCadastro(Scanner sc){

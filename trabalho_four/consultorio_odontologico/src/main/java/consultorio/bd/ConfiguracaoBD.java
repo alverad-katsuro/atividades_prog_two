@@ -9,7 +9,7 @@ public class ConfiguracaoBD {
 	private final String senha = "odonto123";
 	private final String url = "jdbc:mysql://138.36.20.69:10000/site_prog?useTimeZone=True&serverTimeZone=UTC";
 	
-	Connection conectar() {
+	public Connection conectar() {
 		Connection con = null;
 		try {
 			Class.forName(driver);

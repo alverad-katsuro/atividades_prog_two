@@ -52,8 +52,9 @@ public class Atualizar_Dados {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
             ResultSet rs = pst.executeQuery();
+            ArrayList<Cliente> cli = searchClientExtract(rs);
             con.close();
-            return searchClientExtract(rs);
+            return cli;
         } catch (Exception e) {
             System.out.println(e);
             return null;
@@ -84,7 +85,7 @@ public class Atualizar_Dados {
 
     public static boolean modifyClient(Cliente cliente){
         ConfiguracaoBD dao = new ConfiguracaoBD();
-        String comando_sql = "update cliente set endereco=?, nome=?, cpf=?, telefone=?, email=?, sexo=?, idade=?, plano=? where idcleint = ?";
+        String comando_sql = "update cliente set endereco=?, nome=?, cpf=?, telefone=?, email=?, sexo=?, idade=?, plano=? where idclient=?";
         try {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
@@ -96,7 +97,7 @@ public class Atualizar_Dados {
             pst.setString(6, cliente.getSexo().toString());
             pst.setString(7, String.valueOf(cliente.getIdade()));
             pst.setString(8, cliente.getPlano());
-            pst.setString(9, String.valueOf(cliente.getIdclient()));
+            pst.setString(9, String.valueOf(cliente.getIdclient()).strip());
             pst.executeUpdate();
             con.close();
             return true;
@@ -148,8 +149,9 @@ public class Atualizar_Dados {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
             ResultSet rs = pst.executeQuery();
+            ArrayList<Odontologista> odo = searchDentistaExtract(rs);
             con.close();
-            return searchDentistaExtract(rs);
+            return odo;
         } catch (Exception e) {
             System.out.println(e);
             return null;
@@ -181,7 +183,7 @@ public class Atualizar_Dados {
 
     public static boolean modifyDentista(Odontologista dentista){
         ConfiguracaoBD dao = new ConfiguracaoBD();
-        String comando_sql = "update cliente set endereco=?, nome=?, cpf=?, telefone=?, email=?, sexo=?, idade=?, crm=? where iddentista = ?";
+        String comando_sql = "update dentista set endereco=?, nome=?, cpf=?, telefone=?, email=?, sexo=?, idade=?, crm=? where iddentista=?";
         try {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
@@ -193,7 +195,7 @@ public class Atualizar_Dados {
             pst.setString(6, dentista.getSexo().toString());
             pst.setString(7, String.valueOf(dentista.getIdade()));
             pst.setString(8, dentista.getCrm());
-            pst.setString(9, String.valueOf(dentista.getIddentista()));
+            pst.setString(9, String.valueOf(dentista.getIddentista()).strip());
             pst.executeUpdate();
             con.close();
             return true;

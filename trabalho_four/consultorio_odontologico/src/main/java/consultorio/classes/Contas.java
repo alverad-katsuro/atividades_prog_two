@@ -12,15 +12,17 @@ public class Contas {
 
     public Contas(String usuario, String senha){
         ConfiguracaoBD dao = new ConfiguracaoBD();
-        String comando_sql = "SELECT * FROM contas WHERE login =" + usuario + " and senha = " + senha;
+        String comando_sql = "SELECT * FROM contas WHERE login = ? and senha = ?";
         try {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
+            pst.setString(1, usuario.strip());
+            pst.setString(2, senha.strip());
             ResultSet rs = pst.executeQuery();
-            con.close();
             while (rs.next()) {
                 this.funcao = comparaFuncao(rs.getString(4));
             }
+            con.close();
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -113,7 +113,7 @@ public class ITHM {
                 System.out.print("Digite o fim do intervalo\nResposta: ");
                 data[1] = sc.nextLine();
                 return AgendarConsulta.searchConsulta(data);
-            case "3":
+            case "2":
                 System.out.print("Digite a IdConsulta\nResposta: ");
                 data[1] = sc.nextLine();
                 data[0] = "IdConsulta";
@@ -165,7 +165,7 @@ public class ITHM {
         option[0] = "cpf";
         System.out.println("----------------- Modifica Cliente -----------------");
         System.out.print("Digite o CPF do cliente no formato -> 'xxx.xxx.xxx-xx'\nResposta: ");
-        option[1] = sc.nextLine();
+        option[1] = "'"+sc.nextLine()+"'";
         Cliente cliente = Atualizar_Dados.searchClient(option).get(0);
         System.out.print("Digite o rotulo do dado a ser atualizado [nome, email, cpf, idade, plano, sexo, telefone]\nResposta: ");
         option[0] = sc.nextLine();
@@ -239,7 +239,7 @@ public class ITHM {
         float valor;
         System.out.println("----------------- Agendamento de Consulta -----------------");
         System.out.print("Digite a especialização: ");
-        especializacao = sc.nextLine();
+        especializacao = sc.nextLine().toUpperCase();
         System.out.print("Digite o CRM: ");
         crm_dentista = sc.nextLine();
         System.out.print("Digite o CPF do cliente: ");

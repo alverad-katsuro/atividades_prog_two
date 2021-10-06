@@ -36,13 +36,13 @@ public class AgendarConsulta {
                 comando_sql = "SELECT * FROM consulta order by data";
                 return searchConsultaLogical(comando_sql);
             case "IdConsulta":
-                comando_sql = "SELECT * FROM consulta WHERE "+ option[0] + " = "+ option[1];
+                comando_sql = "SELECT * FROM consulta WHERE "+ option[0] + " = '"+ option[1]+"'";
                 return searchConsultaLogical(comando_sql); 
             case "realizada":
-                comando_sql = "SELECT * FROM consulta WHERE "+ option[0] + " = "+ option[1];
+                comando_sql = "SELECT * FROM consulta WHERE "+ option[0] + " = '"+ option[1]+"'";
                 return searchConsultaLogical(comando_sql); 
             default:
-                comando_sql = "SELECT * FROM consulta WHERE data BETWEEN " + option[0] +" and "+ option[1] +" order by data";
+                comando_sql = "SELECT * FROM consulta WHERE data BETWEEN '" + option[0].strip() +"' and '"+ option[1].strip() +"' order by data;";
                 return searchConsultaLogical(comando_sql); 
         }
     }
@@ -53,8 +53,9 @@ public class AgendarConsulta {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);
             ResultSet rs = pst.executeQuery();
+            ArrayList<Consulta> consu = searchConsultaExtract(rs);
             con.close();
-            return searchConsultaExtract(rs);
+            return consu;
         } catch (Exception e) {
             System.out.println(e);
             return null;
@@ -84,7 +85,7 @@ public class AgendarConsulta {
 
     public static boolean modifyConsulta(Consulta consulta){
         ConfiguracaoBD dao = new ConfiguracaoBD();
-        String comando_sql = "update cliente set especializacao=?, crm_dentista=?, cpf_cliente=?, data=?, valor=?, realizada=?, notas=? where idcleint = ?";
+        String comando_sql = "update consulta set especializacao=?, crm_dentista=?, cpf_cliente=?, data=?, valor=?, realizada=?, notas=? where idConsulta = ?";
         try {
             Connection con = dao.conectar();
             PreparedStatement pst = con.prepareStatement(comando_sql);

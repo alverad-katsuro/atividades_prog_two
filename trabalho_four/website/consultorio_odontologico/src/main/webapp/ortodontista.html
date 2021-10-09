@@ -9,10 +9,12 @@
 <script src="scripts/collapse_bar.js"></script>
 </head>
 <body>
+  <div class="block">
+
 <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item" href="cliente.html"></a>
+      <a class="navbar-item" href="ortodontista.html"></a>
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="nav-links">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -21,7 +23,7 @@
     </div>
     <div id="nav-links" class="navbar-menu">
       <div class="navbar-start">
-      	<a class="navbar-item" href='cliente.html'>Home</a>
+      	<a class="navbar-item" href='ortodontista.html'>Home</a>
       </div>
       <div class="navbar-end">        
         <a class="navbar-item" href='index.html'>
@@ -33,15 +35,20 @@
     </div>
   </div>
 </nav>
-<div class="container">
+</div>
+<div class="block">
+  <div class="container">
     <aside class="menu">
       <p class="menu-label">
         Cliente
       </p>
       <ul class="menu-list">
         <li>
-            <a class="is-active">Ver informações</a>
-            <a class="is-active">Atribuir informações</a>
+            <a class="is-active">Controle de Cliente</a>
+            <ul>
+            <li><a>Ver informações</a></li>
+            <li><a>Alterar informações</a></li>
+            </ul>
         </li>
       </ul>
       <p class="menu-label">
@@ -49,10 +56,14 @@
       </p>
       <ul class="menu-list">
         <li>
-            <a class="is-active">Agendar consultas</a>
-            <a class="is-active">Remarcar consultas</a>
-            <a class="is-active">Confirmar consultas</a>
-            <a class="is-active">Ver consultas pendentes</a>
+          <a class="is-active">Controle de Consultas</a>
+          <ul>
+            <li><a>Agendar consultas</a></li>
+            <li><a>Remarcar consultas</a></li>
+            <li><a>Confirmar consultas</a></li>
+            <li><a>Ver consultas pendentes</a></li>
+
+          </ul>
         </li>
       </ul>
       <p class="menu-label">
@@ -69,5 +80,6 @@
         </ul>
     </aside>
   </div>
+</div>
 </body>
 </html>

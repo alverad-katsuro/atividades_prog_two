@@ -9,6 +9,8 @@
 <script src="scripts/collapse_bar.js"></script>
 </head>
 <body>
+  <div class="block">
+
 <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
   <div class="container">
     <div class="navbar-brand">
@@ -24,11 +26,6 @@
       	<a class="navbar-item" href='cliente.html'>Home</a>
       </div>
       <div class="navbar-end">        
-        <a class="navbar-item" href=''>
-            <strong>
-                MARCAR CONSULTA
-            </strong>
-        </a>
         <a class="navbar-item" href='index.html'>
           SAIR <!--ai atribui uma funcao do java para de fato sair-->
         </a>
@@ -36,47 +33,38 @@
     </div>
   </div>
 </nav>
-<br> <br>
-<div class="tile is-ancestor">
-  <div class="tile is-vertical is-8">
-    <div class="tile">
-      <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification is-primary">
-          <p class="title">Vertical...</p>
-          <p class="subtitle">ESTA PÁGINA REFLETE A PERSPECTIVA DO CLIENTE</p>
-        </article>
-        <article class="tile is-child notification is-warning">
-          <p class="title">...tiles</p>
-          <p class="subtitle">ENQUANTO AJUDA O PROGRAMADOR A VER O QUE ESTA ACONTECENDO</p>
-        </article>
-      </div>
-      <div class="tile is-parent">
-        <article class="tile is-child notification is-info">
-          <p class="title">Middle tile</p>
-          <p class="subtitle">E APRENDER A MANIPULAR AS FERRAMENTAS</p>
-          <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/640x480.png">
-          </figure>
-        </article>
-      </div>
-    </div>
-    <div class="tile is-parent">
-      <article class="tile is-child notification is-danger">
-          <!-- Content -->
-        </div>
-      </article>
-    </div>
-  </div>
-  <div class="tile is-parent">
-    <article class="tile is-child notification is-success">
-      <div class="content">
-        <p class="title">Tall tile</p>
-        <p class="subtitle">With even more content</p>
-        <div class="content">
-          <!-- Content -->
-        </div>
-      </div>
-    </article>
+</div>
+<div class="block">
+  <div class="container">
+    <aside class="menu">
+      <p class="menu-label">
+        Consultas
+      </p>
+      <ul class="menu-list">
+        <li>
+          <a class="is-active">Controle de Consultas</a>
+          <ul>
+            <li><a>Agendar consultas</a></li>
+            <li><a>Reagendar consultas</a></li>
+            <li><a>Cancelar consultas</a></li>
+            <li><a>Ver estado das consultas</a></li>
+          </ul>
+        </li>
+      </ul>
+      <p class="menu-label">
+        Conta
+      </p>
+      <ul class="menu-list">
+        <li>
+          <a class="is-active">Alterar dados da conta</a>
+          <ul>
+            <li><a>Alterar dados pessoais</a></li>
+            <li><a>Alterar login</a></li>
+            <li><a>Alterar senha</a></li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
   </div>
 </div>
 </body>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   </head>
   <body>
+  <div class="block">
   <section class="section">
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div id="nav-links" class="navbar-menu">
@@ -15,32 +16,145 @@
       </div>
     </div> 
     </nav>
-    <input class="input-is-small" type="text" placeholder="digite o nome"> <br>
-    <br>
-    <input class="input-is-small" type="text" placeholder="digite a idade"><br>
-    <br>
-    <div class="select">
-     <select>
-       <option>selecione o sexo</option>
-        <option>m</option>
-        <option>f</option>
-     </select> 
-    </div>  <br>
-     <br>
-     <input class="input-is-small" type="text" placeholder="insira cpf"><br>
-     <br>
-     <input class="input-is-small" type="text" placeholder="insira numero do telefone celular para contato"><br>
-     <br>
-     <input class="input-is-small" type="text" placeholder="insira numero do telefone residencial para contato"><br>
-     <br>
-     <input class="input-is-small" type="text" placeholder="insira email"><br>
-     <br>
-     <input class="input-is-small" type="text" placeholder="insira login"><br>
-     <br>
-     <input class="input-is-small" type="text" placeholder="insira senha"><br>
-     <br>
-     <button class="button">confirmar</button>    
-    </button>
+  </div>
+  <div class="block">
+    <section class="section">
+      <h1 class="title">Dados Pessoais</h1>
+      <nav class="level">
+        <div class="block">
+          <div class="level-left">
+            <div class="level-item">
+              <div class = "field is-horizontal">
+                <div class="field-label is-normal">
+                  <label class="label">Nome</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input class="input" type="text" placeholder="Digite o nome">
+                    </p>
+                  </div>
+                </div>
+                <div class="field-label is-normal">
+                  <label class="label">CPF</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input class="input" type="text" placeholder="Digite o CPF">
+                    </p>
+                  </div>
+                </div>
+                <div class="field-label is-normal">
+                  <label class="label">Sexo</label>
+                </div>
+                <div class="field-body">
+                  <div class="field is-narrow">
+                    <div class="control">
+                      <div class="select is-fullwidth">
+                        <select>
+                          <option>Selecione o Sexo</option>
+                          <option>M</option>
+                          <option>F</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="field-label is-normal">
+                  <label class="label">Idade</label>
+                </div>
+                <div class="field-body">
+                  <div class="field is-narrow">
+                    <div class="control">
+                      <div class="select is-fullwidth">
+                        <select>
+                          <option>Selecione a idade</option>
+                          <option>3</option> <option>4</option><option>5</option> <option>6</option><option>7</option> <option>8</option><option>9</option> <option>10</option><option>11</option> <option>12</option><option>13</option> <option>14</option><option>15</option> <option>16</option><option>17</option> <option>18</option><option>19</option> <option>20</option><option>21</option> <option>22</option><option>23</option> <option>24</option><option>25</option> <option>26</option><option>27</option> <option>28</option><option>29</option> <option>30</option><option>31</option> <option>32</option><option>33</option> <option>34</option><option>35</option> <option>36</option><option>37</option> <option>38</option><option>39</option> <option>40</option><option>41</option> <option>42</option><option>43</option> <option>44</option><option>45</option> <option>46</option><option>47</option> <option>48</option><option>49</option> <option>50</option><option>51</option> <option>52</option><option>53</option> <option>54</option><option>55</option> <option>56</option><option>57</option> <option>58</option><option>59</option> <option>60</option><option>61</option> <option>62</option><option>63</option> <option>64</option><option>65</option> <option>66</option><option>67</option> <option>68</option><option>69</option> <option>70</option><option>71</option> <option>72</option><option>73</option> <option>74</option>75</option><option>76</option> <option>77</option><option>78</option> <option>79</option><option>80</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
+    <section class="section">
+      <h1 class="title">Dados de Contato</h1>  
+       <div class="container">
+      <div class="field is-horizontal">
+        <div class="field-label"></div>
+        <div class="field-body">
+          <div class="field is-expanded">
+            <div class="field has-addons">
+              <p class="control">
+                <a class="button is-static">
+                  +55
+                </a>
+              </p>
+              <p class="control is-expanded">
+                <input class="input" type="tel" placeholder="Insira o número do telefone celular">
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label"></div>
+        <div class="field-body">
+          <div class="field is-expanded">
+            <div class="field has-addons">
+              <p class="control is-expanded">
+                <input class="input" type="tel" placeholder="Insira o número do telefone residencial">
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Email</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="text" placeholder="Digite o e-mail para contato">
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <h1 class="title">Dados de Contato</h1>
+        <div class="container">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Login</label>
+          </div>
+          <div class="control">
+            <input class="input" type="email" placeholder="">
+          </div>
+          <div class="field-label is-normal">
+            <label class="label">Senha</label>
+          </div>
+          <div class="control">
+            <input class="input" type="password" placeholder="********">
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
   </section>
+    <div class="container">
+      <div class="block">
+        <button class="button">Confirmar</button>  
+      </div>
+    </div>  
+  </div>
+  </div>
   </body>
 </html>
